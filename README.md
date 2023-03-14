@@ -24,7 +24,7 @@ View [all components here](https://www.creative-tim.com/learning-lab/bootstrap/a
 
 | Dashboard page | User profile page | Add product page  |
 | --- | --- | ---  |
-| ![Dashboard page](https://i.imgur.com/PcLFbIV.jpg)  | ![User profile page](https://i.imgur.com/u7nga5K.png) | [![Add product page](https://i.imgur.com/IFtP2e6.png)
+| ![Dashboard page](https://i.imgur.com/PcLFbIV.jpg)  | ![User profile page](https://i.imgur.com/u7nga5K.png) | ![Add product page](https://i.imgur.com/IFtP2e6.png)
 
 | Staff page | Product page | Login page  |
 | --- | --- | ---  |
