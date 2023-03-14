@@ -231,14 +231,16 @@
       <div class="row">
         <div class="col-12">
           <div class="card mb-4">
-            <div class="row p-3">
+            <div class="row px-2">
               <form action="" method="get">
-                <div class="col-12 pb-2 d-flex">
-                  <div class="px-3 col-3 font-weight-bold">
-                    Lọc theo nguồn hàng
+                <div class="px-3 col-12 pb-2 d-flex align-items-center">
+                  <div class="col-1 mt-2 font-weight-bold d-flex align-items-center">
+                    Lọc danh sách: 
+                  </div>
+                  <div class="px-2 mt-n3 col-2 font-weight-bold">
                     <br>
-                    <select class="form-control form-control-lg" name="source" id="source">
-                      <option value="" selected disabled hidden>-Chọn-</option>
+                    <select class="form-control form-control-md" name="source" id="source">
+                      <option value="" selected disabled hidden>- Nguồn hàng -</option>
                       <?php
                         $sql = "SELECT * FROM nguon_hang";
                         $result = $conn->query($sql);
@@ -254,11 +256,10 @@
                       ?>
                     </select>
                   </div>
-                  <div class="px-3 col-3 font-weight-bold">
-                    Lọc theo kho
+                  <div class="px-2 mt-n3 col-2 font-weight-bold">
                     <br>
-                    <select class="form-control form-control-lg" name="storage" id="storage">
-                      <option value="" selected disabled hidden>-Chọn-</option>
+                    <select class="form-control form-control-md" name="storage" id="storage">
+                      <option value="" selected disabled hidden>- Kho -</option>
                       <?php
                         $sql = "SELECT * FROM kho";
                         $result = $conn->query($sql);
@@ -274,6 +275,21 @@
                       ?>
                     </select>
                   </div>
+                  <div class="px-2 mt-2 col-1 font-weight-bold">
+                    <button type="submit" class="btn btn-primary text-white font-weight-bold text-md ms-0 mt-3">
+                      Lọc
+                    </button>
+                  </div>
+                  <div class="px-2 mt-n3 col-1 font-weight-bold"></div>
+                  <div class="col-5 mt-2 d-flex align-items-center justify-content-end">
+                        <div class="input-group w-75 me-3">
+                          <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
+                          <input type="text" name="timkiem" class="form-control" placeholder="Nhập tên sản phẩm cần tìm..">
+                        </div>
+                        <button type="submit" class="btn btn-primary text-white font-weight-bold text-md ms-0 mt-3">
+                          Tìm
+                        </button>
+                      </div>
                 </div>
               </form>
             </div>
