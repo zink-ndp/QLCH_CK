@@ -232,7 +232,7 @@
         <div class="col-12">
           <div class="card mb-4">
             <div class="row px-2">
-              <form action="" method="get">
+              <form action="#" method="get">
                 <div class="px-3 col-12 pb-2 d-flex align-items-center">
                   <div class="col-1 mt-2 font-weight-bold d-flex align-items-center">
                     Lọc danh sách: 
@@ -282,16 +282,17 @@
                   </div>
                   <div class="px-2 mt-n3 col-1 font-weight-bold"></div>
                   <div class="col-5 mt-2 d-flex align-items-center justify-content-end">
-                        <div class="input-group w-75 me-3">
-                          <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-                          <input type="text" name="timkiem" class="form-control" placeholder="Nhập tên sản phẩm cần tìm..">
-                        </div>
-                        <button type="submit" class="btn btn-primary text-white font-weight-bold text-md ms-0 mt-3">
-                          Tìm
-                        </button>
-                      </div>
+                    <div class="input-group w-75 me-3">
+                      <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
+                      <input type="text" name="timkiem" class="form-control" placeholder="Nhập tên sản phẩm cần tìm..">
+                    </div>
+                    <button type="submit" class="btn btn-primary text-white font-weight-bold text-md ms-0 mt-3">
+                      Tìm
+                    </button>
+                  </div>
                 </div>
               </form>
+              
             </div>
           </div>
         </div>
@@ -304,7 +305,14 @@
             $result = $conn->query($sql);
             $result_all = $result -> fetch_all(MYSQLI_ASSOC);
             foreach ($result_all as $row) {
-              $lspid = $row["LSP_ID"]
+              $lspid = $row["LSP_ID"];
+              $sql = "SELECT * FROM san_pham where LSP_ID = {$lspid}";
+                if(isset($_GET["timkiem"])){
+                  $search = $_GET["timkiem"];
+                  if ($search != null) {
+                    $sql = "SELECT * FROM san_pham where LSP_ID = {$lspid} and SP_TEN LIKE '%".$search."%'";
+                  }
+                }
               ?>
               <div class="row">
                 <div class="col-12">
@@ -333,7 +341,6 @@
                           <tbody>
                             <!-- 1 hang -->
                             <?php
-                              $sql = "SELECT * FROM san_pham where LSP_ID = {$lspid}";
                               $result = $conn->query($sql);
                               if ($result->num_rows > 0) {
                                 $result = $conn->query($sql);
