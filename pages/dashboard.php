@@ -261,7 +261,7 @@
               <div class="row">
                 <div class="col-8">
                   <div class="numbers">
-                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Tổng số khách hàng</p>
+                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Tổng abcxyz</p>
                     <h5 class="font-weight-bolder">
                       2,300
                     </h5>
@@ -286,9 +286,19 @@
               <div class="row">
                 <div class="col-8">
                   <div class="numbers">
-                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Tổng doanh thu</p>
+                    <?php
+                      $sql_kh = "select count(KH_ID) as countkh from khach_hang";
+                      $rs_kh = $conn->query($sql_kh);
+                      if ($rs_kh->num_rows > 0){
+                        $row_kh = mysqli_fetch_assoc($rs_kh);
+                        $countkh = $row_kh["countkh"];
+                      } else {
+                        $countkh = 0;
+                      }
+                    ?>
+                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Tổng số khách hàng</p>
                     <h5 class="font-weight-bolder">
-                      +3,462
+                      <?php echo $countkh ?>
                     </h5>
                     <p class="mb-0">
                       <span class="text-danger text-sm font-weight-bolder">-2%</span>
@@ -332,7 +342,7 @@
                 </div>
                 <div class="col-4 text-end">
                   <div class="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle">
-                    <i class="fa fa-user-tie text-lg opacity-10"></i>
+                    <i class="fa-solid fa-user-tie text-lg opacity-10"></i>
                   </div>
                 </div>
               </div>
