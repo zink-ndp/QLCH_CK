@@ -15,7 +15,7 @@ $dbname = "shop_db";
 	}
   
     $file_name = basename($_FILES["staffImg"]["name"]);
-    $target_dir = "C:/xampp/htdocs/qlck/assets/img/staff_img/";
+    $target_dir = "../assets/img/staff_img/";
     $target_file = $target_dir . $file_name;
     $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
     $uploadOk = 1;

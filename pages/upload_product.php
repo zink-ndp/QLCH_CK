@@ -3,7 +3,7 @@
 session_start();
 
 $file_name = basename($_FILES["productImg"]["name"]);
-$target_dir = "C:/xampp/htdocs/qlck/assets/img/product_img/";
+$target_dir = "../assets/img/product_img/";
 $target_file = $target_dir . basename($_FILES["productImg"]["name"]);
 $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 $uploadOk = 1;
