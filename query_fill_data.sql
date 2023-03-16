@@ -3,10 +3,11 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th3 16, 2023 lúc 03:53 AM
+-- Thời gian đã tạo: Th3 16, 2023 lúc 04:40 AM
 -- Phiên bản máy phục vụ: 10.4.27-MariaDB
 -- Phiên bản PHP: 8.0.25
 
+SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -21,20 +22,61 @@ SET time_zone = "+00:00";
 -- Cơ sở dữ liệu: `shop_db`
 --
 
+--
+-- Đang đổ dữ liệu cho bảng `chitiet_kho`
+--
+
+INSERT INTO `chitiet_kho` (`SP_ID`, `K_ID`, `SP_SOLUONG`) VALUES
+(4, 1, '50'),
+(5, 2, '20'),
+(6, 3, '15'),
+(7, 3, '4');
 
 --
--- Đang đổ dữ liệu cho bảng `tai_khoan`
+-- Đang đổ dữ liệu cho bảng `chitiet_nhap`
 --
 
-INSERT INTO `tai_khoan` (`TK_ID`, `TK_TENDANGNHAP`, `TK_MATKHAU`, `TK_AVATAR`, `TK_VAITRO`) VALUES
-(1, 'ad', 'ad', 'avatar.jpg', 'admin'),
-(2, 'nv1', 'nv1', 'bruce-mars.jpg', 'staff'),
-(3, 'nv2', 'nv2', 'team-4.jpg', 'admin'),
-(4, 'ad3', 'ad3', 'team-4.jpg', 'admin'),
-(5, 'nv3', 'nv3', 'kal-visuals-square.jpg', 'staff'),
-(6, 'ad1', 'ad1', 'marie.jpg', 'admin'),
-(7, 'nv9', 'nv9', 'team-2.jpg', 'staff'),
-(8, 'kh1', 'kh1', 'default.jpg', 'custommer');
+INSERT INTO `chitiet_nhap` (`NH_ID`, `SP_ID`, `NV_ID`, `NH_NGAYNHAP`, `SP_SOLUONG`, `SP_DVT`) VALUES
+(1, 5, 1, '2023-03-13', '20', 'Kg'),
+(2, 4, 1, '2023-03-13', '50', 'Con'),
+(2, 6, 1, '2023-03-13', '15', 'Cái'),
+(3, 7, 1, '2023-03-16', '4', 'Cái');
+
+--
+-- Đang đổ dữ liệu cho bảng `khach_hang`
+--
+
+INSERT INTO `khach_hang` (`KH_ID`, `TK_ID`, `KH_HOTEN`, `KH_SDT`, `KH_EMAIL`, `KH_NGAYSINH`, `KH_DIACHI`, `KH_GIOITINH`, `KH_NGAYDK`) VALUES
+(1, 8, 'Nguyễn Văn Khách', '0972666533', 'toilakhach@gmail.com', '2001-04-17', 'A123, Đường A, huyện AA, tỉnh AAA', 'm', '2022-03-16');
+
+--
+-- Đang đổ dữ liệu cho bảng `kho`
+--
+
+INSERT INTO `kho` (`K_ID`, `K_DIACHI`) VALUES
+(1, 'Cần Thơ'),
+(2, 'Hà Nội'),
+(3, 'An Giang'),
+(4, 'Sóc Trăng');
+
+--
+-- Đang đổ dữ liệu cho bảng `loai_sp`
+--
+
+INSERT INTO `loai_sp` (`LSP_ID`, `LSP_TEN`) VALUES
+(1, 'Cá kiểng'),
+(2, 'Thức ăn'),
+(3, 'Trang trí'),
+(4, 'Khác');
+
+--
+-- Đang đổ dữ liệu cho bảng `nguon_hang`
+--
+
+INSERT INTO `nguon_hang` (`NH_ID`, `NH_TENNGUON`) VALUES
+(1, 'Công ty A'),
+(2, 'Công ty B'),
+(3, 'Công ty C');
 
 --
 -- Đang đổ dữ liệu cho bảng `nhan_vien`
@@ -48,37 +90,14 @@ INSERT INTO `nhan_vien` (`NV_ID`, `TK_ID`, `NV_HOTEN`, `NV_SDT`, `NV_EMAIL`, `NV
 (5, 6, 'Trần Thị Lan', '0379816362', 'tranlan97@gmail.com', '1998-03-14', 'm', '2023-03-13'),
 (6, 7, 'Lê Văn Lai', '0379816362', 'lailv@gmail.com', '1987-04-14', 'm', '2023-03-16');
 
-
 --
--- Đang đổ dữ liệu cho bảng `khach_hang`
---
-
-INSERT INTO `khach_hang` (`KH_ID`, `TK_ID`, `KH_HOTEN`, `KH_SDT`, `KH_EMAIL`, `KH_NGAYSINH`, `KH_DIACHI`, `KH_GIOITINH`) VALUES
-(1, 8, 'Nguyễn Văn Khách', '0972666533', 'toilakhach@gmail.com', '2001-04-17', 'A123, Đường A, huyện AA, tỉnh AAA', 'm');
-
-
-
---
--- Đang đổ dữ liệu cho bảng `nguon_hang`
+-- Đang đổ dữ liệu cho bảng `pt_thanhtoan`
 --
 
-INSERT INTO `nguon_hang` (`NH_ID`, `NH_TENNGUON`) VALUES
-(1, 'Công ty A'),
-(2, 'Công ty B'),
-(3, 'Công ty C');
-
-
-
---
--- Đang đổ dữ liệu cho bảng `loai_sp`
---
-
-INSERT INTO `loai_sp` (`LSP_ID`, `LSP_TEN`) VALUES
-(1, 'Cá kiểng'),
-(2, 'Thức ăn'),
-(3, 'Trang trí'),
-(4, 'Khác');
-
+INSERT INTO `pt_thanhtoan` (`PTTT_ID`, `PTTT_TEN`) VALUES
+(1, 'Tiền mặt'),
+(2, 'Chuyển khoản ngân hàng'),
+(3, 'Visa/Mastercard');
 
 --
 -- Đang đổ dữ liệu cho bảng `san_pham`
@@ -90,52 +109,74 @@ INSERT INTO `san_pham` (`SP_ID`, `LSP_ID`, `SP_TEN`, `SP_MOTA`, `SP_GIA`, `SP_HI
 (6, 2, 'Tôm sấy khô cho cá hộp 85g', 'Tôm sấy khô cho cá hộp 85gTôm sấy khô cho cá hộp 85gTôm sấy khô cho cá hộp 85g', 120000, 'ff4dde06ff158a22744a1663aa69c74e.jpg'),
 (7, 3, 'Tượng đá phục sinh', 'Tượng đá phục sinh\r\nTượng đá phục sinh\r\nTượng đá phục sinh, Tượng đá phục sinh', 250000, '27044915_318094348699756_72419214_n.jpg');
 
-
 --
--- Đang đổ dữ liệu cho bảng `chitiet_kho`
---
-
-INSERT INTO `chitiet_kho` (`SP_ID`, `K_ID`, `SP_SOLUONG`) VALUES
-(4, 1, '50'),
-(5, 2, '20'),
-(6, 3, '15'),
-(7, 3, '4');
-
-
---
--- Đang đổ dữ liệu cho bảng `kho`
+-- Đang đổ dữ liệu cho bảng `tai_khoan`
 --
 
-INSERT INTO `kho` (`K_ID`, `K_DIACHI`) VALUES
-(1, 'Cần Thơ'),
-(2, 'Hà Nội'),
-(3, 'An Giang'),
-(4, 'Sóc Trăng');
+INSERT INTO `tai_khoan` (`TK_ID`, `TK_TENDANGNHAP`, `TK_MATKHAU`, `TK_AVATAR`, `TK_VAITRO`) VALUES
+(1, 'ad', 'ad', 'avatar.jpg', 'admin'),
+(2, 'nv1', 'nv1', 'bruce-mars.jpg', 'staff'),
+(3, 'nv2', 'nv2', 'team-4.jpg', 'admin'),
+(4, 'ad3', 'ad3', 'team-4.jpg', 'admin'),
+(5, 'nv3', 'nv3', 'kal-visuals-square.jpg', 'staff'),
+(6, 'ad1', 'ad1', 'marie.jpg', 'admin'),
+(7, 'nv9', 'nv9', 'team-2.jpg', 'staff'),
+(8, 'kh1', 'kh1', 'macdinh.jpg', 'custommer');
 
 
 --
--- Đang đổ dữ liệu cho bảng `chitiet_nhap`
+-- Đang đổ dữ liệu cho bảng `nha_van_chuyen`
 --
 
-INSERT INTO `chitiet_nhap` (`NH_ID`, `SP_ID`, `NV_ID`, `NH_NGAYNHAP`, `SP_SOLUONG`, `SP_DVT`) VALUES
-(1, 5, 1, '2023-03-13', '20', 'Kg'),
-(2, 4, 1, '2023-03-13', '50', 'Con'),
-(2, 6, 1, '2023-03-13', '15', 'Cái'),
-(3, 7, 1, '2023-03-16', '4', 'Cái');
-
+INSERT INTO `nha_van_chuyen` (`NVC_ID`, `NVC_TEN`) VALUES
+(1, 'J&J Express'),
+(2, 'Giao hàng tiết kiệm'),
+(3, 'Giao hàng nhanh'),
+(4, 'EMS Express');
 
 
 --
--- Đang đổ dữ liệu cho bảng `pt_thanhtoan`
+-- Đang đổ dữ liệu cho bảng `don_van_chuyen`
 --
 
-INSERT INTO `pt_thanhtoan` (`PTTT_ID`, `PTTT_TEN`) VALUES
-(1, 'Tiền mặt'),
-(2, 'Chuyển khoản ngân hàng'),
-(3, 'Visa/Mastercard');
+INSERT INTO `don_van_chuyen` VALUES
+(1,2, 'A, đường A, huyện A, tỉnh A','2022-03-16', '2022-05-13');
 
 
+--
+-- Đang đổ dữ liệu cho bảng `khuyen_mai`
+--
 
+INSERT INTO `khuyen_mai` VALUES
+(1,'2022-04-01','2022-05-01',0.1);
+
+
+--
+-- Đang đổ dữ liệu cho bảng `chitiet_hd`
+--
+
+INSERT INTO `chitiet_hd` VALUES
+(1,1,2,200000),
+(2,1,1,100000);
+
+--
+-- Đang đổ dữ liệu cho bảng `trangthai_hd`
+--
+
+INSERT INTO `trangthai_hd` VALUES
+(1,'Đợi xác nhận'),
+(2,'Đang giao hàng'),
+(3,'Hoàn thành');
+
+
+--
+-- Đang đổ dữ liệu cho bảng `hoa_don`
+--
+
+INSERT INTO `hoa_don` VALUES
+(1,1,null,1,2,1,3,300000); 
+
+SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

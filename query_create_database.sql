@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     16/03 9:54                                   */
+/* Created on:     16/03 10:38                                  */
 /*==============================================================*/
 
 
@@ -38,6 +38,8 @@ drop table if exists SAN_PHAM;
 
 drop table if exists TAI_KHOAN;
 
+drop table if exists TRANGTHAI_HD;
+
 /*==============================================================*/
 /* Table: CHITIET_GH                                            */
 /*==============================================================*/
@@ -55,7 +57,8 @@ create table CHITIET_HD
 (
    SP_ID                int not null,
    HD_ID                int not null,
-   SP_SOLUONG           numeric(8,0) not null
+   SP_SOLUONG           numeric(8,0) not null,
+   SP_THANHTIEN         int not null
 );
 
 /*==============================================================*/
@@ -105,10 +108,9 @@ create table DON_VAN_CHUYEN
 (
    DVC_ID               int not null,
    NVC_ID               int not null,
-   DVC_NGAYGIAOHANG     date not null,
-   DVC_DIACHI           text,
-   DVC_TGBATDAU         date,
-   DVC_TGHOANTHANH      date,
+   DVC_DIACHI           text not null,
+   DVC_TGBATDAU         date not null,
+   DVC_TGHOANTHANH      date not null,
    primary key (DVC_ID)
 );
 
@@ -123,8 +125,8 @@ create table HOA_DON
    NV_ID                int not null,
    PTTT_ID              int not null,
    KH_ID                int not null,
+   TT_ID                int not null,
    HD_TONGTIEN          float not null,
-   HD_TRANGTHAI         char(1),
    primary key (HD_ID)
 );
 
@@ -250,6 +252,16 @@ create table TAI_KHOAN
    primary key (TK_ID)
 );
 
+/*==============================================================*/
+/* Table: TRANGTHAI_HD                                          */
+/*==============================================================*/
+create table TRANGTHAI_HD
+(
+   TT_ID                int not null,
+   TT_TEN               char(20) not null,
+   primary key (TT_ID)
+);
+
 alter table CHITIET_GH add constraint FK_RELATIONSHIP_18 foreign key (KH_ID)
       references KHACH_HANG (KH_ID) on delete restrict on update restrict;
 
@@ -297,6 +309,9 @@ alter table HOA_DON add constraint FK_CO_HOADON foreign key (KH_ID)
 
 alter table HOA_DON add constraint FK_CO_PHUONGTHUC foreign key (PTTT_ID)
       references PT_THANHTOAN (PTTT_ID) on delete restrict on update restrict;
+
+alter table HOA_DON add constraint FK_CO_TRANGTHAI foreign key (TT_ID)
+      references TRANGTHAI_HD (TT_ID) on delete restrict on update restrict;
 
 alter table HOA_DON add constraint FK_THUOC foreign key (DVC_ID)
       references DON_VAN_CHUYEN (DVC_ID) on delete restrict on update restrict;
