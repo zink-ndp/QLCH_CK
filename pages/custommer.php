@@ -26,7 +26,7 @@
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <title>
-    Danh sách nhân viên
+    Danh sách khách hàng
   </title>
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -84,7 +84,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="../pages/products_add_form.php">
+          <a class="nav-link active" href="../pages/products_add_form.php">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="fas fa-cart-plus text-info text-sm opacity-10"></i>
             </div>
@@ -118,7 +118,7 @@
               echo "<li class=\"nav-item mt-3\">\n"; 
               echo " <h6 class=\"ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6\">Quản lý nhân viên</h6>\n"; 
               echo "</li>\n"; echo "<li class=\"nav-item\">\n"; 
-              echo " <a class=\"nav-link active \" href=\"../pages/staff.php\">\n"; 
+              echo " <a class=\"nav-link \" href=\"../pages/staff.php\">\n"; 
               echo " <div class=\"icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center\">\n"; 
               echo " <i class=\"ni ni-single-copy-04 text-warning text-sm opacity-10\"></i>\n"; 
               echo " </div>\n"; 
@@ -193,9 +193,9 @@
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">Trang</a></li>
-            <li class="breadcrumb-item text-sm text-white active" aria-current="page">Danh sách nhân viên</li>
+            <li class="breadcrumb-item text-sm text-white active" aria-current="page">Danh sách khách hàng</li>
           </ol>
-          <h6 class="font-weight-bolder text-white mb-0">Danh sách nhân viên</h6>
+          <h6 class="font-weight-bolder text-white mb-0">Danh sách khách hàng</h6>
         </nav>
         <!-- Đoạn này -->
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
@@ -260,13 +260,13 @@
                     <form action="#" method="get">
                     <div class="card-header pb-2 d-flex align-items-center">
                       <div class="col-3">
-                        <h6 class="">Danh sách nhân viên</h6>
+                        <h6 class="">Danh sách khách hàng</h6>
                       </div>
                       <!-- <div class="col-6"></div> -->
                       <div class="col-9 d-flex align-items-center  justify-content-end">
                         <div class="input-group w-30 me-3">
                           <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-                          <input type="text" name="timkiem" class="form-control" placeholder="Nhập tên nhân viên cần tìm..">
+                          <input type="text" name="timkiem" class="form-control" placeholder="Nhập tên khách hàng cần tìm..">
                         </div>
                         <button type="submit" class="btn btn-primary text-white font-weight-bold text-md ms-0 mt-3">
                           Tìm
@@ -276,11 +276,11 @@
                     </form>
 
                     <?php
-                      $sql = "SELECT * FROM nhan_vien";
+                      $sql = "SELECT * FROM khach_hang";
                       if(isset($_GET["timkiem"])){
                         $search = $_GET["timkiem"];
                         if ($search != null) {
-                          $sql = "SELECT * FROM nhan_vien WHERE nv_hoten LIKE '%".$search."%'";
+                          $sql = "SELECT * FROM khach_hang WHERE kh_hoten LIKE '%".$search."%'";
                         }
                       }
                     ?>
@@ -291,11 +291,11 @@
                         <table class="table align-items-center mb-0">
                           <thead>
                             <tr>
-                              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nhân viên</th>
-                              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Chức vụ</th>
+                              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Khách hàng</th>
+                              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">địa chỉ</th>
                               <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">SĐT</th>
                               <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Email</th>
-                              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ngày tuyển</th>
+                              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ngày đăng ký</th>
                               <th class="text-secondary opacity-7"></th>
                               <th class="text-secondary opacity-7"></th>
                             </tr>

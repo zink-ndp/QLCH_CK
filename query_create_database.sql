@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     16/03 9:13                                   */
+/* Created on:     16/03 9:54                                   */
 /*==============================================================*/
 
 
@@ -141,6 +141,7 @@ create table KHACH_HANG
    KH_NGAYSINH          date not null,
    KH_DIACHI            text not null,
    KH_GIOITINH          char(1) not null,
+   KH_NGAYDK            date not null,
    primary key (KH_ID)
 );
 
