@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     13/03 8:25                                   */
+/* Created on:     16/03 9:02                                   */
 /*==============================================================*/
 
 
@@ -77,9 +77,8 @@ create table CHITIET_NHAP
    SP_ID                int not null,
    NV_ID                int not null,
    NH_NGAYNHAP          date not null,
-   SP_SOLUONG           numeric(8,0) not null,
-   SP_DVT               char(5) not null,
-   primary key (NH_ID, SP_ID)
+   NH_SOLUONG           numeric(8,0) not null,
+   primary key ()
 );
 
 /*==============================================================*/
@@ -88,11 +87,12 @@ create table CHITIET_NHAP
 create table DANH_GIA
 (
    DG_ID                int not null,
+   SP_ID                int not null,
    TK_ID                int not null,
    NV_ID                int not null,
    DG_TIEUDE            char(50) not null,
    DG_NOIDUNG           text not null,
-   DG_RATE              tinyint not null,
+   DG_RATE              numeric(1,0) not null,
    DG_PHANHOI           text,
    primary key (DG_ID)
 );
@@ -228,7 +228,6 @@ create table SAN_PHAM
 (
    SP_ID                int not null,
    LSP_ID               int not null,
-   DG_ID                int,
    SP_TEN               char(50) not null,
    SP_MOTA              char(200) not null,
    SP_GIA               float not null,
@@ -276,6 +275,9 @@ alter table CHITIET_NHAP add constraint FK_RELATIONSHIP_24 foreign key (NH_ID)
 alter table CHITIET_NHAP add constraint FK_RELATIONSHIP_25 foreign key (SP_ID)
       references SAN_PHAM (SP_ID) on delete restrict on update restrict;
 
+alter table DANH_GIA add constraint FK_CO_DANH_GIA foreign key (SP_ID)
+      references SAN_PHAM (SP_ID) on delete restrict on update restrict;
+
 alter table DANH_GIA add constraint FK_DANH_GIA foreign key (TK_ID)
       references TAI_KHOAN (TK_ID) on delete restrict on update restrict;
 
@@ -305,9 +307,6 @@ alter table KHACH_HANG add constraint FK_KH_CO_TK foreign key (TK_ID)
 
 alter table NHAN_VIEN add constraint FK_TK_NV foreign key (TK_ID)
       references TAI_KHOAN (TK_ID) on delete restrict on update restrict;
-
-alter table SAN_PHAM add constraint FK_CO_DANH_GIA foreign key (DG_ID)
-      references DANH_GIA (DG_ID) on delete restrict on update restrict;
 
 alter table SAN_PHAM add constraint FK_THUOC_LOAI foreign key (LSP_ID)
       references LOAI_SP (LSP_ID) on delete restrict on update restrict;

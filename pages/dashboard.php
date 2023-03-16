@@ -17,6 +17,18 @@
 
 <?php
   session_start();
+  $servername = "localhost";
+	$username = "root";
+	$password = "";
+	$dbname = "shop_db";
+
+	// Create connection
+	$conn = new mysqli($servername, $username, $password, $dbname);
+	// Check connection
+	if ($conn->connect_error) {
+	  die("Connection failed: " . $conn->connect_error);
+	}
+
 ?>
 
 <head>
@@ -299,9 +311,19 @@
               <div class="row">
                 <div class="col-8">
                   <div class="numbers">
-                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Sales</p>
+                    <?php
+                      $sql_nv = "select count(NV_ID) as countnv from nhan_vien";
+                      $rs_nv = $conn->query($sql_nv);
+                      if ($rs_nv->num_rows > 0){
+                        $row_nv = mysqli_fetch_assoc($rs_nv);
+                        $countnv = $row_nv["countnv"];
+                      } else {
+                        $countnv = 0;
+                      }
+                    ?>
+                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Tổng số nhân viên</p>
                     <h5 class="font-weight-bolder">
-                      $103,430
+                      <?php echo $countnv ?>
                     </h5>
                     <p class="mb-0">
                       <span class="text-success text-sm font-weight-bolder">+5%</span> than last month
@@ -310,7 +332,7 @@
                 </div>
                 <div class="col-4 text-end">
                   <div class="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle">
-                    <i class="ni ni-cart text-lg opacity-10" aria-hidden="true"></i>
+                    <i class="fa fa-user-tie text-lg opacity-10"></i>
                   </div>
                 </div>
               </div>
