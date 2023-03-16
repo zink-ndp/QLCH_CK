@@ -306,6 +306,7 @@
             $result = $conn->query($sql);
             $result_all = $result -> fetch_all(MYSQLI_ASSOC);
             foreach ($result_all as $row) {
+              $lspid = $row["LSP_ID"];
               $sql = "SELECT * FROM san_pham where LSP_ID = {$lspid}";
                 if(isset($_GET["timkiem"])){
                   $search = $_GET["timkiem"];
@@ -313,7 +314,6 @@
                     $sql = "SELECT * FROM san_pham where LSP_ID = {$lspid} and SP_TEN LIKE '%".$search."%'";
                   }
                 }
-              $lspid = $row["LSP_ID"];
               ?>
               <div class="row">
                 <div class="col-12">

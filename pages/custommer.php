@@ -308,9 +308,9 @@
                                 $result = $conn->query($sql);
                                 $result_all = $result -> fetch_all(MYSQLI_ASSOC);
                                 foreach ($result_all as $row) {
-                                  $tknvid = $row["TK_ID"];
+                                  $tkkhid = $row["TK_ID"];
 
-                                  $sql1 = "SELECT * FROM tai_khoan WHERE TK_ID = {$tknvid} and (TK_VAITRO = 'admin' or TK_VAITRO = 'staff')";
+                                  $sql1 = "SELECT * FROM tai_khoan WHERE TK_ID = {$tkkhid}";
                                   $result1 = $conn->query($sql1);
                                   if ($result1->num_rows > 0) {
                                     $result1 = $conn->query($sql1);
@@ -320,54 +320,38 @@
                                     <tr class="height-100">
                                       <td>
                                         <div class="d-flex px-1 py-1">
-                                            <!-- hinh anh nhan vien -->
+                                            <!-- hinh anh khach hang -->
                                           <div>
                                             <?php
-                                              if($row1["TK_AVATAR"]==null){
-                                                $file = "macdinh.jpg";
-                                              } else {
-                                                $file = $row1["TK_AVATAR"];
-                                              } 
-                                              $avatar_url = "../assets/img/staff_img/" . $file;
-                                              echo "<img src='{$avatar_url}' class='avatar avatar-xl me-3' alt='user1'>";
+                                              $avatar_url = "../assets/img/cus_img/" . $row1["TK_AVATAR"];
+                                              echo "<img src='{$avatar_url}' class='avatar avatar-xl me-3' alt='cus'>";
                                             ?> 
-                                            
                                           </div>
-                                          <!-- ten san pham -->
+                                          <!-- ten kh -->
                                           <div class="d-flex flex-column justify-content-center">
-                                            <h6 class="mb-0 text-sm"><?php echo $row["NV_HOTEN"]; ?></h6>
-                                            <p class='text-xs text-secondary mb-0'>Ngày sinh: <?php echo $row["NV_NGAYSINH"]; ?></p>
+                                            <h6 class="mb-0 text-sm"><?php echo $row["KH_HOTEN"]; ?></h6>
+                                            <p class='text-xs text-secondary mb-0'>Ngày sinh: <?php echo $row["KH_NGAYSINH"]; ?></p>
                                           </div>
                                         </div>
                                       </td>
                                       <td>
-                                        <?php
-                                            if($row1["TK_VAITRO"] == "staff") {
-                                              ?>
-                                                <p class="text-sm font-weight-bold mb-0">Nhân viên</p>
-                                              <?php
-                                            } else {
-                                              ?>
-                                                <p class="text-sm font-weight-bold mb-0 text-success">Quản lý</p>
-                                              <?php
-                                            }
-                                          ?>
+                                      <p class="text-sm font-weight-bold mb-0"><?php echo $row["KH_DIACHI"]; ?></p>
                                       </td>
                                       <!-- SDT-->
                                       <td>
-                                        <p class="text-sm font-weight-bold mb-0"><?php echo $row["NV_SDT"]; ?></p>
+                                        <p class="text-sm font-weight-bold mb-0"><?php echo $row["KH_SDT"]; ?></p>
                                       </td>
                                       <!-- email-->
                                       <td>
-                                        <p class="text-sm font-weight-bold mb-0"><?php echo $row["NV_EMAIL"]; ?></p>
+                                        <p class="text-sm font-weight-bold mb-0"><?php echo $row["KH_EMAIL"]; ?></p>
                                       </td>
                                       <!-- ngay them -->
                                       <td class="align-middle text-center">
-                                        <span class="text-secondary text-xs font-weight-bold"><?php echo $row["NV_NGAYTUYEN"]; ?></span>
+                                        <span class="text-secondary text-xs font-weight-bold"><?php echo $row["KH_NGAYDK"]; ?></span>
                                       </td>
                                       <td class="align-middle">
                                       <form method="post" action="edit_staff.php">
-                                          <input type="hidden" name="nvid" value="<?php echo $row["NV_ID"]; ?>">
+                                          <input type="hidden" name="nvid" value="<?php echo $row["KH_ID"]; ?>">
                                           <button onclick="this.form.submit()" class="mt-3 btn btn-link text-primary font-weight-bold text-sm">
                                             Sửa
                                           </button>
@@ -375,22 +359,12 @@
                                       </td>
                                       <td class="align-middle">
                                         <form method="post" action="del_staff.php">
-                                          <input type="hidden" name="nvid" value="<?php echo $row["NV_ID"]; ?>">
-                                          <?php
-                                            if($row["NV_ID"] == $_SESSION["nvid"]) {
-                                              ?>
-                                                <a class="mt-3 ms-n4 text-secondary font-weight-bold text-sm">
-                                                  Xoá
-                                                </a>
-                                              <?php
-                                            } else {
-                                              ?>
-                                                <button onclick="this.form.submit()" class="mt-3 ms-n5 btn btn-link text-warning text-secondary font-weight-bold text-sm">
-                                                  Xoá
-                                                </button>
-                                              <?php
-                                            }
-                                          ?>
+                                          <input type="hidden" name="nvid" value="<?php echo $row["KH_ID"]; ?>">
+                                          
+                                            <button onclick="this.form.submit()" class="mt-3 ms-n5 btn btn-link text-warning text-secondary font-weight-bold text-sm">
+                                              Xoá
+                                            </button>
+                                              
                                         </form>
                                       </td>
                                     </tr>
@@ -411,7 +385,7 @@
               </div>
               <?php
         ?>
-        <a href="staff_add.php" class="btn btn-link mt-n3">+ Thêm nhân viên</a>
+        <!-- <a href="staff_add.php" class="btn btn-link mt-n3">+ Thêm nhân viên</a> -->
       </div>
       <footer class="footer pt-3  ">
         <div class="container-fluid">
