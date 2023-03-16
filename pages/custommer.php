@@ -86,7 +86,7 @@
         <li class="nav-item">
           <a class="nav-link active" href="../pages/products_add_form.php">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="fas fa-cart-plus text-info text-sm opacity-10"></i>
+              <i class="fas fa-user-tie text-info text-sm opacity-10"></i>
             </div>
             <span class="nav-link-text ms-1">Khách hàng</span>
           </a>
@@ -296,8 +296,7 @@
                               <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">SĐT</th>
                               <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Email</th>
                               <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ngày đăng ký</th>
-                              <th class="text-secondary opacity-7"></th>
-                              <th class="text-secondary opacity-7"></th>
+                              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Liên hệ</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -353,18 +352,8 @@
                                       <form method="post" action="edit_staff.php">
                                           <input type="hidden" name="nvid" value="<?php echo $row["KH_ID"]; ?>">
                                           <button onclick="this.form.submit()" class="mt-3 btn btn-link text-primary font-weight-bold text-sm">
-                                            Sửa
+                                            Gửi email
                                           </button>
-                                        </form>
-                                      </td>
-                                      <td class="align-middle">
-                                        <form method="post" action="del_staff.php">
-                                          <input type="hidden" name="nvid" value="<?php echo $row["KH_ID"]; ?>">
-                                          
-                                            <button onclick="this.form.submit()" class="mt-3 ms-n5 btn btn-link text-warning text-secondary font-weight-bold text-sm">
-                                              Xoá
-                                            </button>
-                                              
                                         </form>
                                       </td>
                                     </tr>

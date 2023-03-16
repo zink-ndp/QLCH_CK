@@ -84,9 +84,9 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="../pages/products_add_form.php">
+          <a class="nav-link " href="../pages/custommer.php">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="fas fa-cart-plus text-info text-sm opacity-10"></i>
+              <i class="fas fa-user-tie text-info text-sm opacity-10"></i>
             </div>
             <span class="nav-link-text ms-1">Khách hàng</span>
           </a>

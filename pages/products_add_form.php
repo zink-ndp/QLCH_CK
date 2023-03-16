@@ -317,13 +317,7 @@
                       <div class="mb-3 px-3 col-3">
                         Đơn vị tính
                         <br>
-                        <select class="form-control form-control-lg" name="dvt" id="dvt">
-                          <option value="" selected disabled hidden>-Chọn-</option>
-                          <option value="Kg">Kg</option>
-                          <option value="Cái">Cái</option>
-                          <option value="Con">Con</option>
-                          
-                        </select>
+                        <input type="text" name="dvt" class="form-control form-control-lg" placeholder="ĐVT: Con, Cái, Hộp, Kg...">
                       </div>
                       <div class="mb-3 px-3 col-3">
                           Số lượng
