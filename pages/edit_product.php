@@ -23,7 +23,7 @@
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <title>
-    Sản phẩm
+    Sửa sản phẩm
   </title>
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -38,15 +38,15 @@
 </head>
 
 <body class="g-sidenav-show   bg-gray-100">
-  <!-- Nguyên đoạn này -->
-  <div class="position-absolute w-100 min-height-300 top-0" style="background-image: url('https://images.unsplash.com/photo-1514907283155-ea5f4094c70c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80'); background-position-y: 50%;">
+<!-- Nguyên đoạn này -->
+<div class="position-absolute w-100 min-height-300 top-0" style="background-image: url('https://images.unsplash.com/photo-1514907283155-ea5f4094c70c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80'); background-position-y: 50%;">
     <span class="mask bg-primary opacity-6"></span>
   </div>
   <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 " id="sidenav-main">
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
       <a class="navbar-brand m-0" href="#" target="_blank">
-       <img src="../assets/img/logo-ck.png" class=" h-100" alt="main_logo">
+        <img src="../assets/img/logo-ck.png" class=" h-100" alt="main_logo">
         <span class="ms-1 font-weight-bold">Quản lý Forish</span>
       </a>
     </div>
@@ -162,7 +162,7 @@
       </ul>
     </div>
   </aside>
-  
+   
   <main class="main-content position-relative border-radius-lg ">
     <!-- Navbar -->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur" data-scroll="false">
@@ -174,6 +174,7 @@
           </ol>
           <h6 class="font-weight-bolder text-white mb-0">Sản phẩm</h6>
         </nav>
+        <!-- Đoạn này -->
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
             <div class="input-group">
@@ -226,238 +227,167 @@
         if ($conn->connect_error) {
           die("Connection failed: " . $conn->connect_error);
         }
-      ?> 
-      </div>
-      <div class="row">
+
+        $idsp = $_POST["pdid"]; 
+        $anhsp = $_POST["anhsp"];
+        $lsp = $_POST["lsp"]; 
+        $tensp = $_POST["tensp"]; 
+        $giasp = $_POST["giasp"]; 
+        $motasp = $_POST["motasp"];
+        $nguonsp = $_POST["nguonsp"];
+        $khosp = $_POST["khosp"]; 
+        $dvtsp = $_POST["dvtsp"];
+        $slsp = $_POST["slsp"];
+
+      ?>
         <div class="col-12">
           <div class="card mb-4">
-            <div class="row px-2">
-              <form action="#" method="get">
-                <div class="px-3 col-12 pb-2 d-flex align-items-center">
-                  <div class="col-1 mt-2 font-weight-bold d-flex align-items-center">
-                    Lọc danh sách: 
-                  </div>
-                  <div class="px-2 mt-n3 col-2 font-weight-bold">
-                    <br>
-                    <select class="form-control form-control-md" name="source" id="source">
-                      <option value="" selected disabled hidden>- Nguồn hàng -</option>
-                      <?php
-                        $sql = "SELECT * FROM nguon_hang";
-                        $result = $conn->query($sql);
-                        if ($result->num_rows > 0) {
-                          $result = $conn->query($sql);
-                          $result_all = $result -> fetch_all(MYSQLI_ASSOC);
-                          foreach ($result_all as $row) {
-                            echo "<option value=" .$row["NH_ID"]. ">".$row["NH_TENNGUON"]. "</option>";
-                          }                          
-                        } else {
-                          echo "<option value=''>Không có dữ liệu</option>";
-                        }
-                      ?>
-                    </select>
-                  </div>
-                  <div class="px-2 mt-n3 col-2 font-weight-bold">
-                    <br>
-                    <select class="form-control form-control-md" name="storage" id="storage">
-                      <option value="" selected disabled hidden>- Kho -</option>
-                      <?php
-                        $sql = "SELECT * FROM kho";
-                        $result = $conn->query($sql);
-                        if ($result->num_rows > 0) {
-                          $result = $conn->query($sql);
-                          $result_all = $result -> fetch_all(MYSQLI_ASSOC);
-                          foreach ($result_all as $row) {
-                            echo "<option value=" .$row["K_ID"]. ">".$row["K_DIACHI"]. "</option>";
-                          }                          
-                        } else {
-                          echo "<option value=''>Không có dữ liệu</option>";
-                        }
-                      ?>
-                    </select>
-                  </div>
-                  <div class="px-2 mt-2 col-1 font-weight-bold">
-                    <button type="submit" class="btn btn-primary text-white font-weight-bold text-md ms-0 mt-3">
-                      Lọc
-                    </button>
-                  </div>
-                  <div class="px-2 mt-n3 col-1 font-weight-bold"></div>
-                  <div class="col-5 mt-2 d-flex align-items-center justify-content-end">
-                    <div class="input-group w-75 me-3">
-                      <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-                      <input type="text" name="timkiem" class="form-control" placeholder="Nhập tên sản phẩm cần tìm..">
-                    </div>
-                    <button type="submit" class="btn btn-primary text-white font-weight-bold text-md ms-0 mt-3">
-                      Tìm
-                    </button>
-                  </div>
-                </div>
-              </form>
-              
+            <div class="card-header pb-0">
+              <h4>Sửa sản phẩm #<?php echo $idsp; ?> - <?php echo $tensp; ?></h4>
             </div>
-          </div>
-        </div>
-        <a href="products_add_form.php" class="btn btn-link text-white mt-n3">+ Thêm sản phẩm</a>
-      </div>
-        <!-- Nguyên đống này la mot danh muc -->
-        <?php
-          $sql = "SELECT * FROM loai_sp";
-          $result = $conn->query($sql);
-          if ($result->num_rows > 0) {
-            $result = $conn->query($sql);
-            $result_all = $result -> fetch_all(MYSQLI_ASSOC);
-            foreach ($result_all as $rowlsp) {
-              $lspid = $rowlsp["LSP_ID"];
-              $sql = "SELECT * FROM san_pham where LSP_ID = {$lspid}";
-                if(isset($_GET["timkiem"])){
-                  $search = $_GET["timkiem"];
-                  if ($search != null) {
-                    $sql = "SELECT * FROM san_pham where LSP_ID = {$lspid} and SP_TEN LIKE '%".$search."%'";
-                  }
-                }
-              ?>
-              <div class="row">
-                <div class="col-12">
-                  <div class="card mb-4">
-                    <div class="card-header pb-2">
-                      <?php
-                        echo  "<h6>".$rowlsp["LSP_TEN"]."</h6>";
-                      ?>
+            <div class="card-body px-2 pt-0 pb-2">
+                <form role="form" method="post" action="upload_product.php" enctype="multipart/form-data">
+                    <div class="col-12 card-header pb-2 d-flex align-items-center">
+                      <div class="mb-3 px-3 col-2">
+                          Danh mục
+                          <br>
+                          <select class="form-control form-control-lg" name="types" id="types">
+                          <option value="" selected disabled hidden><?php echo $lsp; ?></option>
+                          <?php
+                            $sql = "SELECT * FROM loai_sp";
+                            $result = $conn->query($sql);
+                            if ($result->num_rows > 0) {
+                              $result = $conn->query($sql);
+                              $result_all = $result -> fetch_all(MYSQLI_ASSOC);
+                              foreach ($result_all as $row) {
+                                echo "<option value=" .$row["LSP_ID"]. ">".$row["LSP_TEN"]. "</option>";
+                              }                          
+                            } else {
+                              echo "<option value=''>Không có dữ liệu</option>";
+                            }
+                          ?>
+                        </select>
+                      </div>
+                      <div class="mb-3 px-3 col-8">
+                          Tên sản phẩm
+                        <input type="text" name="pd_name" class="form-control form-control-lg" value="<?php echo $tensp; ?>">
+                      </div>
+                      <div class="mb-3 px-3 col-2">
+                          Giá (VNĐ)
+                        <input min="1000" max="10000000000" step="1000" type="number" name="pd_price" class="form-control form-control-lg" value="<?php echo $giasp; ?>">
+                      </div>
                     </div>
-                    <div class="card-body px-0 pt-0 pb-2">
-                      <div class="table-responsive p-0">
-                        <!-- table 5 cot -->
-                        <table class="table align-items-center mb-0">
-                          <thead>
-                            <tr>
-                              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Sản phẩm</th>
-                              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Giá</th>
-                              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Số lượng</th>
-                              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Đơn vị tính</th>
-                              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Kho</th>
-                              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ngày nhập</th>
-                              <th class="text-secondary opacity-7"></th>
-                              <th class="text-secondary opacity-7"></th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <!-- 1 hang -->
+                    <div class="col-12 mt-n4 card-header pb-2 d-flex align-items-center">
+                      <div class="mb-3 px-3 col-12">
+                          Mô tả sản phẩm
+                        <textarea row="20" name="pd_des" style="height: 150px;" class="form-control form-control-lg"><?php echo $motasp; ?></textarea>
+                      </div>
+                    </div>
+                    <div class="col-12 mt-n4 card-header pb-2 d-flex align-items-center">                    
+                      <div class="mb-3 px-3 col-3">
+                          Nguồn cung cấp
+                          <br>
+                          <select class="form-control form-control-lg" name="source" id="source">
+                            <option value="" selected disabled hidden><?php echo $nguonsp; ?></option>
                             <?php
+                              $sql = "SELECT * FROM nguon_hang";
                               $result = $conn->query($sql);
                               if ($result->num_rows > 0) {
                                 $result = $conn->query($sql);
                                 $result_all = $result -> fetch_all(MYSQLI_ASSOC);
                                 foreach ($result_all as $row) {
-
-                                  $lsp = $rowlsp["LSP_TEN"];
-
-                                  $sql_nhap = "select * from chitiet_nhap where sp_id = '{$row["SP_ID"]}'";
-                                  $rs = $conn->query($sql_nhap);
-                                  $row1 = mysqli_fetch_assoc($rs);
-                                  $nhid = $row1["NH_ID"];
-                                  $ngaynhap = $row1["NH_NGAYNHAP"];
-                                  $soluong = $row1["SP_SOLUONG"];
-
-                                  $sql_kho ="select K_DIACHI from kho where K_ID = (select K_ID from chitiet_kho where SP_ID = '{$row["SP_ID"]}')";
-                                  $rs1 = $conn->query($sql_kho);
-                                  $row2 = mysqli_fetch_assoc($rs1);
-                                  $tenkho = $row2["K_DIACHI"];
-
-                                  $sql_nguon = "select NH_TENNGUON from nguon_hang where NH_ID = $nhid";
-                                  $rs2 = $conn->query($sql_nguon);
-                                  $row3 = mysqli_fetch_assoc($rs2);
-                                  $tennh = $row3["NH_TENNGUON"];
-
-                                  ?>
-                                  <tr class="height-100">
-                                    <td class="w-30" >
-                                      <div class="d-flex px-2 py-1">
-                                          <!-- hinh anh san pham -->
-                                        <div>
-                                          <?php
-                                            if($row["SP_HINHANH"]==null){
-                                              $file = "default.jpg";
-                                            } else {
-                                              $file = $row["SP_HINHANH"];
-                                            } 
-                                            $avatar_url = "../assets/img/product_img/" . $file;
-                                            echo "<img src='{$avatar_url}' class='avatar avatar-xl me-3' alt='user1'>";
-                                          ?> 
-                                          
-                                        </div>
-                                        <!-- ten san pham -->
-                                        <div class="d-flex flex-column justify-content-center">
-                                          <h6 class="mb-0 text-md"><?php echo $row["SP_TEN"]; ?></h6>
-                                          <p class='text-xs text-secondary mb-0'><?php echo $tennh; ?></p>
-                                        </div>
-                                      </div>
-                                    </td>
-                                    <!-- gia sp -->
-                                    <td>
-                                      <p class="text-s font-weight-bold mb-0"><?php echo number_format($row["SP_GIA"], 0, '.') ; ?> VNĐ</p>
-                                    </td>
-                                    <!-- soluong sp -->
-                                    <td>
-                                      <p class="text-xs font-weight-bold mb-0"><?php echo $row1["SP_SOLUONG"]; ?></p>
-                                    </td>
-                                    <!-- dvt -->
-                                    <td>
-                                      <p class="text-xs font-weight-bold mb-0"><?php echo $row1["SP_DVT"]; ?></p>
-                                    </td>
-                                    <!-- kho -->
-                                    <td>
-                                      <p class="text-xs font-weight-bold mb-0"><?php echo $tenkho; ?></p>
-                                    </td>
-                                    <!-- ngay them -->
-                                    <td class="align-middle text-center">
-                                    <p class="text-xs font-weight-bold mb-0"><?php echo $ngaynhap; ?></p>
-                                    </td>
-                                    <td class="align-middle">
-                                      <form method="post" action="edit_product.php">
-                                          <input type="hidden" name="pdid" value="<?php echo $row["SP_ID"]; ?>">
-                                          <input type="hidden" name="anhsp" value="<?php echo $file; ?>">
-                                          <input type="hidden" name="lsp" value="<?php echo $lsp; ?>">
-                                          <input type="hidden" name="tensp" value="<?php echo $row["SP_TEN"]; ?>">
-                                          <input type="hidden" name="giasp" value="<?php echo $row["SP_GIA"]; ?>">
-                                          <input type="hidden" name="motasp" value="<?php echo $row["SP_MOTA"]; ?>">
-                                          <input type="hidden" name="nguonsp" value="<?php echo $tennh; ?>">
-                                          <input type="hidden" name="khosp" value="<?php echo $tenkho; ?>">
-                                          <input type="hidden" name="dvtsp" value="<?php echo $row1["SP_DVT"]; ?>">
-                                          <input type="hidden" name="slsp" value="<?php echo $row1["SP_SOLUONG"] ?>">
-                                          <button onclick="this.form.submit()" class="mt-3 me-n4 btn btn-link text-primary font-weight-bold text-sm">
-                                            Sửa
-                                          </button>
-                                        </form>
-                                      </td>
-                                      <td class="align-middle">
-                                        <form method="post" action="del_staff.php">
-                                          <input type="hidden" name="pdid" value="<?php echo $row["SP_ID"]; ?>">
-                                          <button onclick="this.form.submit()" class="mt-3 me-n3 btn btn-link text-warning text-secondary font-weight-bold text-sm">
-                                            Xoá
-                                          </button>
-                                        </form>
-                                      </td>
-                                  </tr>
-                                  <?php
-                                }
+                                  echo "<option value=" .$row["NH_ID"]. ">".$row["NH_TENNGUON"]. "</option>";
+                                }                          
+                              } else {
+                                echo "<option value=''>Không có dữ liệu</option>";
                               }
                             ?>
-                            
-                            <!-- het 1 hang -->
-                          </tbody>
-                        </table>
+                          </select>
+                        </div>
+                      <div class="mb-3 px-3 col-3">
+                        Nhập vào kho
+                        <br>
+                        <select class="form-control form-control-lg" name="storage" id="storage">
+                          <option value="" selected disabled hidden><?php echo $khosp; ?></option>
+                          <?php
+                            $sql = "SELECT * FROM kho";
+                            $result = $conn->query($sql);
+                            if ($result->num_rows > 0) {
+                              $result = $conn->query($sql);
+                              $result_all = $result -> fetch_all(MYSQLI_ASSOC);
+                              foreach ($result_all as $row) {
+                                echo "<option value=" .$row["K_ID"]. ">".$row["K_DIACHI"]. "</option>";
+                              }                          
+                            } else {
+                              echo "<option value=''>Không có dữ liệu</option>";
+                            }
+                          ?>
+                        </select>
+                          
+                      </div>
+                      
+                      <div class="mb-3 px-3 col-3">
+                        Đơn vị tính
+                        <br>
+                        <input type="text" name="dvt" class="form-control form-control-lg" value="<?php echo $dvtsp; ?>">
+                      </div>
+                      <div class="mb-3 px-3 col-3">
+                          Số lượng
+                        <input min="1" max="10000" step="1" type="number" name="pd_quantity" class="form-control form-control-lg" value="<?php echo $slsp; ?>">
                       </div>
                     </div>
-                  </div>
-                </div>
-              </div>
-              <?php
-            }                          
-          } else {
-            echo "<option value=''>Không có dữ liệu</option>";
-          }
-        ?>
+                    <div class="col-12 mt-n4 card-header pb-2 d-flex align-items-center">                                        
+                      <div class="mb-3 px-3 col-3"></div>
+                      <div class="mb-3 px-3 col-3">
+                          Tải ảnh sản phẩm:
+                          <br>
+                          <input class="mt-3" type="file" name="productImg" id="productImg" accept="image/*">
+                      </div>
+                      <div class="mb-3 px-3 col-3">
+                          <div id="preview">
+                            <img id="old_img" src="../assets/img/product_img/<?php echo $anhsp;?>" class="rounded-circle avatar avatar-xxl ms-4" alt="">
+                          </div>
+                          <script>
+                            var input = document.getElementById("productImg");
+                            var preview = document.getElementById("preview");
 
+                            input.addEventListener("change", function() {
+                              preview.innerHTML = ""; // clear previous preview
+                              var files = this.files;
+                              for (var i = 0; i < files.length; i++) {
+                                var file = files[i];
+                                if (!file.type.startsWith("image/")){ continue } // skip non-image files
+                                var reader = new FileReader();
+                                reader.onload = function(e) {
+                                  var img = document.createElement("img");
+                                  img.src = e.target.result;
+                                  img.width = 1000; // set width for preview images
+                                  img.className = "avatar avatar-xxl me-3";
+                                  preview.appendChild(img); // append image to preview div
+                                };
+                                reader.readAsDataURL(file); // read file as data url
+                              }
+                            });
+                          </script>
+                      </div>
+                      <div class="mb-3 px-3 col-3"></div>
+                    </div>
+
+                    <!-- <div class="form-check form-switch">
+                      <input class="form-check-input" type="checkbox" id="rememberMe">
+                      <label class="form-check-label" for="rememberMe">Remember me</label>
+                    </div> -->
+                    <div class="col-12 mt-n4 card-header pb-2 d-flex align-items-center">                                                            
+                      <div class="col-12 text-center px-3">
+                        <button type="submit" class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">Thêm</button>
+                      </div>
+                    </div>
+                </form>
+            </div>
+          </div>
+        </div> 
       </div>
+        
       <footer class="footer pt-3  ">
         <div class="container-fluid">
           <div class="row align-items-center justify-content-lg-between">
