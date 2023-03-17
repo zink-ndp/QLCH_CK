@@ -11,7 +11,7 @@ $nvpass = $_POST["staff_pass"];
 $nvrepass = $_POST["staff_repass"];
 $nvsex = $_POST["staff_sex"];
 $nvvt = $_POST["staff_vaitro"];
-$nvbirth = date_create($_POST["staff_birth"]);
+$nvbirth = $_POST["staff_birth"];
 
 if($nvpass != $nvrepass){
   $message = "Mật khẩu nhập lại không đúng!";
@@ -113,10 +113,9 @@ $dbname = "shop_db";
                   nv_hoten = '".$nvname."',
                   nv_sdt = '".$nvsdt."',
                   nv_email = '".$nvemail."',
-                  nv_gioitinh = '".$nvsex."'
-                  where nv_id = ".$nvid."";
-                  
-                  // nv_ngaysinh = '".$nvbirth."',
+                  nv_gioitinh = '".$nvsex."',
+                  nv_ngaysinh = '".$nvbirth."'
+                where nv_id = ".$nvid."";
       
       if (($conn->query($sql) == TRUE)&&($conn->query($sql1) == TRUE)) {
 

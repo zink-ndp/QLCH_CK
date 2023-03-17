@@ -231,11 +231,14 @@
         $idsp = $_POST["pdid"]; 
         $anhsp = $_POST["anhsp"];
         $lsp = $_POST["lsp"]; 
+        $mlsp = $_POST["mlsp"];
         $tensp = $_POST["tensp"]; 
         $giasp = $_POST["giasp"]; 
         $motasp = $_POST["motasp"];
         $nguonsp = $_POST["nguonsp"];
+        $manguonsp = $_POST["manguonsp"];
         $khosp = $_POST["khosp"]; 
+        $makhosp = $_POST["makhosp"]; 
         $dvtsp = $_POST["dvtsp"];
         $slsp = $_POST["slsp"];
 
@@ -246,13 +249,18 @@
               <h4>Sửa sản phẩm #<?php echo $idsp; ?> - <?php echo $tensp; ?></h4>
             </div>
             <div class="card-body px-2 pt-0 pb-2">
-                <form role="form" method="post" action="upload_product.php" enctype="multipart/form-data">
+                <form role="form" method="post" action="update_edit_product.php" enctype="multipart/form-data">
+                    <input type="hidden" name="idsp" value="<?php echo $idsp; ?>">
+                    <input type="hidden" name="lsp" value="<?php echo $lsp; ?>">
+                    <input type="hidden" name="mlsp" value="<?php echo $mlsp; ?>">
+                    <input type="hidden" name="manguonsp" value="<?php echo $manguonsp; ?>">
+                    <input type="hidden" name="makhosp" value="<?php echo $makhosp; ?>">
                     <div class="col-12 card-header pb-2 d-flex align-items-center">
                       <div class="mb-3 px-3 col-2">
                           Danh mục
                           <br>
-                          <select class="form-control form-control-lg" name="types" id="types">
-                          <option value="" selected disabled hidden><?php echo $lsp; ?></option>
+                          <select class="form-control form-control-lg" name="lsp" id="lsp">
+                          <option value="<?php echo $mlsp; ?>" selected hidden><?php echo $lsp; ?></option>
                           <?php
                             $sql = "SELECT * FROM loai_sp";
                             $result = $conn->query($sql);
@@ -270,25 +278,25 @@
                       </div>
                       <div class="mb-3 px-3 col-8">
                           Tên sản phẩm
-                        <input type="text" name="pd_name" class="form-control form-control-lg" value="<?php echo $tensp; ?>">
+                        <input type="text" name="tensp" class="form-control form-control-lg" value="<?php echo $tensp; ?>">
                       </div>
                       <div class="mb-3 px-3 col-2">
                           Giá (VNĐ)
-                        <input min="1000" max="10000000000" step="1000" type="number" name="pd_price" class="form-control form-control-lg" value="<?php echo $giasp; ?>">
+                        <input min="1000" max="10000000000" step="1000" type="number" name="giasp" class="form-control form-control-lg" value="<?php echo $giasp; ?>">
                       </div>
                     </div>
                     <div class="col-12 mt-n4 card-header pb-2 d-flex align-items-center">
                       <div class="mb-3 px-3 col-12">
                           Mô tả sản phẩm
-                        <textarea row="20" name="pd_des" style="height: 150px;" class="form-control form-control-lg"><?php echo $motasp; ?></textarea>
+                        <textarea row="20" name="motasp" style="height: 150px;" class="form-control form-control-lg"><?php echo $motasp; ?></textarea>
                       </div>
                     </div>
                     <div class="col-12 mt-n4 card-header pb-2 d-flex align-items-center">                    
                       <div class="mb-3 px-3 col-3">
                           Nguồn cung cấp
                           <br>
-                          <select class="form-control form-control-lg" name="source" id="source">
-                            <option value="" selected disabled hidden><?php echo $nguonsp; ?></option>
+                          <select class="form-control form-control-lg" name="nguonsp" id="nguonsp">
+                            <option value="<?php echo $manguonsp; ?>" selected hidden><?php echo $nguonsp; ?></option>
                             <?php
                               $sql = "SELECT * FROM nguon_hang";
                               $result = $conn->query($sql);
@@ -307,8 +315,8 @@
                       <div class="mb-3 px-3 col-3">
                         Nhập vào kho
                         <br>
-                        <select class="form-control form-control-lg" name="storage" id="storage">
-                          <option value="" selected disabled hidden><?php echo $khosp; ?></option>
+                        <select class="form-control form-control-lg" name="khosp" id="khosp">
+                          <option value="<?php echo $makhosp; ?>" selected hidden><?php echo $khosp; ?></option>
                           <?php
                             $sql = "SELECT * FROM kho";
                             $result = $conn->query($sql);
@@ -329,11 +337,11 @@
                       <div class="mb-3 px-3 col-3">
                         Đơn vị tính
                         <br>
-                        <input type="text" name="dvt" class="form-control form-control-lg" value="<?php echo $dvtsp; ?>">
+                        <input type="text" name="dvtsp" class="form-control form-control-lg" value="<?php echo $dvtsp; ?>">
                       </div>
                       <div class="mb-3 px-3 col-3">
                           Số lượng
-                        <input min="1" max="10000" step="1" type="number" name="pd_quantity" class="form-control form-control-lg" value="<?php echo $slsp; ?>">
+                        <input min="1" max="10000" step="1" type="number" name="slsp" class="form-control form-control-lg" value="<?php echo $slsp; ?>">
                       </div>
                     </div>
                     <div class="col-12 mt-n4 card-header pb-2 d-flex align-items-center">                                        
@@ -341,6 +349,7 @@
                       <div class="mb-3 px-3 col-3">
                           Tải ảnh sản phẩm:
                           <br>
+                          <input type="hidden" name="old_productImg" value="<?php echo $anhsp;?>" accept="image/*">
                           <input class="mt-3" type="file" name="productImg" id="productImg" accept="image/*">
                       </div>
                       <div class="mb-3 px-3 col-3">

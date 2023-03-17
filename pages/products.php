@@ -349,6 +349,7 @@
                                 foreach ($result_all as $row) {
 
                                   $lsp = $rowlsp["LSP_TEN"];
+                                  $mlsp = $rowlsp["LSP_ID"];
 
                                   $sql_nhap = "select * from chitiet_nhap where sp_id = '{$row["SP_ID"]}'";
                                   $rs = $conn->query($sql_nhap);
@@ -357,15 +358,17 @@
                                   $ngaynhap = $row1["NH_NGAYNHAP"];
                                   $soluong = $row1["SP_SOLUONG"];
 
-                                  $sql_kho ="select K_DIACHI from kho where K_ID = (select K_ID from chitiet_kho where SP_ID = '{$row["SP_ID"]}')";
+                                  $sql_kho ="select K_DIACHI, K_ID from kho where K_ID = (select K_ID from chitiet_kho where SP_ID = '{$row["SP_ID"]}')";
                                   $rs1 = $conn->query($sql_kho);
                                   $row2 = mysqli_fetch_assoc($rs1);
                                   $tenkho = $row2["K_DIACHI"];
+                                  $makho = $row2["K_ID"];
 
-                                  $sql_nguon = "select NH_TENNGUON from nguon_hang where NH_ID = $nhid";
+                                  $sql_nguon = "select NH_TENNGUON, NH_ID from nguon_hang where NH_ID = $nhid";
                                   $rs2 = $conn->query($sql_nguon);
                                   $row3 = mysqli_fetch_assoc($rs2);
                                   $tennh = $row3["NH_TENNGUON"];
+                                  $manh = $row3["NH_ID"];
 
                                   ?>
                                   <tr class="height-100">
@@ -416,11 +419,14 @@
                                           <input type="hidden" name="pdid" value="<?php echo $row["SP_ID"]; ?>">
                                           <input type="hidden" name="anhsp" value="<?php echo $file; ?>">
                                           <input type="hidden" name="lsp" value="<?php echo $lsp; ?>">
+                                          <input type="hidden" name="mlsp" value="<?php echo $mlsp; ?>">
                                           <input type="hidden" name="tensp" value="<?php echo $row["SP_TEN"]; ?>">
                                           <input type="hidden" name="giasp" value="<?php echo $row["SP_GIA"]; ?>">
                                           <input type="hidden" name="motasp" value="<?php echo $row["SP_MOTA"]; ?>">
                                           <input type="hidden" name="nguonsp" value="<?php echo $tennh; ?>">
+                                          <input type="hidden" name="manguonsp" value="<?php echo $manh; ?>">
                                           <input type="hidden" name="khosp" value="<?php echo $tenkho; ?>">
+                                          <input type="hidden" name="makhosp" value="<?php echo $makho; ?>">
                                           <input type="hidden" name="dvtsp" value="<?php echo $row1["SP_DVT"]; ?>">
                                           <input type="hidden" name="slsp" value="<?php echo $row1["SP_SOLUONG"] ?>">
                                           <button onclick="this.form.submit()" class="mt-3 me-n4 btn btn-link text-primary font-weight-bold text-sm">
