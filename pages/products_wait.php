@@ -51,21 +51,7 @@
   <!-- CSS Files -->
   <link id="pagestyle" href="../assets/css/argon-dashboard.css?v=2.0.4" rel="stylesheet" />
 </head>
-<style>
-#myDIV {
-  width: 100%;
-  padding: 50px 0;
-  text-align: center;
-  background-color: lightblue;
-  margin-top:20px;
-}
 
-.content {
-    max-height:0px; 
-    overflow:hidden; 
-    transition:max-height .5s ease-in-out; 
-}
-</style>
 <body class="g-sidenav-show   bg-gray-100">
   <!-- Nguyên đoạn này -->
   <div class="position-absolute w-100 min-height-300 top-0" style="background-image: url('https://images.unsplash.com/photo-1514907283155-ea5f4094c70c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80'); background-position-y: 50%;">
@@ -247,34 +233,19 @@
     
 
 
-
+<!-- 
     <button class="btn btn-outline-light text-white collapsible">Mở rộng</button>
     <div class="content">
         <div id="myDIV">
             ây là nội dung của bảng
         </div>
-    </div>
+    </div> 
+-->
 
-    <script>
-    var coll = document.getElementsByClassName("collapsible");
-    var i;
-
-    for (i = 0; i < coll.length; i++) {
-        coll[i].addEventListener("click", function() {
-            this.classList.toggle("active");
-            var content = this.nextElementSibling;
-            if (content.style.maxHeight){
-                content.style.maxHeight = null;
-            } else {
-                content.style.maxHeight = content.scrollHeight + "px";
-            } 
-        });
-    }
-    </script>
-
+    
 
     <div class="row">
-        <div class="col-12">
+        <div class="col-12  px-4">
             <div class="card mb-4">
                 <form action="#" method="get">
                 <div class="card-header pb-2 d-flex align-items-center">
@@ -300,70 +271,88 @@
                 <table class="table align-items-center mb-0">
                     <thead>
                     <tr>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Mã đơn</th>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Khách hàng</th>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">địa chỉ</th>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">SĐT</th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Email</th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ngày đăng ký</th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Liên hệ</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Địa chỉ</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Tổng tiền</th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ngày đặt hàng</th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Trạng thái</th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"></th>
                     </tr>
                     </thead>
                     <tbody>
                     <!-- 1 hang -->
                     <?php
+                        $sql = "select * from hoa_don";
                         $result = $conn->query($sql);
                         if ($result->num_rows > 0) {
                         $result = $conn->query($sql);
                         $result_all = $result -> fetch_all(MYSQLI_ASSOC);
                         foreach ($result_all as $row) {
-                            $tkkhid = $row["TK_ID"];
-
-                            $sql1 = "SELECT * FROM tai_khoan WHERE TK_ID = {$tkkhid}";
-                            $result1 = $conn->query($sql1);
+                            
+                            $sql_kh = "SELECT * FROM khach_hang WHERE KH_ID = {$row["KH_ID"]}";
+                            $result1 = $conn->query($sql_kh);
                             if ($result1->num_rows > 0) {
-                            $result1 = $conn->query($sql1);
+                            $result1 = $conn->query($sql_kh);
                             $result_all1 = $result1 -> fetch_all(MYSQLI_ASSOC);
                             foreach ($result_all1 as $row1) {
+
+                                $sql_tk = "select * from tai_khoan where TK_ID = {$row1["TK_ID"]}";
+                                $result2 = $conn->query($sql_tk);
+                                $row2 = mysqli_fetch_assoc($result2);
+
+                                $sql_tt = "select * from trangthai_hd where TT_ID = {$row["TT_ID"]}" ;
+                                $result3 = $conn->query($sql_tt);
+                                $row3 = mysqli_fetch_assoc($result3);
+
+
                             ?>
                             <tr class="height-100">
+                                <!-- Ma hoa don -->
+                                <td class="align-middle text-center">
+                                    <p class="text-sm font-weight-bold mb-0"><?php echo $row["HD_ID"]; ?></p>
+                                </td>
                                 <td>
                                 <div class="d-flex px-1 py-1">
                                     <!-- hinh anh khach hang -->
                                     <div>
                                     <?php
-                                        $avatar_url = "../assets/img/cus_img/" . $row1["TK_AVATAR"];
-                                        echo "<img src='{$avatar_url}' class='avatar avatar-xl me-3' alt='cus'>";
+                                        $avatar_url = "../assets/img/cus_img/" . $row2["TK_AVATAR"];
+                                        echo "<img src='{$avatar_url}' class='avatar avatar-md me-3 mt-3' alt='cus'>";
                                     ?> 
                                     </div>
                                     <!-- ten kh -->
                                     <div class="d-flex flex-column justify-content-center">
-                                    <h6 class="mb-0 text-sm"><?php echo $row["KH_HOTEN"]; ?></h6>
-                                    <p class='text-xs text-secondary mb-0'>Ngày sinh: <?php echo $row["KH_NGAYSINH"]; ?></p>
+                                    <h6 class="mb-0 text-sm"><?php echo $row1["KH_HOTEN"]; ?></h6>
+                                    <p class='text-xs text-secondary mb-0'>Ngày sinh: <?php echo $row1["KH_NGAYSINH"]; ?></p>
                                     </div>
                                 </div>
                                 </td>
                                 <td>
-                                <p class="text-sm font-weight-bold mb-0"><?php echo $row["KH_DIACHI"]; ?></p>
+                                <p class="text-xs font-weight-bold mb-0"><?php echo $row1["KH_DIACHI"]; ?></p>
                                 </td>
-                                <!-- SDT-->
+                                <!-- Tong tien-->
                                 <td>
-                                <p class="text-sm font-weight-bold mb-0"><?php echo $row["KH_SDT"]; ?></p>
-                                </td>
-                                <!-- email-->
-                                <td>
-                                <p class="text-sm font-weight-bold mb-0"><?php echo $row["KH_EMAIL"]; ?></p>
+                                <p class="text-s text-success font-weight-bold mb-0"><?php echo number_format($row["HD_TONGTIEN"], 0, '.')  ?> VNĐ</p>
                                 </td>
                                 <!-- ngay them -->
                                 <td class="align-middle text-center">
-                                <span class="text-secondary text-xs font-weight-bold"><?php echo $row["KH_NGAYDK"]; ?></span>
+                                <span class="text-secondary text-xs font-weight-bold"><?php echo $row["HD_NGAYDAT"]; ?></span>
+                                </td>
+                                <!-- status-->
+                                <td class="align-middle text-center">
+                                    <?php
+                                        if ($row3["TT_ID"]==1) $style = "text-warning";
+                                        elseif ($row3["TT_ID"]==2) $style = "text-primary";
+                                        else $style = "text-success";
+                                    ?>
+                                <p class="text-xs font-weight-bold mb-0 <?php echo $style; ?>"><?php echo $row3["TT_TEN"]; ?></p>
                                 </td>
                                 <td class="align-middle">
-                                <form method="post" action="edit_staff.php">
-                                    <input type="hidden" name="nvid" value="<?php echo $row["KH_ID"]; ?>">
-                                    <button onclick="this.form.submit()" class="mt-3 btn btn-link text-primary font-weight-bold text-sm">
-                                    Gửi email
+                                    <button class="mt-3 btn btn-link text-primary font-weight-bold text-xs">
+                                        Xem chi tiết ->
                                     </button>
-                                </form>
+                                    
                                 </td>
                             </tr>
                             <?php
@@ -372,18 +361,15 @@
                         }
                         }
                     ?>
-                    
                     <!-- het 1 hang -->
                     </tbody>
                 </table>
+                    
                 </div>
             </div>
             </div>
         </div>
         </div>
-
-
-
   </main>
   
   <!--   Core JS Files   -->
@@ -488,6 +474,7 @@
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="../assets/js/argon-dashboard.min.js?v=2.0.4"></script>
+  
 </body>
 
 </php>
