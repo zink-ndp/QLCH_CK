@@ -37,8 +37,8 @@ INSERT INTO `chitiet_kho` (`SP_ID`, `K_ID`, `SP_SOLUONG`) VALUES
 --
 
 INSERT INTO `chitiet_nhap` (`NH_ID`, `SP_ID`, `NV_ID`, `NH_NGAYNHAP`, `SP_SOLUONG`, `SP_DVT`) VALUES
-(1, 1, 1, '2023-03-13', '20', 'Kg'),
-(2, 2, 1, '2023-03-13', '50', 'Con'),
+(1, 1, 1, '2023-03-13', '20', 'Con'),
+(2, 2, 1, '2023-03-13', '50', 'Cái'),
 (2, 3, 1, '2023-03-13', '15', 'Cái'),
 (3, 4, 1, '2023-03-16', '4', 'Cái');
 
@@ -47,7 +47,8 @@ INSERT INTO `chitiet_nhap` (`NH_ID`, `SP_ID`, `NV_ID`, `NH_NGAYNHAP`, `SP_SOLUON
 --
 
 INSERT INTO `khach_hang` (`KH_ID`, `TK_ID`, `KH_HOTEN`, `KH_SDT`, `KH_EMAIL`, `KH_NGAYSINH`, `KH_DIACHI`, `KH_GIOITINH`, `KH_NGAYDK`) VALUES
-(1, 8, 'Nguyễn Văn Khách', '0972666533', 'toilakhach@gmail.com', '2001-04-17', 'A123, Đường A, huyện AA, tỉnh AAA', 'm', '2022-03-16');
+(1, 8, 'Nguyễn Văn Khách', '0972666533', 'toilakhach@gmail.com', '2001-04-17', 'A123, Đường A, huyện AA, tỉnh AAA', 'm', '2022-03-16'),
+(2, 9, 'Trần Thị Khách', '0972636534', 'toicunglakhach@gmail.com', '2001-04-17', 'B123, Đường B, huyện BB, tỉnh BBB', 'm', '2022-03-16');
 
 --
 -- Đang đổ dữ liệu cho bảng `kho`
@@ -121,7 +122,8 @@ INSERT INTO `tai_khoan` (`TK_ID`, `TK_TENDANGNHAP`, `TK_MATKHAU`, `TK_AVATAR`, `
 (5, 'nv3', 'nv3', 'kal-visuals-square.jpg', 'staff'),
 (6, 'ad1', 'ad1', 'marie.jpg', 'admin'),
 (7, 'nv9', 'nv9', 'team-2.jpg', 'staff'),
-(8, 'kh1', 'kh1', 'macdinh.jpg', 'custommer');
+(8, 'kh1', 'kh1', 'macdinh.jpg', 'custommer'),
+(9, 'kh2', 'khh2', 'macdinh.jpg', 'custommer');
 
 
 --
@@ -140,7 +142,8 @@ INSERT INTO `nha_van_chuyen` (`NVC_ID`, `NVC_TEN`) VALUES
 --
 
 INSERT INTO `don_van_chuyen` VALUES
-(1,2, 'A, đường A, huyện A, tỉnh A','2022-03-16', '2022-05-13');
+(1,2, 'A, đường A, huyện A, tỉnh A','2022-03-16', '2022-05-13'),
+(2,1, 'B, đường B, huyện B, tỉnh B','2022-03-15', '2022-05-12');
 
 
 --
@@ -157,13 +160,16 @@ INSERT INTO `khuyen_mai` VALUES
 
 INSERT INTO `chitiet_hd` VALUES
 (1,1,2),
-(2,1,1);
+(2,1,1),
+(1,2,2),
+(2,2,2);
 
 --
 -- Đang đổ dữ liệu cho bảng `trangthai_hd`
 --
 
 INSERT INTO `trangthai_hd` VALUES
+(0,'Đã huỷ'),
 (1,'Đợi xác nhận'),
 (2,'Đang giao hàng'),
 (3,'Hoàn thành');
@@ -174,7 +180,8 @@ INSERT INTO `trangthai_hd` VALUES
 --
 
 INSERT INTO `hoa_don` VALUES
-(1,1,null,1,2,1,1,300000,'2023-03-12',null); 
+(1,1,null,null,2,1,1,300000,'2023-03-12',null),
+(2,2,null,1,1,2,2,600000,'2023-03-14',null); 
 
 SET FOREIGN_KEY_CHECKS=1;
 COMMIT;

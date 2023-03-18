@@ -121,7 +121,7 @@ create table HOA_DON
    HD_ID                int not null,
    DVC_ID               int not null,
    KM_ID                int,
-   NV_ID                int not null,
+   NV_ID                int,
    PTTT_ID              int not null,
    KH_ID                int not null,
    TT_ID                int not null,
