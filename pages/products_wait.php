@@ -273,7 +273,7 @@
                     <tr>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Mã đơn</th>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Khách hàng</th>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Địa chỉ</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nhân viên tiếp nhận</th>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Tổng tiền</th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ngày đặt hàng</th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Trạng thái</th>
@@ -290,6 +290,8 @@
                         $result_all = $result -> fetch_all(MYSQLI_ASSOC);
                         foreach ($result_all as $row) {
                             
+                            $nvid = $row["NV_ID"];
+
                             $sql_kh = "SELECT * FROM khach_hang WHERE KH_ID = {$row["KH_ID"]}";
                             $result1 = $conn->query($sql_kh);
                             if ($result1->num_rows > 0) {
@@ -325,11 +327,24 @@
                                     <div class="d-flex flex-column justify-content-center">
                                     <h6 class="mb-0 text-sm"><?php echo $row1["KH_HOTEN"]; ?></h6>
                                     <p class='text-xs text-secondary mb-0'>Ngày sinh: <?php echo $row1["KH_NGAYSINH"]; ?></p>
+                                    <p class="text-xs text-secondary mb-0">Địa chỉ: <?php echo $row1["KH_DIACHI"]; ?></p>
                                     </div>
                                 </div>
                                 </td>
+
+                                <!-- Nhan vien tiep nhan -->
                                 <td>
-                                <p class="text-xs font-weight-bold mb-0"><?php echo $row1["KH_DIACHI"]; ?></p>
+                                    <?php
+                                    if ($nvid != null){
+                                        $sqlnv = "select NV_HOTEN from nhan_vien where NV_ID = {$nvid}";
+                                        $rsnv = $conn->query($sqlnv);
+                                        $rownv = mysqli_fetch_assoc($rsnv);
+                                        $tennv = $rownv["NV_HOTEN"];
+                                    } else {
+                                        $tennv = "Chưa được duyệt!";
+                                    }
+                                    ?>
+                                <p class="text-xs font-weight-bold mb-0"><?php echo $tennv; ?></p>
                                 </td>
                                 <!-- Tong tien-->
                                 <td>
