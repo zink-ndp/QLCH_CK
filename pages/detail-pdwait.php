@@ -250,7 +250,7 @@
                 <form action="#" method="get">
                 <div class="card-header pb-2 d-flex align-items-center">
                     <div class="col-3">
-                    <h6 class="">Chi tiết đơn hàng</h6>
+                    <h6 class="">Thông tin khách hàng</h6>
                     </div>
                     <!-- <div class="col-6"></div> -->
                     <div class="col-9 d-flex align-items-center  justify-content-end">
@@ -308,7 +308,7 @@
                                     <div>
                                     <?php
                                         $avatar_url = "../assets/img/cus_img/" . $avtkh;
-                                        echo "<img src='{$avatar_url}' class='avatar avatar-md me-3 mt-2' alt='cus'>";
+                                        echo "<img src='{$avatar_url}' class='rounded-circle avatar avatar-md me-3 mt-2' alt='cus'>";
                                     ?> 
                                     </div>
                                     <!-- ten kh -->
@@ -382,8 +382,6 @@
                         $row2 = mysqli_fetch_assoc($rs2);
                         $dvtsp = $row2["SP_DVT"];
 
-
-
                         ?>
                             <tr class="height-100">
                                 <!-- STT -->
@@ -433,15 +431,35 @@
         <div class="col-12 ">
             <div class="card mb-4">
             <div class="card-header pb-2 d-flex align-items-center">
-                    <div class="col-3">
-                    <h6 class="">Thao tác đơn hàng</h6>
-                    </div>
-                    <div class="col-9 d-flex align-items-center  justify-content-end">
-                    
+                <div class="col-2">
+                <h6 class="">Thao tác đơn hàng</h6>
+                </div>
+                <div class="col-6 d-flex align-items-center me-4">
+                <input type="text" name="lido" class="form-control form-control-md" placeholder="Lí do huỷ đơn (nếu có)">
+                </div>
+                <div class="col-2 d-flex align-items-center justify-content-end">
+                    <select class="form-control form-control-md" name="types" id="types">
+                        <option value="<?php echo $trangthai; ?>" selected disabled hidden><?php echo $tentrangthai; ?></option>
+                        <?php
+                        $sqltt = "SELECT * FROM trangthai_hd";
+                        $resulttt = $conn->query($sqltt);
+                        if ($resulttt->num_rows > 0) {
+                            $resulttt = $conn->query($sqltt);
+                            $resulttt_all = $resulttt -> fetch_all(MYSQLI_ASSOC);
+                            foreach ($resulttt_all as $rowtt) {
+                            echo "<option value=" .$rowtt["TT_ID"]. ">".$rowtt["TT_TEN"]."</option>";
+                            }                          
+                        } else {
+                            echo "<option value=''>Không có dữ liệu</option>";
+                        }
+                        ?>
+                    </select>
+                </div>
+                <div class="col-2 d-flex align-items-center justify-content-center">
+                    <button class="btn btn-primary text-white mt-3 ms-3" type="submit">Cập nhật đơn hàng</button>
                 </div>
             </div>
             <div class="card-body px-0 pt-0 pb-2 px-4 py-4">
-
             </div>
         </div>
     </div>

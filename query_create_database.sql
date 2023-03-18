@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     16/03 10:38                                  */
+/* Created on:     18/03 4:56                                   */
 /*==============================================================*/
 
 
@@ -57,8 +57,7 @@ create table CHITIET_HD
 (
    SP_ID                int not null,
    HD_ID                int not null,
-   SP_SOLUONG           numeric(8,0) not null,
-   SP_THANHTIEN         int not null
+   SP_SOLUONG           numeric(8,0) not null
 );
 
 /*==============================================================*/
@@ -81,8 +80,8 @@ create table CHITIET_NHAP
    NV_ID                int not null,
    NH_NGAYNHAP          date not null,
    SP_SOLUONG           numeric(8,0) not null,
-   SP_DVT               char(20) not null,
-   primary key (NH_ID, SP_ID, NV_ID)
+   SP_DVT               text not null,
+   primary key (NH_ID, SP_ID)
 );
 
 /*==============================================================*/
@@ -127,6 +126,8 @@ create table HOA_DON
    KH_ID                int not null,
    TT_ID                int not null,
    HD_TONGTIEN          float not null,
+   HD_NGAYDAT           date not null,
+   HD_LIDOHUY           text,
    primary key (HD_ID)
 );
 
