@@ -250,7 +250,7 @@
                 <form action="#" method="get">
                 <div class="card-header pb-2 d-flex align-items-center">
                     <div class="col-3">
-                    <h6 class="">Danh sách đơn hàng</h6>
+                    <h6 class="">Chi tiết đơn hàng</h6>
                     </div>
                     <!-- <div class="col-6"></div> -->
                     <div class="col-9 d-flex align-items-center  justify-content-end">
@@ -295,6 +295,8 @@
                             $tentrangthai = $_POST["tentrangthai"];
                             $ngaysinh = $_POST["ngaysinh"];
                             
+
+                            
                         ?>
                                 <!-- Ma hoa don -->
                                 <td class="align-middle text-center">
@@ -318,8 +320,9 @@
                                 </div>
                                 </td>
                                 <!-- Lien he -->
-                                <td>
-                                <p class="text-s font-weight-bold mb-0"><?php echo $emailkh; ?> - <?php echo $sdtkh; ?></p>
+                                <td class="align-middle text-center"    >
+                                <p class="text-s font-weight-bold mb-0"><?php echo $emailkh; ?></p>
+                                <p class="text-s font-weight-bold mb-0"><?php echo $sdtkh; ?></p>
                                 </td>
                                 <!-- Tong tien-->
                                 <td>
@@ -342,6 +345,103 @@
                     <!-- het 1 hang -->
                     </tbody>
                 </table>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 ">
+            <div class="card mb-4">
+            <div class="card-header pb-2 d-flex align-items-center">
+                    <div class="col-3">
+                    <h6 class="">Danh sách sản phẩm</h6>
+                    </div>
+                    <div class="col-9 d-flex align-items-center  justify-content-end">
+                    
+                </div>
+            </div>
+            <div class="card-body px-0 pt-0 pb-2 px-4 py-4">
+                <table class="table align-items-center mb-0">
+                <?php
+                    $sql="select * from chitiet_hd where HD_ID = {$mahd}";
+                    $rs = $conn->query($sql);
+                    $rs_all = $rs -> fetch_all(MYSQLI_ASSOC);
+                    $stt=1;
+                    foreach ($rs_all as $row){
+                        $idsp = $row["SP_ID"];
+                        $sql1 = "select * from san_pham where SP_ID = {$idsp}";
+                        $rs1 = $conn->query($sql1);
+                        $row1 = mysqli_fetch_assoc($rs1);
+
+                        $anhsp = $row1["SP_HINHANH"];
+                        $tensp = $row1["SP_TEN"];
+                        $motasp = $row1["SP_MOTA"]; 
+                        $giasp = $row1["SP_GIA"];
+
+                        $sql2 = "select * from chitiet_nhap where SP_ID = {$idsp}";
+                        $rs2 = $conn->query($sql2);
+                        $row2 = mysqli_fetch_assoc($rs2);
+                        $dvtsp = $row2["SP_DVT"];
+
+
+
+                        ?>
+                            <tr class="height-100">
+                                <!-- STT -->
+                                <td>
+                                    <p class="text-sm font-weight-bold mb-0"><?php echo $stt; ?></p>
+                                </td>
+                                <td class="w-30" >
+                                      <div class="d-flex px-2 py-1">
+                                          <!-- hinh anh san pham -->
+                                        <div>
+                                          <?php
+                                            $avatar_url = "../assets/img/product_img/" . $anhsp;
+                                            echo "<img src='{$avatar_url}' class='avatar avatar-xl me-3' alt='user1'>";
+                                          ?> 
+                                          
+                                        </div>
+                                        <!-- ten san pham -->
+                                        <div class="d-flex flex-column justify-content-center">
+                                          <h6 class="mb-0 text-md"><?php echo $tensp; ?></h6>
+                                          <!-- <p class='text-xs text-secondary mb-0'><?php echo $tennh; ?></p> -->
+                                        </div>
+                                      </div>
+                                    </td>
+                                    <!-- gia sp -->
+                                    <td>
+                                      <p class="text-xs font-weight-bold mb-0"><?php echo number_format($row1["SP_GIA"], 0, '.') ; ?> VNĐ</p>
+                                    </td>
+                                    <!-- soluong sp -->
+                                    <td class="align-middle text-center">
+                                    Số lượng: <p class="text-s text-primary font-weight-bold mb-0"><?php echo $row["SP_SOLUONG"] ." ".$dvtsp;; ?></p>
+                                    </td>
+                                    <!-- dvt -->
+                                    <td>
+                                      <p class="text-s text-success font-weight-bold mb-0">Thành tiền <?php echo number_format($row["SP_SOLUONG"]*$row1["SP_GIA"],0,'.') ;?></p>
+                                    </td>
+                            </tr>
+                            
+                        <?php
+                        $stt++;
+                    }
+                ?>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 ">
+            <div class="card mb-4">
+            <div class="card-header pb-2 d-flex align-items-center">
+                    <div class="col-3">
+                    <h6 class="">Thao tác đơn hàng</h6>
+                    </div>
+                    <div class="col-9 d-flex align-items-center  justify-content-end">
+                    
+                </div>
+            </div>
+            <div class="card-body px-0 pt-0 pb-2 px-4 py-4">
+
             </div>
         </div>
     </div>

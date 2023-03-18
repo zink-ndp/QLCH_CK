@@ -363,7 +363,7 @@
                                         <input type="hidden" name="tentrangthai" value="<?php echo $row3["TT_TEN"] ?>">
                                         
 
-                                        <button type="submit" class="mt-3 btn btn-link text-primary font-weight-bold text-xs">
+                                        <button type="submit" class="mt-4 btn btn-link text-primary font-weight-bold text-xs">
                                             Xem chi tiết ->
                                         </button>
                                     </form>
