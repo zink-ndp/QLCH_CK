@@ -43,12 +43,12 @@
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
       <a class="navbar-brand m-0" href="#" target="_blank">
-       <img src="../assets/img/logo-ck.png" class=" h-100" alt="main_logo">
+        <img src="../assets/img/logo-ck.png" class=" h-100" alt="main_logo">
         <span class="ms-1 font-weight-bold">Quản lý Forish</span>
       </a>
     </div>
     <hr class="horizontal dark mt-0">
-    <div class="collapse navbar-collapse w-auto " id="sidenav-collapse-main">
+    <div class="collapse navbar-collapse w-auto" style="height: 100vh; !important" id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item mt-3">
           <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Tổng quan</h6>
@@ -70,7 +70,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="../pages/products.php">
+          <a class="nav-link " href="../pages/products_wait.php">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="fas fa-copy text-warning text-sm opacity-10"></i>
             </div>
@@ -78,33 +78,13 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="../pages/products_add_form.php">
+          <a class="nav-link " href="../pages/custommer.php">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="fas fa-cart-plus text-info text-sm opacity-10"></i>
+              <i class="fas fa-user-tie text-info text-sm opacity-10"></i>
             </div>
             <span class="nav-link-text ms-1">Khách hàng</span>
           </a>
         </li>
-        
-        <!-- <li class="nav-item mt-3">
-          <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Quản lý nhân viên</h6>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link " href="../pages/staff.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-single-copy-04 text-warning text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Danh sách nhân viên</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link " href="../pages/staff_add.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="fas fa-user-plus text-warning text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Thêm nhân viên</span>
-          </a>
-        </li> -->
 
         <?php
           if($_SESSION["role"] == 'admin')
@@ -112,7 +92,7 @@
               echo "<li class=\"nav-item mt-3\">\n"; 
               echo " <h6 class=\"ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6\">Quản lý nhân viên</h6>\n"; 
               echo "</li>\n"; echo "<li class=\"nav-item\">\n"; 
-              echo " <a class=\"nav-link  \" href=\"../pages/staff.php\">\n"; 
+              echo " <a class=\"nav-link active\" href=\"../pages/staff.php\">\n"; 
               echo " <div class=\"icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center\">\n"; 
               echo " <i class=\"ni ni-single-copy-04 text-warning text-sm opacity-10\"></i>\n"; 
               echo " </div>\n"; 
@@ -126,18 +106,46 @@
               echo " </div>\n"; echo " <span class=\"nav-link-text ms-1\">Thêm nhân viên</span>\n"; 
               echo " </a>\n"; 
               echo "</li>";
+              echo '<li class="nav-item mt-3">
+                    <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Quản lý đối tác</h6>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link " href="../pages/pdsource.php">
+                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                    <i class="fas fa-building text-primary text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Nguồn hàng</span>
+                    </a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link " href="../pages/storage.php">
+                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                    <i class="fas fa-warehouse text-warning text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Kho hàng</span>
+                    </a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link " href="../pages/transporter.php">
+                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                    <i class="fas fa-truck text-success text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Đơn vị vận chuyển</span>
+                    </a>
+                    </li>';
             }
         ?>
+
 
         <li class="nav-item mt-3">
           <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Quản lý sản phẩm</h6>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="../pages/products.php">
+          <a class="nav-link " href="../pages/trans_bill.php">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="fas fa-warehouse text-primary text-sm opacity-10"></i>
+              <i class="fas fa-truck-loading text-primary text-sm opacity-10"></i>
             </div>
-            <span class="nav-link-text ms-1">Kho hàng</span>
+            <span class="nav-link-text ms-1">Đơn vận chuyển</span>
           </a>
         </li>
         <li class="nav-item">
@@ -158,7 +166,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="../pages/products.php">
+          <a class="nav-link " href="../pages/rating.php">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="fas fa-star-half-alt text-danger text-sm opacity-10"></i>
             </div>
@@ -178,22 +186,9 @@
         </li>
       </ul>
     </div>
-    <div class="sidenav-footer mx-3 mt-3">
-      <hr class="horizontal dark mt-0">
-      <div class="card card-plain shadow-none" id="sidenavCard">
-        <img src="../assets/img/staff_img/<?php echo $_SESSION["avt"]; ?>" class="mx-auto rounded-circle avatar avatar-lg" alt="user">
-        <div class="card-body text-center p-3 w-100 pt-1">
-          <div class="docs-info">
-            <h7 class="text-secondary mt-1 mb-0">Xin chào, </h7>  <br>
-            <h6 class="font-weight-bolder text-primary mt-n1 mb-0"><?php echo $_SESSION["name"]; ?></h6> 
-          </div>
-        </div>
-      </div>
-      <a href="profile.php" class="btn btn-dark btn-sm w-100 mb-3">Thông tin cá nhân</a>
-      <a class="btn btn-primary btn-sm mt-n2 mb-0 w-100" href="log_out.php" type="button">Đăng xuất</a>
-    </div>
   </aside>
-<main class="main-content position-relative border-radius-lg ">
+  
+  <main class="main-content position-relative border-radius-lg ">
     <!-- Navbar -->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur" data-scroll="false">
       <div class="container-fluid py-1 px-3">
