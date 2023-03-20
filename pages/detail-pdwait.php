@@ -261,10 +261,11 @@
     
     <div class="container-fuild mx-3">
       <div class="col-12">
-        <div class="col-9">
-          <div class="row">
-            <div class="col-12  px-4">
-                <div class="card mb-4">
+        <div class="row">
+          <div class="col-9">
+            <div class="row">
+              <div class="col-12  px-4">
+                  <div class="card mb-4">
                     <form action="#" method="get">
                     <div class="card-header pb-2 d-flex align-items-center">
                         <div class="col-3">
@@ -355,91 +356,143 @@
                         </table>
                         </div>
                     </div>
-                </div>
-
-
-            </div>
-          </div>   
-        </div>
-        <div class="col-3">
-          <div class="row">
-            <div class="col-12 ">
+                  </div>
+              </div>
+            </div> 
+            <div class="row">
+              <div class="col-12 px-4">
                 <div class="card mb-4">
-                <div class="card-header pb-2 d-flex align-items-center">
-                    <div class="col-3">
-                        <h6 class="">Danh sách sản phẩm</h6>
-                    </div>
-                    <div class="col-9 d-flex align-items-center  justify-content-end"></div>
-                </div>
-                <div class="card-body px-0 pt-0 pb-2 px-4 py-4">
-                    <table class="table align-items-center mb-0">
-                    <?php
-                        $sql="select * from chitiet_hd where HD_ID = {$mahd}";
-                        $rs = $conn->query($sql);
-                        $rs_all = $rs -> fetch_all(MYSQLI_ASSOC);
-                        $stt=1;
-                        foreach ($rs_all as $row){
-                            $idsp = $row["SP_ID"];
-                            $sql1 = "select * from san_pham where SP_ID = {$idsp}";
-                            $rs1 = $conn->query($sql1);
-                            $row1 = mysqli_fetch_assoc($rs1);
-
-                            $anhsp = $row1["SP_HINHANH"];
-                            $tensp = $row1["SP_TEN"];
-                            $motasp = $row1["SP_MOTA"]; 
-                            $giasp = $row1["SP_GIA"];
-
-                            $sql2 = "select * from chitiet_nhap where SP_ID = {$idsp}";
-                            $rs2 = $conn->query($sql2);
-                            $row2 = mysqli_fetch_assoc($rs2);
-                            $dvtsp = $row2["SP_DVT"];
-
-                            ?>
-                                <tr class="height-100">
-                                    <!-- STT -->
-                                    <td>
-                                        <p class="text-sm font-weight-bold mb-0"><?php echo $stt; ?></p>
-                                    </td>
-                                    <td class="w-30" >
-                                          <div class="d-flex px-2 py-1">
-                                              <!-- hinh anh san pham -->
-                                            <div>
-                                              <?php
-                                                $avatar_url = "../assets/img/product_img/" . $anhsp;
-                                                echo "<img src='{$avatar_url}' class='avatar avatar-xl me-3' alt='user1'>";
-                                              ?> 
-                                              
+                  <div class="card-header pb-2 d-flex align-items-center">
+                      <div class="col-3">
+                          <h6 class="">Danh sách sản phẩm</h6>
+                      </div>
+                      <div class="col-9 d-flex align-items-center  justify-content-end"></div>
+                  </div>
+                  <div class="card-body px-0 pt-0 pb-2 px-4 py-4">
+                      <table class="table align-items-center mb-0">
+                      <?php
+                          $sql="select * from chitiet_hd where HD_ID = {$mahd}";
+                          $rs = $conn->query($sql);
+                          $rs_all = $rs -> fetch_all(MYSQLI_ASSOC);
+                          $stt=1;
+                          foreach ($rs_all as $row){
+                              $idsp = $row["SP_ID"];
+                              $sql1 = "select * from san_pham where SP_ID = {$idsp}";
+                              $rs1 = $conn->query($sql1);
+                              $row1 = mysqli_fetch_assoc($rs1);
+    
+                              $anhsp = $row1["SP_HINHANH"];
+                              $tensp = $row1["SP_TEN"];
+                              $motasp = $row1["SP_MOTA"]; 
+                              $giasp = $row1["SP_GIA"];
+    
+                              $sql2 = "select * from chitiet_nhap where SP_ID = {$idsp}";
+                              $rs2 = $conn->query($sql2);
+                              $row2 = mysqli_fetch_assoc($rs2);
+                              $dvtsp = $row2["SP_DVT"];
+    
+                              ?>
+                                  <tr class="height-100">
+                                      <!-- STT -->
+                                      <td>
+                                          <p class="text-sm font-weight-bold mb-0"><?php echo $stt; ?></p>
+                                      </td>
+                                      <td class="w-30" >
+                                            <div class="d-flex px-2 py-1">
+                                                <!-- hinh anh san pham -->
+                                              <div>
+                                                <?php
+                                                  $avatar_url = "../assets/img/product_img/" . $anhsp;
+                                                  echo "<img src='{$avatar_url}' class='avatar avatar-xl me-3' alt='user1'>";
+                                                ?> 
+                                                
+                                              </div>
+                                              <!-- ten san pham -->
+                                              <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-0 text-md"><?php echo $tensp; ?></h6>
+                                                <!-- <p class='text-xs text-secondary mb-0'><?php echo $tennh; ?></p> -->
+                                              </div>
                                             </div>
-                                            <!-- ten san pham -->
-                                            <div class="d-flex flex-column justify-content-center">
-                                              <h6 class="mb-0 text-md"><?php echo $tensp; ?></h6>
-                                              <!-- <p class='text-xs text-secondary mb-0'><?php echo $tennh; ?></p> -->
-                                            </div>
-                                          </div>
-                                        </td>
-                                        <!-- gia sp -->
-                                        <td>
-                                          <p class="text-xs font-weight-bold mb-0"><?php echo number_format($row1["SP_GIA"], 0, '.') ; ?> VNĐ</p>
-                                        </td>
-                                        <!-- soluong sp -->
-                                        <td class="align-middle text-center">
-                                        Số lượng: <p class="text-s text-primary font-weight-bold mb-0"><?php echo $row["SP_SOLUONG"] ." ".$dvtsp;; ?></p>
-                                        </td>
-                                        <!-- dvt -->
-                                        <td>
-                                          <p class="text-s text-success font-weight-bold mb-0">Thành tiền <?php echo number_format($row["SP_SOLUONG"]*$row1["SP_GIA"],0,'.') ;?></p>
-                                        </td>
-                                </tr>
-                                
-                            <?php
-                            $stt++;
-                        }
-                    ?>
-                    </table>
+                                          </td>
+                                          <!-- gia sp -->
+                                          <td>
+                                            <p class="text-xs font-weight-bold mb-0"><?php echo number_format($row1["SP_GIA"], 0, '.') ; ?> VNĐ</p>
+                                          </td>
+                                          <!-- soluong sp -->
+                                          <!-- dvt -->
+                                          <td class="align-middle text-center">
+                                          Số lượng: <p class="text-s text-primary font-weight-bold mb-0"><?php echo $row["SP_SOLUONG"] ." ".$dvtsp;; ?></p>
+                                          </td>
+                                          <!-- thanhtien -->
+                                          <td>
+                                            <p class="text-xs text-secondary font-weight-bold mb-0 me-n5">Thành tiền:</p>
+                                          </td>
+                                          <td>
+                                            <p class="text-s text-success font-weight-bold mb-0 me-n5"><?php echo number_format($row["SP_SOLUONG"]*$row1["SP_GIA"],0,'.') ;?> VNĐ</p>
+                                          </td>
+                                  </tr>
+                                  
+                              <?php
+                              $stt++;
+                          }
+                      ?>
+                      </table>
+                  </div>
                 </div>
+              </div>
             </div>
-        </div>
-        
+          </div>
+          <div class="col-3">
+            <div class="row">
+              <div class="col-12 ">
+                <div class="card mb-4">
+                  <div class="card-header pb-2 d-flex align-items-center">
+                    <div class="col-12">
+                      <h6 class="">Thao tác đơn hàng</h6>
+                    </div>
+                  </div>
+                  <div class="card-body px-0 pt-1 pb-2 px-4 py-4">
+                    <form action="" method="post">
+                      <div class="col-12 d-flex align-items-center justify-content-end">
+                        <select id="mySelect" onchange="showTextarea()" class="form-control form-control-md" name="status" id="status">
+                          <option value="<?php echo $trangthai; ?>" selected disabled hidden><?php echo $tentrangthai; ?></option>
+                          <?php
+                              $sqltt = "SELECT * FROM trangthai_hd";
+                              $resulttt = $conn->query($sqltt);
+                              if ($resulttt->num_rows > 0) {
+                                $resulttt = $conn->query($sqltt);
+                                $resulttt_all = $resulttt -> fetch_all(MYSQLI_ASSOC);
+                                foreach ($resulttt_all as $rowtt) {
+                                  echo "<option value=" .$rowtt["TT_ID"]. ">".$rowtt["TT_TEN"]."</option>";
+                                }                          
+                              } else {
+                                echo "<option value=''>Không có dữ liệu</option>";
+                              }
+                              ?>
+                              
+                          </select>
+                      </div>
+                      <div class="col-12 d-flex align-items-center me-4 mt-4">
+                        <textarea id="myTextarea" style="display: none;" name="lido" class="form-control form-control-md">Lí do huỷ đơn</textarea>
+                      </div>
+                      <div class="col-12 d-flex align-items-center justify-content-center">
+                        <button class="btn btn-primary text-white mt-3 ms-3" type="submit">Cập nhật đơn hàng</button>
+                      </div>
+                    </form>
+                    <script>
+                      function showTextarea() {
+                        var selectValue = document.getElementById("mySelect").value;
+                        if (selectValue == 0) {
+                          document.getElementById("myTextarea").style.display = "block";
+                        } else {
+                          document.getElementById("myTextarea").style.display = "none";
+                        }
+                      }
+                    </script>
+                  </div>
+                </div>
+              </div>
+            </div>        
           </div>
         </div>
       </div>
