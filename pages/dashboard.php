@@ -265,19 +265,14 @@
                 <div class="col-8">
                   <div class="numbers">
                     <?php
-                      $sql = "select * from hoa_don where TT_ID = 3";
-                      if ($conn->query($sql)==true){
-                        $rs = $conn->query($sql);
-
-                        if (mysqli_fetch_assoc($rs)!=null){
-                          $row = mysqli_fetch_assoc($rs);
-                          if ($row["HD_TONGTIEN"] != null){
-                            $message = "1";
-                            $tongdoanhthu = $row["HD_TONGTIEN"];
-                          }else {
-                            $tongdoanhthu = 0;
-                          }
-                        }
+                      $sql = "select SUM(HD_TONGTIEN) as tongdt from hoa_don where TT_ID = 3";
+                      $rs = $conn->query($sql);
+                      $row = mysqli_fetch_assoc($rs);
+                      if ($row["tongdt"] != null){
+                        $message = "1";
+                        $tongdoanhthu = $row["tongdt"];
+                      }else {
+                        $tongdoanhthu = 0;
                       }
                     ?>
                     <p class="text-sm mb-0 text-uppercase font-weight-bold">Doanh thu</p>

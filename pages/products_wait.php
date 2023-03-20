@@ -311,7 +311,7 @@
                     <tbody>
                     <!-- 1 hang -->
                     <?php
-                        $sql = "select * from hoa_don";
+                        $sql = "select * from hoa_don where TT_ID BETWEEN 0 AND 2";
                         $result = $conn->query($sql);
                         if ($result->num_rows > 0) {
                         $result = $conn->query($sql);
