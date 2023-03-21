@@ -346,6 +346,7 @@
                                             <?php
                                                 if ($trangthai==1) $style = "text-warning";
                                                 elseif ($trangthai==2) $style = "text-primary";
+                                                elseif ($trangthai==0) $style = "text-danger";
                                                 else $style = "text-success";
                                             ?>
                                         <p class="text-xs font-weight-bold mb-0 <?php echo $style; ?>"><?php echo $tentrangthai ?></p>
@@ -452,10 +453,10 @@
                     </div>
                   </div>
                   <div class="card-body px-0 pt-1 pb-2 px-4 py-4">
-                    <form action="" method="post">
+                    <form action="update_status_bill.php" method="post">
                       <div class="col-12 d-flex align-items-center justify-content-end">
                         <select id="mySelect" onchange="showTextarea()" class="form-control form-control-md" name="status" id="status">
-                          <option value="<?php echo $trangthai; ?>" selected disabled hidden><?php echo $tentrangthai; ?></option>
+                          <option value="<?php echo $trangthai; ?>" selected hidden><?php echo $tentrangthai; ?></option>
                           <?php
                               $sqltt = "SELECT * FROM trangthai_hd";
                               $resulttt = $conn->query($sqltt);
@@ -476,6 +477,7 @@
                         <textarea id="myTextarea" style="display: none;" name="lido" class="form-control form-control-md">Lí do huỷ đơn</textarea>
                       </div>
                       <div class="col-12 d-flex align-items-center justify-content-center">
+                        <input type="hidden" name="mahd" value="<?php echo $mahd; ?>">
                         <button class="btn btn-primary text-white mt-3 ms-3" type="submit">Cập nhật đơn hàng</button>
                       </div>
                     </form>

@@ -21,7 +21,13 @@
 	};
 	$nvid = $_SESSION["nvid"];
 
-	$sql = "update hoa_don set NV_ID = {$nvid}, TT_ID = {$status}";
+	$sql = "update hoa_don set TT_ID = {$status}";
+
+	if ($status!=1){
+		$sql .= ", NV_ID = {$nvid}";
+	} else {
+		$sql .= ", NV_ID = null";
+	}
 
 	if ($reason!=null){
 		$sql .= ", HD_LIDOHUY = '{$reason}'";
