@@ -8390,6 +8390,18 @@ fieldset:disabled .btn {
   display: flex !important;
 }
 
+.d-flex-v {
+  display: flex !important;
+  orientation: vertical !important;
+}
+
+.d-flex-v-center {
+  display: flex !important;
+  orientation: vertical !important;
+  justify-content: center;
+  align-items: center;
+}
+
 .d-inline-flex {
   display: inline-flex !important;
 }

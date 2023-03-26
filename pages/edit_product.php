@@ -337,7 +337,7 @@
                       </div>
                       <div class="mb-3 px-3 col-2">
                           Số lượng
-                        <input min="1" max="10000" step="1" type="number" name="slsp" class="form-control form-control-lg" value="<?php echo $slsp; ?>">
+                        <input disabled min="1" max="10000" step="1" type="number" name="slsp" class="form-control form-control-lg" value="<?php echo $slsp; ?>">
                       </div>
                       <div class="mb-3 px-3 col-3">
                           Tải ảnh sản phẩm:

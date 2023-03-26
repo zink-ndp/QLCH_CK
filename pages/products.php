@@ -409,9 +409,10 @@
                                             
                                         <div class="me-n3 align-middle col-4">
                                           <!-- <form method="get" action=""> -->
-                                            <input type="hidden" name="pdid_add" value="<?php echo $row["SP_ID"]; ?>">
-                                            <button onclick="showOverlay()" class="btn btn-link text-success text-secondary font-weight-bold text-sm">
+                                            <!-- <input type="hidden" name="pdid_add" value="<?php echo $row["SP_ID"]; ?>"> -->
+                                            <button data-id="<?php echo $row["SP_ID"]; ?>" data-name="<?php echo $row["SP_TEN"]; ?>" data-img="<?php echo $avatar_url; ?>" class="addmore-button btn btn-link text-success text-secondary font-weight-bold text-sm">
                                               Nhập thêm
+                                              <!-- onclick="showOverlay()" -->
                                             </button>
                                           <!-- </form> -->
                                         </div>
@@ -472,10 +473,23 @@
           <div class="row">
             <div class="col-12">
               <div class="row">
-                <div class="col-4 d-flex justify-content-center align-items-center">
-                  <img src="../assets/img/product_img/default.png" class="rounded-circle img-fluid border border-2 border-white">
+                <div class="col-6 d-flex justify-content-center align-items-center">
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="product-image">
+                        
+                      </div>  
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="ms-2 product-name">
+    
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div class="col-8">
+                <div class="col-6">
                   <div class="mb-3 mt-4 px-3">
                     Số lượng nhập thêm
                     <input min="1" max="10000" step="1" type="number" name="pd_quantity" class="form-control form-control-lg mt-3" placeholder="Nhập số lượng sản phẩm">
@@ -493,38 +507,6 @@
           </div>
         </div>
       </div>
-      <footer class="footer pt-3  ">
-        <div class="container-fluid">
-          <div class="row align-items-center justify-content-lg-between">
-            <div class="col-lg-6 mb-lg-0 mb-4">
-              <div class="copyright text-center text-sm text-muted text-lg-start">
-                © <script>
-                  document.write(new Date().getFullYear())
-                </script>,
-                made with <i class="fa fa-heart"></i> by
-                <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative Tim</a>
-                for a better web.
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <ul class="nav nav-footer justify-content-center justify-content-lg-end">
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com" class="nav-link text-muted" target="_blank">Creative Tim</a>
-                </li>
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted" target="_blank">About Us</a>
-                </li>
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com/blog" class="nav-link text-muted" target="_blank">Blog</a>
-                </li>
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted" target="_blank">License</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </footer>
     </div>
       </div>
       <hr class="horizontal dark my-1">
@@ -540,7 +522,7 @@
       height: 100%;
       z-index: 99999;
       background: rgba(0, 0, 0, 0.5);
-      display: block;
+      display: none;
     }
 
     .my-box {
@@ -557,9 +539,42 @@
 
   </style>
   <script>
-    function showOverlay() {
-      document.getElementById("overlay").style.display = "block";
-    } 
+
+    const productButtons = document.querySelectorAll('.addmore-button');
+
+    productButtons.forEach(button => {
+      button.addEventListener('click', showProductDetails);
+    });
+
+    function showProductDetails(event) {
+      // Lấy ID của sản phẩm được click
+      const productId = event.target.getAttribute('data-id');
+      const product_img = event.target.getAttribute('data-img');
+      const product_name = event.target.getAttribute('data-name');
+      
+      
+      // Truyền giá trị productId qua URL
+      // window.location.href = 'products.php?pdid=' + encodeURIComponent(productId);
+
+      // // Lấy thông tin chi tiết của sản phẩm từ cơ sở dữ liệu hoặc từ một nguồn dữ liệu khác
+      // <?php
+      //   $pdid = ;
+      // ?>
+
+      // Hiển thị overlay
+      const overlay = document.querySelector('.overlay');
+      overlay.style.display = 'block';
+
+      // Hiển thị thông tin chi tiết của sản phẩm
+      const productName = document.querySelector('.product-name');
+      productName.innerHTML = '<h6>' + product_name + '</h6>';
+      const productImg = document.querySelector('.product-image');
+      productImg.innerHTML = '<img src="' + product_img + '" class="avatar avatar-xxl" alt="product">';
+      
+    }
+
+
+    //Tắt overlay
     const overlay = document.getElementById("overlay");
     overlay.addEventListener("click", function(event) {
       if (event.target === overlay) {
