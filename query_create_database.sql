@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     25/03 7:11                                   */
+/* Created on:     26/03 3:04                                   */
 /*==============================================================*/
 
 
@@ -66,7 +66,7 @@ create table CHITIET_NHAP
    NV_ID                int not null,
    NH_NGAYNHAP          date not null,
    SP_SOLUONG           int not null,
-   primary key (NH_ID, SP_ID)
+   primary key (NH_ID, SP_ID, NH_NGAYNHAP)
 );
 
 /*==============================================================*/

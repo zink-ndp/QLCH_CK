@@ -276,30 +276,12 @@
                       ?>
                     </select>
                   </div>
-                  <div class="px-2 mt-n3 col-2 font-weight-bold">
-                    <br>
-                    <select class="form-control form-control-md" name="storage" id="storage">
-                      <option value="" selected disabled hidden>- Kho -</option>
-                      <?php
-                        $sql = "SELECT * FROM kho";
-                        $result = $conn->query($sql);
-                        if ($result->num_rows > 0) {
-                          $result = $conn->query($sql);
-                          $result_all = $result -> fetch_all(MYSQLI_ASSOC);
-                          foreach ($result_all as $row) {
-                            echo "<option value=" .$row["K_ID"]. ">".$row["K_DIACHI"]. "</option>";
-                          }                          
-                        } else {
-                          echo "<option value=''>Không có dữ liệu</option>";
-                        }
-                      ?>
-                    </select>
-                  </div>
                   <div class="px-2 mt-2 col-1 font-weight-bold">
                     <button type="submit" class="btn btn-primary text-white font-weight-bold text-md ms-0 mt-3">
                       Lọc
                     </button>
                   </div>
+                  <div class="px-2 mt-n3 col-2"></div>
                   <div class="px-2 mt-n3 col-1 font-weight-bold"></div>
                   <div class="col-5 mt-2 d-flex align-items-center justify-content-end">
                     <div class="input-group w-75 me-3">
@@ -353,9 +335,7 @@
                               <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Giá</th>
                               <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Số lượng</th>
                               <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Đơn vị tính</th>
-                              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Kho</th>
                               <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ngày nhập</th>
-                              <th class="text-secondary opacity-7"></th>
                               <th class="text-secondary opacity-7"></th>
                             </tr>
                           </thead>
@@ -368,15 +348,15 @@
                                 $result_all = $result -> fetch_all(MYSQLI_ASSOC);
                                 foreach ($result_all as $row) {
 
+                                  $soluong = $row["SP_SOLUONG"];
                                   $lsp = $rowlsp["LSP_TEN"];
                                   $mlsp = $rowlsp["LSP_ID"];
 
-                                  $sql_nhap = "select * from chitiet_nhap where sp_id = '{$row["SP_ID"]}'";
+                                  $sql_nhap = "select * from chitiet_nhap where sp_id = {$row["SP_ID"]}";
                                   $rs = $conn->query($sql_nhap);
                                   $row1 = mysqli_fetch_assoc($rs);
                                   $nhid = $row1["NH_ID"];
                                   $ngaynhap = $row1["NH_NGAYNHAP"];
-                                  $soluong = $row1["SP_SOLUONG"];
 
                                   $sql_nguon = "select NH_TENNGUON, NH_ID from nguon_hang where NH_ID = $nhid";
                                   $rs2 = $conn->query($sql_nguon);
@@ -414,48 +394,56 @@
                                     </td>
                                     <!-- soluong sp -->
                                     <td>
-                                      <p class="text-xs font-weight-bold mb-0"><?php echo $row1["SP_SOLUONG"]; ?></p>
+                                      <p class="text-xs font-weight-bold mb-0"><?php echo $row["SP_SOLUONG"]; ?></p>
                                     </td>
                                     <!-- dvt -->
                                     <td>
-                                      <p class="text-xs font-weight-bold mb-0"><?php echo $row1["SP_DVT"]; ?></p>
-                                    </td>
-                                    <!-- kho -->
-                                    <td>
-                                      <p class="text-xs font-weight-bold mb-0"><?php echo $tenkho; ?></p>
+                                      <p class="text-xs font-weight-bold mb-0"><?php echo $row["SP_DVT"]; ?></p>
                                     </td>
                                     <!-- ngay them -->
                                     <td class="align-middle text-center">
                                     <p class="text-xs font-weight-bold mb-0"><?php echo $ngaynhap; ?></p>
                                     </td>
-                                    <td class="align-middle">
-                                      <form method="post" action="edit_product.php">
-                                          <input type="hidden" name="pdid" value="<?php echo $row["SP_ID"]; ?>">
-                                          <input type="hidden" name="anhsp" value="<?php echo $file; ?>">
-                                          <input type="hidden" name="lsp" value="<?php echo $lsp; ?>">
-                                          <input type="hidden" name="mlsp" value="<?php echo $mlsp; ?>">
-                                          <input type="hidden" name="tensp" value="<?php echo $row["SP_TEN"]; ?>">
-                                          <input type="hidden" name="giasp" value="<?php echo $row["SP_GIA"]; ?>">
-                                          <input type="hidden" name="motasp" value="<?php echo $row["SP_MOTA"]; ?>">
-                                          <input type="hidden" name="nguonsp" value="<?php echo $tennh; ?>">
-                                          <input type="hidden" name="manguonsp" value="<?php echo $manh; ?>">
-                                          <input type="hidden" name="khosp" value="<?php echo $tenkho; ?>">
-                                          <input type="hidden" name="makhosp" value="<?php echo $makho; ?>">
-                                          <input type="hidden" name="dvtsp" value="<?php echo $row1["SP_DVT"]; ?>">
-                                          <input type="hidden" name="slsp" value="<?php echo $row1["SP_SOLUONG"] ?>">
-                                          <button onclick="this.form.submit()" class="mt-3 me-n4 btn btn-link text-primary font-weight-bold text-sm">
-                                            Sửa
-                                          </button>
-                                        </form>
-                                      </td>
-                                      <td class="align-middle">
-                                        <form method="post" action="del_staff.php">
-                                          <input type="hidden" name="pdid" value="<?php echo $row["SP_ID"]; ?>">
-                                          <button onclick="this.form.submit()" class="mt-3 me-n3 btn btn-link text-warning text-secondary font-weight-bold text-sm">
-                                            Xoá
-                                          </button>
-                                        </form>
-                                      </td>
+                                    <td class="align-middle text-center">
+                                      <div class="mt-3 d-flex col-sm-12">
+                                            
+                                        <div class="me-n4 align-middle col-4">
+                                          <form method="get" action="">
+                                            <input type="hidden" name="pdid_add" value="<?php echo $row["SP_ID"]; ?>">
+                                            <button onclick="showOverlay(), this.form.submit()" class="btn btn-link text-success text-secondary font-weight-bold text-sm">
+                                              Nhập thêm
+                                            </button>
+                                          </form>
+                                        </div>
+                                        <div class="me-n4 align-middle col-4">
+                                          <form method="post" action="edit_product.php">
+                                              <input type="hidden" name="pdid" value="<?php echo $row["SP_ID"]; ?>">
+                                              <input type="hidden" name="anhsp" value="<?php echo $file; ?>">
+                                              <input type="hidden" name="lsp" value="<?php echo $lsp; ?>">
+                                              <input type="hidden" name="mlsp" value="<?php echo $mlsp; ?>">
+                                              <input type="hidden" name="tensp" value="<?php echo $row["SP_TEN"]; ?>">
+                                              <input type="hidden" name="giasp" value="<?php echo $row["SP_GIA"]; ?>">
+                                              <input type="hidden" name="motasp" value="<?php echo $row["SP_MOTA"]; ?>">
+                                              <input type="hidden" name="nguonsp" value="<?php echo $tennh; ?>">
+                                              <input type="hidden" name="manguonsp" value="<?php echo $manh; ?>">
+                                              <input type="hidden" name="dvtsp" value="<?php echo $row["SP_DVT"]; ?>">
+                                              <input type="hidden" name="slsp" value="<?php echo $row["SP_SOLUONG"] ?>">
+                                              <button onclick="this.form.submit()" class="btn btn-link text-primary font-weight-bold text-sm">
+                                                Sửa
+                                              </button>
+                                            </form>
+                                        </div>
+                                        <div class=" align-middle col-4">
+                                          <form method="post" action="del_product.php">
+                                              <input type="hidden" name="pdid" value="<?php echo $row["SP_ID"]; ?>">
+                                              <button onclick="this.form.submit()" class="btn btn-link text-warning text-secondary font-weight-bold text-sm">
+                                                Xoá
+                                              </button>
+                                            </form>
+                                        </div>
+
+                                      </div>
+                                    </td>
                                   </tr>
                                   <?php
                                 }
@@ -465,6 +453,8 @@
                             <!-- het 1 hang -->
                           </tbody>
                         </table>
+
+
                       </div>
                     </div>
                   </div>
@@ -477,6 +467,16 @@
           }
         ?>
 
+      </div>
+      <div class="overlay" id="overlay">
+        <div class="my-box">
+          <?php
+            if(isset($_GET["pdid_add"])){
+              $idsp = $_GET["pdid_add"];
+              echo $idsp;
+            }
+          ?>
+        </div>
       </div>
       <footer class="footer pt-3  ">
         <div class="container-fluid">
@@ -557,6 +557,41 @@
     </div>
   </div>  -->
   <!--   Core JS Files   -->
+  <style>
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: none;
+    }
+
+    .my-box {
+      width: 40%;
+      height: 30%;
+      background-color: #fff;
+      border-radius: 10px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+  </style>
+  <script>
+    function showOverlay() {
+      document.getElementById("overlay").style.display = "block";
+    } 
+    const overlay = document.getElementById("overlay");
+    overlay.addEventListener("click", function(event) {
+      if (event.target === overlay) {
+        overlay.style.display = "none";
+      }
+    });
+
+  </script>
   <script src="../assets/js/core/popper.min.js"></script>
   <script src="../assets/js/core/bootstrap.min.js"></script>
   <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>

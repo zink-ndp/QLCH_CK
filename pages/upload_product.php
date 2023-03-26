@@ -89,21 +89,19 @@ if ($uploadOk == 0) {
   $dvt = $_POST["dvt"];
   $pdsl = $_POST["pd_quantity"];
   
-  $sql = "insert into san_pham(sp_id, lsp_id, sp_ten, sp_mota, sp_gia, sp_hinhanh)
-          values ($pdid,$lspid,'$pdn','$pdd','$pdp','$pdi')";
+  $sql = "insert into san_pham(sp_id, lsp_id, sp_ten, sp_mota, sp_gia, sp_hinhanh, sp_dvt, sp_soluong)
+          values ($pdid,$lspid,'$pdn','$pdd','$pdp','$pdi','$dvt','$pdsl')";
   
 	if ($conn->query($sql) == TRUE) {
 
-    $sql1 = "insert into chitiet_nhap values ($idnh, $pdid, $nvid, sysdate(),$pdsl,'$dvt')";
-    $sql2 = "insert into chitiet_kho values ($pdid, $pdsl)";
+    $sql1 = "insert into chitiet_nhap values ($idnh, $pdid, $nvid, sysdate(),$pdsl)";
 
-    if (($conn->query($sql1) == TRUE)&&($conn->query($sql2) == TRUE)){
+    if ($conn->query($sql1) == TRUE){
       $message = "Thêm sản phẩm thành công";
       echo "<script type='text/javascript'>alert('$message');</script>";
       header('Refresh: 0;url=products.php');
     } else {
       echo "Error: " . $sql1 . "<br>" . $conn->error;
-      echo "<br>Error: " . $sql2 . "<br>" . $conn->error;
     }
 
 	} else {

@@ -8,7 +8,6 @@ $tensp = $_POST["tensp"];
 $giasp = $_POST["giasp"]; 
 $motasp = $_POST["motasp"];
 $nguonsp = $_POST["nguonsp"];
-$khosp = $_POST["khosp"]; 
 $dvtsp = $_POST["dvtsp"];
 $slsp = $_POST["slsp"];
 $anhsp = $_POST["old_productImg"];
@@ -88,17 +87,10 @@ if ($uploadOk == 0) {
     $anhsp = $new_name;
   }
 
-  $sql = "update chitiet_kho set 
-            K_ID = {$khosp},
-            SP_SOLUONG = {$slsp}
-           where SP_ID = {$idsp};";
-           
   $sql1 = "update chitiet_nhap set
             NH_ID = {$nguonsp},
             NV_ID = {$_SESSION["nvid"]},
-            NH_NGAYNHAP = sysdate(),
-            SP_SOLUONG = {$slsp},
-            SP_DVT = '{$dvtsp}'
+            NH_NGAYNHAP = sysdate()
           where SP_ID = {$idsp};";
 
   $sql2 = "update san_pham set 
@@ -106,17 +98,17 @@ if ($uploadOk == 0) {
             SP_TEN = '{$tensp}',
             SP_MOTA = '{$motasp}',
             SP_GIA = {$giasp},
-            SP_HINHANH = '{$anhsp}'
+            SP_HINHANH = '{$anhsp}',
+            SP_SOLUONG = {$slsp},
+            SP_DVT = '{$dvtsp}'
           where SP_ID = {$idsp};";
 
-  if($conn->query($sql) == true){
-      if($conn->query($sql1) == true){
-        if($conn->query($sql2) == true){
-          $message = "Cập nhật sản phẩm ".$tensp." thành công!";
-          echo "<script type='text/javascript'>alert('$message');</script>";
-          header('Refresh: 0;url=products.php');
-        }
-      }
+  if($conn->query($sql1) == true){
+    if($conn->query($sql2) == true){
+      $message = "Cập nhật sản phẩm ".$tensp." thành công!";
+      echo "<script type='text/javascript'>alert('$message');</script>";
+      header('Refresh: 0;url=products.php');
+    }
   } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
     echo "Error: " . $sql1 . "<br>" . $conn->error;

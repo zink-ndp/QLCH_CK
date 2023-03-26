@@ -257,8 +257,6 @@
         $motasp = $_POST["motasp"];
         $nguonsp = $_POST["nguonsp"];
         $manguonsp = $_POST["manguonsp"];
-        $khosp = $_POST["khosp"]; 
-        $makhosp = $_POST["makhosp"]; 
         $dvtsp = $_POST["dvtsp"];
         $slsp = $_POST["slsp"];
 
@@ -312,7 +310,7 @@
                       </div>
                     </div>
                     <div class="col-12 mt-n4 card-header pb-2 d-flex align-items-center">                    
-                      <div class="mb-3 px-3 col-3">
+                      <div class="mb-3 px-3 col-2">
                           Nguồn cung cấp
                           <br>
                           <select class="form-control form-control-lg" name="nguonsp" id="nguonsp">
@@ -331,41 +329,16 @@
                               }
                             ?>
                           </select>
-                        </div>
-                      <div class="mb-3 px-3 col-3">
-                        Nhập vào kho
-                        <br>
-                        <select class="form-control form-control-lg" name="khosp" id="khosp">
-                          <option value="<?php echo $makhosp; ?>" selected hidden><?php echo $khosp; ?></option>
-                          <?php
-                            $sql = "SELECT * FROM kho";
-                            $result = $conn->query($sql);
-                            if ($result->num_rows > 0) {
-                              $result = $conn->query($sql);
-                              $result_all = $result -> fetch_all(MYSQLI_ASSOC);
-                              foreach ($result_all as $row) {
-                                echo "<option value=" .$row["K_ID"]. ">".$row["K_DIACHI"]. "</option>";
-                              }                          
-                            } else {
-                              echo "<option value=''>Không có dữ liệu</option>";
-                            }
-                          ?>
-                        </select>
-                          
-                      </div>
-                      
-                      <div class="mb-3 px-3 col-3">
+                        </div>                      
+                      <div class="mb-3 px-3 col-2">
                         Đơn vị tính
                         <br>
                         <input type="text" name="dvtsp" class="form-control form-control-lg" value="<?php echo $dvtsp; ?>">
                       </div>
-                      <div class="mb-3 px-3 col-3">
+                      <div class="mb-3 px-3 col-2">
                           Số lượng
                         <input min="1" max="10000" step="1" type="number" name="slsp" class="form-control form-control-lg" value="<?php echo $slsp; ?>">
                       </div>
-                    </div>
-                    <div class="col-12 mt-n4 card-header pb-2 d-flex align-items-center">                                        
-                      <div class="mb-3 px-3 col-3"></div>
                       <div class="mb-3 px-3 col-3">
                           Tải ảnh sản phẩm:
                           <br>
@@ -399,7 +372,6 @@
                             });
                           </script>
                       </div>
-                      <div class="mb-3 px-3 col-3"></div>
                     </div>
 
                     <!-- <div class="form-check form-switch">
@@ -408,7 +380,7 @@
                     </div> -->
                     <div class="col-12 mt-n4 card-header pb-2 d-flex align-items-center">                                                            
                       <div class="col-12 text-center px-3">
-                        <button type="submit" class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">Thêm</button>
+                        <button type="submit" class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">Cập nhật</button>
                       </div>
                     </div>
                 </form>
