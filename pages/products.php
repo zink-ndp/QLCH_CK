@@ -378,12 +378,6 @@
                                   $ngaynhap = $row1["NH_NGAYNHAP"];
                                   $soluong = $row1["SP_SOLUONG"];
 
-                                  $sql_kho ="select K_DIACHI, K_ID from kho where K_ID = (select K_ID from chitiet_kho where SP_ID = '{$row["SP_ID"]}')";
-                                  $rs1 = $conn->query($sql_kho);
-                                  $row2 = mysqli_fetch_assoc($rs1);
-                                  $tenkho = $row2["K_DIACHI"];
-                                  $makho = $row2["K_ID"];
-
                                   $sql_nguon = "select NH_TENNGUON, NH_ID from nguon_hang where NH_ID = $nhid";
                                   $rs2 = $conn->query($sql_nguon);
                                   $row3 = mysqli_fetch_assoc($rs2);
