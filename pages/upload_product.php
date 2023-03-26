@@ -86,7 +86,6 @@ if ($uploadOk == 0) {
   $pdi = $file_name;
 
   $idnh = $_POST["source"];
-  $idkho = $_POST["storage"];
   $dvt = $_POST["dvt"];
   $pdsl = $_POST["pd_quantity"];
   
@@ -96,7 +95,7 @@ if ($uploadOk == 0) {
 	if ($conn->query($sql) == TRUE) {
 
     $sql1 = "insert into chitiet_nhap values ($idnh, $pdid, $nvid, sysdate(),$pdsl,'$dvt')";
-    $sql2 = "insert into chitiet_kho values ($pdid, $idkho, $pdsl)";
+    $sql2 = "insert into chitiet_kho values ($pdid, $pdsl)";
 
     if (($conn->query($sql1) == TRUE)&&($conn->query($sql2) == TRUE)){
       $message = "Thêm sản phẩm thành công";

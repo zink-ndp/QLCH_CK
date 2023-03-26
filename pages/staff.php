@@ -124,14 +124,6 @@
                     </a>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link " href="../pages/storage.php">
-                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                    <i class="fas fa-warehouse text-warning text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Kho hàng</span>
-                    </a>
-                    </li>
-                    <li class="nav-item">
                     <a class="nav-link " href="../pages/transporter.php">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                     <i class="fas fa-truck text-success text-sm opacity-10"></i>
@@ -222,7 +214,7 @@
             <li class="nav-item d-flex align-items-center mt-sm-1 ms-3">
              <nav class=" mt-sm-1" aria-label="breadcrumb">   
                 <h7 class="text-white text mb-0">Xin chào,</h7>
-                <h6 class="font-weight-bolder text-white text fs-7 mt-n1"><?php echo $_SESSION["name"]; ?></h6>      
+                <h6 class="font-weight-bolder text-white mt-n1"><?php echo $_SESSION["name"]; ?></h6>      
                 <a href="log_out.php" class="btn btn-outline-light text-white font-weight-bold px-2 mt-n1 py-1">
                   <span class="d-sm-inline d-none me-sm-1">Đăng xuất</span>
                   <i class="fas fa-sign-out-alt "></i>

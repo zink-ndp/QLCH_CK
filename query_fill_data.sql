@@ -34,31 +34,19 @@ INSERT INTO `chitiet_hd` (`SP_ID`, `HD_ID`, `SP_SOLUONG`) VALUES
 (5, 3, 1),
 (7, 3, 1);
 
---
--- Đang đổ dữ liệu cho bảng `chitiet_kho`
---
-
-INSERT INTO `chitiet_kho` (`SP_ID`, `K_ID`, `SP_SOLUONG`) VALUES
-(1, 1, 50),
-(2, 2, 50),
-(3, 3, 15),
-(4, 3, 4),
-(5, 3, 11),
-(6, 3, 14),
-(7, 1, 50);
 
 --
 -- Đang đổ dữ liệu cho bảng `chitiet_nhap`
 --
 
-INSERT INTO `chitiet_nhap` (`NH_ID`, `SP_ID`, `NV_ID`, `NH_NGAYNHAP`, `SP_SOLUONG`, `SP_DVT`) VALUES
-(1, 1, 1, '2023-03-13', 20, 'Con'),
-(1, 5, 1, '2023-03-19', 11, 'Cái'),
-(1, 6, 1, '2023-03-19', 14, 'Con'),
-(2, 2, 1, '2023-03-19', 50, 'Gói 1kg'),
-(2, 3, 1, '2023-03-19', 15, 'Hộp'),
-(3, 4, 1, '2023-03-16', 4, 'Cái'),
-(3, 7, 1, '2023-03-19', 50, 'Mét vuông');
+INSERT INTO `chitiet_nhap` (`NH_ID`, `SP_ID`, `NV_ID`, `NH_NGAYNHAP`, `SP_SOLUONG`) VALUES
+(1, 1, 1, '2023-03-13', 20),
+(1, 5, 1, '2023-03-19', 11),
+(1, 6, 1, '2023-03-19', 14),
+(2, 2, 1, '2023-03-19', 50),
+(2, 3, 1, '2023-03-19', 15),
+(3, 4, 1, '2023-03-16', 4),
+(3, 7, 1, '2023-03-19', 50);
 
 --
 -- Đang đổ dữ liệu cho bảng `don_van_chuyen`
@@ -86,16 +74,6 @@ INSERT INTO `khach_hang` (`KH_ID`, `TK_ID`, `KH_HOTEN`, `KH_SDT`, `KH_EMAIL`, `K
 (2, 9, 'Trần Thị Khách', '0972636534', 'toicunglakhach@gmail.com', '2001-04-17', 'B123, Đường B, huyện BB, tỉnh BBB', 'm', '2022-03-16'),
 (3, 10, 'Quynh Quý Phi', '0891864273', 'quysphi@gmail.com', '1999-12-15', 'Số 10, đường Trần Phú, quận Hoàn Kiếm, Hà Nội', 'f', '2022-09-03'),
 (4, 11, 'Trần Hạo Nam', '0823564275', 'haonam9x@gmail.com', '1998-04-25', '27, đường Lý Tự Trọng, quận 1, TP.HCM', 'm', '2022-02-13');
-
---
--- Đang đổ dữ liệu cho bảng `kho`
---
-
-INSERT INTO `kho` (`K_ID`, `K_DIACHI`) VALUES
-(1, 'Cần Thơ'),
-(2, 'Hà Nội'),
-(3, 'An Giang'),
-(4, 'Sóc Trăng');
 
 --
 -- Đang đổ dữ liệu cho bảng `khuyen_mai`
@@ -158,14 +136,14 @@ INSERT INTO `pt_thanhtoan` (`PTTT_ID`, `PTTT_TEN`) VALUES
 -- Đang đổ dữ liệu cho bảng `san_pham`
 --
 
-INSERT INTO `san_pham` (`SP_ID`, `LSP_ID`, `SP_TEN`, `SP_MOTA`, `SP_GIA`, `SP_HINHANH`) VALUES
-(1, 1, 'Cá hề', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque feugiat sapien auctor auctor egestas. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Inter', 200000, 'untitled-1-1.jpg'),
-(2, 2, 'Aquamaster Wheat Gerrm', 'Thức ăn cho cá Koi vào mùa đông\r\nThức ăn cho cá Koi vào mùa đông\r\nThức ăn cho cá Koi vào mùa đông', 100000, '0-Thức ăn mùa đông cho cá Koi Aquamaster Aqua Master Wheat Germ Koi Food.jpg'),
-(3, 2, 'Tôm sấy khô cho cá hộp 85g', 'Tôm sấy khô cho cá hộp 85gTôm sấy khô cho cá hộp 85gTôm sấy khô cho cá hộp 85g', 120000, 'ff4dde06ff158a22744a1663aa69c74e.jpg'),
-(4, 3, 'Tượng đá phục sinh', 'Tượng đá phục sinh\r\nTượng đá phục sinh\r\nTượng đá phục sinh, Tượng đá phục sinh', 250000, '27044915_318094348699756_72419214_n.jpg'),
-(5, 3, 'Bể cá mini', 'Bể cá mini kích thước 20x20x20cm, có thể đặt trên bàn làm việc', 150000, 'mau-be-ca-de-ban-lam-viec-1.jpg'),
-(6, 1, 'Cá chép vàng', 'Cá chép vàng có kích thước từ 5-7cm, phù hợp để nuôi trong bể nhỏ Cá chép vàng có kích thước từ 5-7cm, phù hợp để nuôi trong bể nhỏ', 15000, 'ca-chep-canh-hellothucung-1.jpg'),
-(7, 3, 'Thảm cỏ hồ cá', 'Thảm cỏ giả kích thước 30x30cm, giúp tạo cảnh quan tự nhiên cho bể', 50000, 'tham-co-nhan-tao-be-ca-chat-luong.jpg');
+INSERT INTO `san_pham` (`SP_ID`, `LSP_ID`, `SP_TEN`, `SP_MOTA`, `SP_GIA`, `SP_HINHANH`, `SP_SOLUONG`, `SP_DVT`) VALUES
+(1, 1, 'Cá hề', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque feugiat sapien auctor auctor egestas. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Inter', 200000, 'untitled-1-1.jpg', 46, 'Con'),
+(2, 2, 'Aquamaster Wheat Gerrm', 'Thức ăn cho cá Koi vào mùa đông\r\nThức ăn cho cá Koi vào mùa đông\r\nThức ăn cho cá Koi vào mùa đông', 100000, '0-Thức ăn mùa đông cho cá Koi Aquamaster Aqua Master Wheat Germ Koi Food.jpg',15,'Gói'),
+(3, 2, 'Tôm sấy khô cho cá hộp 85g', 'Tôm sấy khô cho cá hộp 85gTôm sấy khô cho cá hộp 85gTôm sấy khô cho cá hộp 85g', 120000, 'ff4dde06ff158a22744a1663aa69c74e.jpg',38,'Hộp'),
+(4, 3, 'Tượng đá phục sinh', 'Tượng đá phục sinh\r\nTượng đá phục sinh\r\nTượng đá phục sinh, Tượng đá phục sinh', 250000, '27044915_318094348699756_72419214_n.jpg',6,'Cái'),
+(5, 3, 'Bể cá mini', 'Bể cá mini kích thước 20x20x20cm, có thể đặt trên bàn làm việc', 150000, 'mau-be-ca-de-ban-lam-viec-1.jpg',4,'Cái'),
+(6, 1, 'Cá chép vàng', 'Cá chép vàng có kích thước từ 5-7cm, phù hợp để nuôi trong bể nhỏ Cá chép vàng có kích thước từ 5-7cm, phù hợp để nuôi trong bể nhỏ', 15000, 'ca-chep-canh-hellothucung-1.jpg',57,'Con'),
+(7, 3, 'Thảm cỏ hồ cá', 'Thảm cỏ giả kích thước 30x30cm, giúp tạo cảnh quan tự nhiên cho bể', 50000, 'tham-co-nhan-tao-be-ca-chat-luong.jpg',20,'m2');
 
 --
 -- Đang đổ dữ liệu cho bảng `tai_khoan`

@@ -121,14 +121,6 @@
                     </a>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link " href="../pages/storage.php">
-                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                    <i class="fas fa-warehouse text-warning text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Kho hàng</span>
-                    </a>
-                    </li>
-                    <li class="nav-item">
                     <a class="nav-link " href="../pages/transporter.php">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                     <i class="fas fa-truck text-success text-sm opacity-10"></i>
@@ -219,7 +211,7 @@
             <li class="nav-item d-flex align-items-center mt-sm-1 ms-3">
              <nav class=" mt-sm-1" aria-label="breadcrumb">   
                 <h7 class="text-white text mb-0">Xin chào,</h7>
-                <h6 class="font-weight-bolder text-white text fs-7 mt-n1"><?php echo $_SESSION["name"]; ?></h6>      
+                <h6 class="font-weight-bolder text-white mt-n1"><?php echo $_SESSION["name"]; ?></h6>      
                 <a href="log_out.php" class="btn btn-outline-light text-white font-weight-bold px-2 mt-n1 py-1">
                   <span class="d-sm-inline d-none me-sm-1">Đăng xuất</span>
                   <i class="fas fa-sign-out-alt "></i>
@@ -264,7 +256,7 @@
             <div class="card-body px-2 pt-0 pb-2">
                 <form role="form" method="post" action="upload_product.php" enctype="multipart/form-data">
                     <div class="col-12 card-header pb-2 d-flex align-items-center">
-                      <div class="mb-3 px-3 col-2">
+                      <div class="mb-3 px-3 col-3">
                           Danh mục
                           <br>
                           <select class="form-control form-control-lg" name="types" id="types">
@@ -284,14 +276,11 @@
                           ?>
                         </select>
                       </div>
-                      <div class="mb-3 px-3 col-8">
+                      <div class="mb-3 px-3 col-9">
                           Tên sản phẩm
                         <input type="text" name="pd_name" class="form-control form-control-lg" placeholder="Nhập tên sản phẩm">
                       </div>
-                      <div class="mb-3 px-3 col-2">
-                          Giá (VNĐ)
-                        <input min="1000" max="10000000000" step="1000" type="number" name="pd_price" class="form-control form-control-lg" placeholder="Nhập giá bán sản phẩm">
-                      </div>
+                      
                     </div>
                     <div class="col-12 mt-n4 card-header pb-2 d-flex align-items-center">
                       <div class="mb-3 px-3 col-12">
@@ -320,7 +309,7 @@
                             ?>
                           </select>
                         </div>
-                      <div class="mb-3 px-3 col-3">
+                      <!-- <div class="mb-3 px-3 col-3">
                         Nhập vào kho
                         <br>
                         <select class="form-control form-control-lg" name="storage" id="storage">
@@ -340,8 +329,11 @@
                           ?>
                         </select>
                           
+                      </div> -->
+                      <div class="mb-3 px-3 col-3">
+                          Giá (VNĐ)
+                        <input min="1000" max="10000000000" step="1000" type="number" name="pd_price" class="form-control form-control-lg" placeholder="Nhập giá bán sản phẩm">
                       </div>
-                      
                       <div class="mb-3 px-3 col-3">
                         Đơn vị tính
                         <br>

@@ -1,14 +1,12 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     19/03 10:00                                  */
+/* Created on:     25/03 7:11                                   */
 /*==============================================================*/
 
 
 drop table if exists CHITIET_GH;
 
 drop table if exists CHITIET_HD;
-
-drop table if exists CHITIET_KHO;
 
 drop table if exists CHITIET_NHAP;
 
@@ -19,8 +17,6 @@ drop table if exists DON_VAN_CHUYEN;
 drop table if exists HOA_DON;
 
 drop table if exists KHACH_HANG;
-
-drop table if exists KHO;
 
 drop table if exists KHUYEN_MAI;
 
@@ -61,16 +57,6 @@ create table CHITIET_HD
 );
 
 /*==============================================================*/
-/* Table: CHITIET_KHO                                           */
-/*==============================================================*/
-create table CHITIET_KHO
-(
-   SP_ID                int not null,
-   K_ID                 int not null,
-   SP_SOLUONG           int not null
-);
-
-/*==============================================================*/
 /* Table: CHITIET_NHAP                                          */
 /*==============================================================*/
 create table CHITIET_NHAP
@@ -80,7 +66,6 @@ create table CHITIET_NHAP
    NV_ID                int not null,
    NH_NGAYNHAP          date not null,
    SP_SOLUONG           int not null,
-   SP_DVT               text not null,
    primary key (NH_ID, SP_ID)
 );
 
@@ -146,16 +131,6 @@ create table KHACH_HANG
    KH_GIOITINH          char(1) not null,
    KH_NGAYDK            date not null,
    primary key (KH_ID)
-);
-
-/*==============================================================*/
-/* Table: KHO                                                   */
-/*==============================================================*/
-create table KHO
-(
-   K_ID                 int not null,
-   K_DIACHI             text not null,
-   primary key (K_ID)
 );
 
 /*==============================================================*/
@@ -237,6 +212,8 @@ create table SAN_PHAM
    SP_MOTA              char(200) not null,
    SP_GIA               float not null,
    SP_HINHANH           text,
+   SP_SOLUONG           int not null,
+   SP_DVT               text not null,
    primary key (SP_ID)
 );
 
@@ -274,12 +251,6 @@ alter table CHITIET_HD add constraint FK_RELATIONSHIP_20 foreign key (SP_ID)
 
 alter table CHITIET_HD add constraint FK_RELATIONSHIP_21 foreign key (HD_ID)
       references HOA_DON (HD_ID) on delete restrict on update restrict;
-
-alter table CHITIET_KHO add constraint FK_RELATIONSHIP_22 foreign key (SP_ID)
-      references SAN_PHAM (SP_ID) on delete restrict on update restrict;
-
-alter table CHITIET_KHO add constraint FK_RELATIONSHIP_23 foreign key (K_ID)
-      references KHO (K_ID) on delete restrict on update restrict;
 
 alter table CHITIET_NHAP add constraint FK_DO_NV foreign key (NV_ID)
       references NHAN_VIEN (NV_ID) on delete restrict on update restrict;

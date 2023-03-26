@@ -51,11 +51,16 @@
   <!-- CSS Files -->
   <link id="pagestyle" href="../assets/css/argon-dashboard.css?v=2.0.4" rel="stylesheet" />
 </head>
-<body class="g-sidenav-show   bg-gray-100">
+<body class="g-sidenav-show  bg-gray-100">
   <!-- Nguyên đoạn này -->
   <div class="position-absolute w-100 min-height-300 top-0" style="background-image: url('https://images.unsplash.com/photo-1514907283155-ea5f4094c70c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80'); background-position-y: 50%;">
-    <span class="mask bg-primary opacity-6"></span>
+    <span class="mask bg-primary opacity-5"></span>
   </div>
+  
+  <!-- dark sidebar -->
+  <!-- <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 ps ps--active-y bg-default " id="sidenav-main">  -->
+  
+  <!-- white sidebar -->
   <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 " id="sidenav-main">
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
@@ -132,14 +137,6 @@
                     <i class="fas fa-building text-primary text-sm opacity-10"></i>
                     </div>
                     <span class="nav-link-text ms-1">Nguồn hàng</span>
-                    </a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link " href="../pages/storage.php">
-                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                    <i class="fas fa-warehouse text-warning text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Kho hàng</span>
                     </a>
                     </li>
                     <li class="nav-item">
@@ -234,7 +231,7 @@
             <li class="nav-item d-flex align-items-center mt-sm-1 ms-3">
              <nav class=" mt-sm-1" aria-label="breadcrumb">   
                 <h7 class="text-white text mb-0">Xin chào,</h7>
-                <h6 class="font-weight-bolder text-white text fs-7 mt-n1"><?php echo $_SESSION["name"]; ?></h6>      
+                <h6 class="font-weight-bolder text-white mt-n1"><?php echo $_SESSION["name"]; ?></h6>      
                 <a href="log_out.php" class="btn btn-outline-light text-white font-weight-bold px-2 mt-n1 py-1">
                   <span class="d-sm-inline d-none me-sm-1">Đăng xuất</span>
                   <i class="fas fa-sign-out-alt "></i>
