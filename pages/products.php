@@ -407,13 +407,13 @@
                                     <td class="align-middle text-center">
                                       <div class="mt-3 d-flex col-sm-12">
                                             
-                                        <div class="me-n4 align-middle col-4">
-                                          <form method="get" action="">
+                                        <div class="me-n3 align-middle col-4">
+                                          <!-- <form method="get" action=""> -->
                                             <input type="hidden" name="pdid_add" value="<?php echo $row["SP_ID"]; ?>">
-                                            <button onclick="showOverlay(), this.form.submit()" class="btn btn-link text-success text-secondary font-weight-bold text-sm">
+                                            <button onclick="showOverlay()" class="btn btn-link text-success text-secondary font-weight-bold text-sm">
                                               Nhập thêm
                                             </button>
-                                          </form>
+                                          <!-- </form> -->
                                         </div>
                                         <div class="me-n4 align-middle col-4">
                                           <form method="post" action="edit_product.php">
@@ -453,8 +453,6 @@
                             <!-- het 1 hang -->
                           </tbody>
                         </table>
-
-
                       </div>
                     </div>
                   </div>
@@ -470,12 +468,29 @@
       </div>
       <div class="overlay" id="overlay">
         <div class="my-box">
-          <?php
-            if(isset($_GET["pdid_add"])){
-              $idsp = $_GET["pdid_add"];
-              echo $idsp;
-            }
-          ?>
+          <h5 class="ms-3 mt-3 text-primary">Nhập thêm sản phẩm</h5>
+          <div class="row">
+            <div class="col-12">
+              <div class="row">
+                <div class="col-4 d-flex justify-content-center align-items-center">
+                  <img src="../assets/img/product_img/default.png" class="rounded-circle img-fluid border border-2 border-white">
+                </div>
+                <div class="col-8">
+                  <div class="mb-3 mt-4 px-3">
+                    Số lượng nhập thêm
+                    <input min="1" max="10000" step="1" type="number" name="pd_quantity" class="form-control form-control-lg mt-3" placeholder="Nhập số lượng sản phẩm">
+                    <div class="row">
+                      <div class="col-12 d-flex justify-content-center align-items-center" >
+                        <button type="submit" class="btn btn-primary text-white font-weight-bold text-md ms-0 mt-4">
+                          Cập nhật
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <footer class="footer pt-3  ">
@@ -511,51 +526,10 @@
         </div>
       </footer>
     </div>
-  <!-- </main>
-  <div class="fixed-plugin">
-    <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
-      <i class="fa fa-cog py-2"> </i>
-    </a>
-    <div class="card shadow-lg">
-      <div class="card-header pb-0 pt-3 ">
-        <div class="float-start">
-          <h5 class="mt-3 mb-0">Argon Configurator</h5>
-          <p>See our dashboard options.</p>
-        </div>
-        <div class="float-end mt-4">
-          <button class="btn btn-link text-dark p-0 fixed-plugin-close-button">
-            <i class="fa fa-close"></i>
-          </button>
-        </div>
-        <!-- End Toggle Button -->
       </div>
       <hr class="horizontal dark my-1">
       <div class="card-body pt-sm-3 pt-0 overflow-auto">
-        <!-- Sidebar Backgrounds -->
-        <!-- <div>
-          <h6 class="mb-0">Sidebar Colors</h6>
-        </div>
-        <a href="javascript:void(0)" class="switch-trigger background-color">
-          <div class="badge-colors my-2 text-start">
-            <span class="badge filter bg-gradient-primary active" data-color="primary" onclick="sidebarColor(this)"></span>
-            <span class="badge filter bg-gradient-dark" data-color="dark" onclick="sidebarColor(this)"></span>
-            <span class="badge filter bg-gradient-info" data-color="info" onclick="sidebarColor(this)"></span>
-            <span class="badge filter bg-gradient-success" data-color="success" onclick="sidebarColor(this)"></span>
-            <span class="badge filter bg-gradient-warning" data-color="warning" onclick="sidebarColor(this)"></span>
-            <span class="badge filter bg-gradient-danger" data-color="danger" onclick="sidebarColor(this)"></span>
-          </div>
-        </a> -->
-        <!-- Navbar Fixed -->
-        <!-- <hr class="horizontal dark my-sm-4">
-        <div class="mt-2 mb-5 d-flex">
-          <h6 class="mb-0">Light / Dark</h6>
-          <div class="form-check form-switch ps-0 ms-auto my-auto">
-            <input class="form-check-input mt-1 ms-auto" type="checkbox" id="dark-version" onclick="darkMode(this)">
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>  -->
+        
   <!--   Core JS Files   -->
   <style>
     .overlay {
@@ -564,8 +538,9 @@
       left: 0;
       width: 100%;
       height: 100%;
+      z-index: 99999;
       background: rgba(0, 0, 0, 0.5);
-      display: none;
+      display: block;
     }
 
     .my-box {
@@ -574,6 +549,7 @@
       background-color: #fff;
       border-radius: 10px;
       position: absolute;
+      padding: 15px;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
