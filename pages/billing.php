@@ -235,9 +235,22 @@
       </div>
     </nav>
     <!-- End Navbar -->
+    <?php
+      $servername = "localhost";
+      $username = "root";
+      $password = "";
+      $dbname = "shop_db";
+  
+      // Create connection
+      $conn = new mysqli($servername, $username, $password, $dbname);
+      // Check connection
+      if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+      }
+    ?>
     <div class="container-fluid py-4">
       <div class="row">
-        <div class="col-lg-8">
+        <div class="col-lg-7">
           <div class="row">
             <div class="col-4">
               <div class="card">
@@ -247,10 +260,15 @@
                   </div>
                 </div>
                 <div class="card-body pt-0 p-1 text-center">
-                  <h6 class="text-center mb-0">Tiền mặt</h6>
-                  <span class="text-xs">Belong Interactive</span>
+                  <?php
+                    $sql = "select sum(HD_TONGTIEN) as tongtien from hoa_don where TT_ID = 3 and PTTT_ID = 1";
+                    $result = $conn->query($sql);
+                    $row = mysqli_fetch_assoc($result);
+                    $tong_tm = number_format($row["tongtien"], 0, '.');
+                  ?>
+                  <h6 class="text-center mb-0">Tiền mặt</h6>                  
                   <hr class="horizontal dark my-2">
-                  <h5 class="mb-0">+$2000</h5>
+                  <h5 class="mb-0">+ <?php echo $tong_tm ?>đ</h5>
                 </div>
               </div>
             </div>
@@ -262,10 +280,15 @@
                   </div>
                 </div>
                 <div class="card-body pt-0 p-1 text-center">
-                  <h6 class="text-center mb-0">Chuyển khoản ngân hàng</h6>
-                  <span class="text-xs">Belong Interactive</span>
+                <?php
+                    $sql = "select sum(HD_TONGTIEN) as tongtien from hoa_don where TT_ID = 3 and PTTT_ID = 2";
+                    $result = $conn->query($sql);
+                    $row = mysqli_fetch_assoc($result);
+                    $tong_ck = number_format($row["tongtien"], 0, '.');
+                  ?>
+                  <h6 class="text-center mb-0">Chuyển khoản ngân hàng</h6>                  
                   <hr class="horizontal dark my-2">
-                  <h5 class="mb-0">+$2000</h5>
+                  <h5 class="mb-0">+ <?php echo $tong_ck ?>đ</h5>
                 </div>
               </div>
             </div>
@@ -273,124 +296,161 @@
               <div class="card">
                 <div class="card-header mx-4 p-3 text-center">
                   <div class="icon icon-shape icon-md bg-gradient-primary shadow text-center border-radius-md">
-                    <i class="fas fa-landmark opacity-10"></i>
+                    <i class="fab fa-cc-visa opacity-10"></i>
                   </div>
                 </div>
                 <div class="card-body pt-0 p-1 text-center">
-                  <h6 class="text-center mb-0">Visa/Mastercard</h6>
-                  <span class="text-xs">Belong Interactive</span>
+                <?php
+                    $sql = "select sum(HD_TONGTIEN) as tongtien from hoa_don where TT_ID = 3 and PTTT_ID = 3";
+                    $result = $conn->query($sql);
+                    $row = mysqli_fetch_assoc($result);
+                    $tong_vm = number_format($row["tongtien"], 0, '.');
+                  ?>
+                  <h6 class="text-center mb-0">Visa/Mastercard</h6>                  
                   <hr class="horizontal dark my-2">
-                  <h5 class="mb-0">+$2000</h5>
+                  <h5 class="mb-0">+ <?php echo $tong_vm ?>đ</h5>
                 </div>
               </div>
             </div>
           </div>
-          <div class="row">
+          <div class="row mt-4 ">
+            <div class="col-lg-12">
+              <div class="card h-100">
+                <div class="card-header pb-0 p-3">
+                  <div class="row">
+                    <div class="col-6 d-flex align-items-center">
+                      <h6 class="mb-0">Danh sách hoá đơn</h6>
+                    </div>
+                    <div class="col-6 text-end">
+                      <?php
+                        $sql = "select * from hoa_don where TT_ID = 3;";
+                      ?>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body p-3 pb-0">
+                  <div class="table-responsive p-0">
+                        <!-- table 5 cot -->
+                        <table class="table align-items-center mb-0">
+                          <thead>
+                            <tr class="col-12">
+                              <th class="col-1 text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Mã hoá đơn</th>
+                              <th class="col-4 text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Ngày hoàn thành</th>
+                              <th class="col-3 text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Số lượng sản phẩm</th>
+                              <th class="col-3 text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Tổng tiền</th>
+                              <th class="col-1 text-secondary opacity-7"></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <!-- 1 hang -->
+                            <?php
+                              $result = $conn->query($sql);
+                              if ($result->num_rows > 0) {
+                                $result = $conn->query($sql);
+                                $result_all = $result -> fetch_all(MYSQLI_ASSOC);
+                                foreach ($result_all as $row) {
 
+                                  ?>
+                                  <tr class="height-100">
+                                    <td class="align-middle text-center" >
+                                      <!-- ma hd -->
+                                      <?php echo $row["HD_ID"] ?>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                      <!-- ngayhoanthanh -->
+                                      <?php echo $row["HD_NGAYDAT"] ?>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                      <!-- soluong -->
+                                      <?php
+                                        $sql_sl = "select count(*) as soluong from chitiet_hd where HD_ID = ".$row["HD_ID"]."";
+                                        $rssl = $conn->query($sql_sl);
+                                        $rowsl = mysqli_fetch_assoc($rssl);
+                                        echo $rowsl["soluong"]
+                                      ?>
+                                    </td>
+                                    <td class="align-middle text-success text-center">
+                                      <!-- tongtien -->
+                                      <?php echo number_format($row["HD_TONGTIEN"], 0, '.') ?>đ
+                                    </td>
+                                    <td class="align-middle text-center">
+                                      <button class="btn btn-link text-primary font-weight-bold text-sm mt-3">
+                                        Xem chi tiết >
+                                      </button>
+                                    </td>
+                                  </tr>
+                                  <?php
+                                }
+                              }
+                            ?>
+                            
+                            <!-- het 1 hang -->
+                          </tbody>
+                        </table>
+                      </div>
+                </div>
+              </div>  
+            </div>
           </div>
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-5">
           <div class="card h-100">
             <div class="card-header pb-0 p-3">
               <div class="row">
-                <div class="col-6 d-flex align-items-center">
-                  <h6 class="mb-0">Invoices</h6>
+                <div class="col-7 d-flex align-items-center">
+                  <h6 class="mb-0">Chi tiết hoá đơn</h6>
                 </div>
-                <div class="col-6 text-end">
-                  <button class="btn btn-outline-primary btn-sm mb-0">View All</button>
+                <div class="col-2 text-center me-n3">
+                  <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><i class="fas fa-print text-sm me-1"></i> In</button>
+                </div>
+                <div class="col-3 text-center">
+                  <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-1"><i class="fas fa-file-pdf text-sm me-1"></i> Xuất PDF</button>
                 </div>
               </div>
             </div>
             <div class="card-body p-3 pb-0">
-              <ul class="list-group">
-                <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                  <div class="d-flex flex-column">
-                    <h6 class="mb-1 text-dark font-weight-bold text-sm">March, 01, 2020</h6>
-                    <span class="text-xs">#MS-415646</span>
+              <div class="row">
+                <div class="col-12">
+                  <!-- title -->
+                  <div class="row text-center fs-4 font-weight-bold">
+                    <div class="col-12">
+                      HOÁ ĐƠN
+                    </div>
                   </div>
-                  <div class="d-flex align-items-center text-sm">
-                    $180
-                    <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><i class="fas fa-file-pdf text-lg me-1"></i> PDF</button>
+                  <!-- ngay -->
+                  <div class="row text-center fs-5 font-weight-bold">
+                    <div class="col-12">
+                      31/12/2023
+                    </div>
                   </div>
-                </li>
-                <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                  <div class="d-flex flex-column">
-                    <h6 class="text-dark mb-1 font-weight-bold text-sm">February, 10, 2021</h6>
-                    <span class="text-xs">#RV-126749</span>
+                  <!-- thongtin khachhang -->
+                  <div class="row mt-3">
+                    <div class="col-md-12">
+                      Thông tin khách hàng:
+                      <!-- 1 hang -->
+                      <div class="row p-2">
+                        <div class="col-4">
+                          <h6>Tên khách hàng: </h6>
+                        </div>
+                        <div class="col-8">
+                          <p>Nguyễn Trần Anh Thư</p>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div class="d-flex align-items-center text-sm">
-                    $250
-                    <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><i class="fas fa-file-pdf text-lg me-1"></i> PDF</button>
+                  <!-- thongtin nhanvien -->
+                  <div class="row mt-3">
+                    <div class="col-md-12">
+                      Thông tin nhân viên:
+                    </div>
                   </div>
-                </li>
-                <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                  <div class="d-flex flex-column">
-                    <h6 class="text-dark mb-1 font-weight-bold text-sm">April, 05, 2020</h6>
-                    <span class="text-xs">#FB-212562</span>
-                  </div>
-                  <div class="d-flex align-items-center text-sm">
-                    $560
-                    <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><i class="fas fa-file-pdf text-lg me-1"></i> PDF</button>
-                  </div>
-                </li>
-                <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                  <div class="d-flex flex-column">
-                    <h6 class="text-dark mb-1 font-weight-bold text-sm">June, 25, 2019</h6>
-                    <span class="text-xs">#QW-103578</span>
-                  </div>
-                  <div class="d-flex align-items-center text-sm">
-                    $120
-                    <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><i class="fas fa-file-pdf text-lg me-1"></i> PDF</button>
-                  </div>
-                </li>
-                <li class="list-group-item border-0 d-flex justify-content-between ps-0 border-radius-lg">
-                  <div class="d-flex flex-column">
-                    <h6 class="text-dark mb-1 font-weight-bold text-sm">March, 01, 2019</h6>
-                    <span class="text-xs">#AR-803481</span>
-                  </div>
-                  <div class="d-flex align-items-center text-sm">
-                    $300
-                    <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><i class="fas fa-file-pdf text-lg me-1"></i> PDF</button>
-                  </div>
-                </li>
-              </ul>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      
-      <footer class="footer pt-3  ">
-        <div class="container-fluid">
-          <div class="row align-items-center justify-content-lg-between">
-            <div class="col-lg-6 mb-lg-0 mb-4">
-              <div class="copyright text-center text-sm text-muted text-lg-start">
-                © <script>
-                  document.write(new Date().getFullYear())
-                </script>,
-                made with <i class="fa fa-heart"></i> by
-                <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative Tim</a>
-                for a better web.
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <ul class="nav nav-footer justify-content-center justify-content-lg-end">
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com" class="nav-link text-muted" target="_blank">Creative Tim</a>
-                </li>
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted" target="_blank">About Us</a>
-                </li>
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com/blog" class="nav-link text-muted" target="_blank">Blog</a>
-                </li>
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted" target="_blank">License</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </footer>
+       
     </div>
   </main>
   <div class="fixed-plugin">

@@ -467,6 +467,7 @@
         ?>
 
       </div>
+      
       <div class="overlay" id="overlay">
         <div class="my-box">
           <h5 class="ms-3 mt-3 text-primary">Nhập thêm sản phẩm</h5>
@@ -490,18 +491,21 @@
                   </div>
                 </div>
                 <div class="col-6">
-                  <div class="mb-3 mt-4 px-3">
-                    Số lượng nhập thêm
-                    <input min="1" max="10000" step="1" type="number" name="pd_quantity" class="form-control form-control-lg mt-3" placeholder="Nhập số lượng sản phẩm">
-                    <div class="row">
-                      <div class="col-12 d-flex justify-content-center align-items-center" >
-                        <button type="submit" class="btn btn-primary text-white font-weight-bold text-md ms-0 mt-4">
-                          Cập nhật
-                        </button>
+                  <form action="update_quantity.php" method="post">
+                    <div class="mb-3 mt-4 px-3">
+                      Số lượng nhập thêm
+                      <input type="hidden" name="temp_id" id="temp_id">
+                      <input min="1" max="10000" step="1" type="number" name="quantity" class="form-control form-control-lg mt-3" placeholder="Nhập số lượng sản phẩm nhập thêm">
+                      <div class="row">
+                        <div class="col-12 d-flex justify-content-center align-items-center" >
+                            <button type="submit" class="btn btn-primary text-white font-weight-bold text-md ms-0 mt-4">
+                              Cập nhật
+                            </button>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </div>
+                  </form>
               </div>
             </div>
           </div>
@@ -553,13 +557,7 @@
       const product_name = event.target.getAttribute('data-name');
       
       
-      // Truyền giá trị productId qua URL
-      // window.location.href = 'products.php?pdid=' + encodeURIComponent(productId);
-
-      // // Lấy thông tin chi tiết của sản phẩm từ cơ sở dữ liệu hoặc từ một nguồn dữ liệu khác
-      // <?php
-      //   $pdid = ;
-      // ?>
+      document.getElementById("temp_id").value = productId;
 
       // Hiển thị overlay
       const overlay = document.querySelector('.overlay');
