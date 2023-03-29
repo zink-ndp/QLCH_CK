@@ -25,7 +25,7 @@
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <title>
-    Hoá đơn
+    Đối tác nhập hàng
   </title>
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -67,7 +67,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="../pages/billing.php">
+          <a class="nav-link" href="../pages/billing.php">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-credit-card text-success text-sm opacity-10"></i>
             </div>
@@ -115,7 +115,7 @@
                     <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Quản lý đối tác</h6>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link " href="../pages/pdsource.php">
+                    <a class="nav-link active   " href="../pages/pdsource.php">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                     <i class="fas fa-building text-primary text-sm opacity-10"></i>
                     </div>
@@ -192,9 +192,9 @@
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">Trang</a></li>
-            <li class="breadcrumb-item text-sm text-white active" aria-current="page">Hoá đơn</li>
+            <li class="breadcrumb-item text-sm text-white active" aria-current="page">Nguồn hàng</li>
           </ol>
-          <h6 class="font-weight-bolder text-white mb-0">Hoá đơn</h6>
+          <h6 class="font-weight-bolder text-white mb-0">Nguồn hàng</h6>
         </nav>
         <!-- Đoạn này -->
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
@@ -250,80 +250,19 @@
     ?>
     <div class="container-fluid py-4">
       <div class="row">
+        <div class="col-lg-1"></div>
         <div class="col-lg-7">
-          <div class="row">
-            <div class="col-4">
-              <div class="card">
-                <div class="card-header mx-4 p-3 text-center">
-                  <div class="icon icon-shape icon-md bg-gradient-primary shadow text-center border-radius-md">
-                    <i class="fas fa-money-bill-wave opacity-10"></i>
-                  </div>
-                </div>
-                <div class="card-body pt-0 p-1 text-center">
-                  <?php
-                    $sql = "select sum(HD_TONGTIEN) as tongtien from hoa_don where TT_ID = 3 and PTTT_ID = 1";
-                    $result = $conn->query($sql);
-                    $row = mysqli_fetch_assoc($result);
-                    $tong_tm = number_format($row["tongtien"], 0, '.');
-                  ?>
-                  <h6 class="text-center mb-0">Tiền mặt</h6>                  
-                  <hr class="horizontal dark my-2">
-                  <h5 class="mb-0">+ <?php echo $tong_tm ?>đ</h5>
-                </div>
-              </div>
-            </div>
-            <div class="col-4">
-              <div class="card">
-                <div class="card-header mx-4 p-3 text-center">
-                  <div class="icon icon-shape icon-md bg-gradient-primary shadow text-center border-radius-md">
-                    <i class="fas fa-landmark opacity-10"></i>
-                  </div>
-                </div>
-                <div class="card-body pt-0 p-1 text-center">
-                <?php
-                    $sql = "select sum(HD_TONGTIEN) as tongtien from hoa_don where TT_ID = 3 and PTTT_ID = 2";
-                    $result = $conn->query($sql);
-                    $row = mysqli_fetch_assoc($result);
-                    $tong_ck = number_format($row["tongtien"], 0, '.');
-                  ?>
-                  <h6 class="text-center mb-0">Chuyển khoản ngân hàng</h6>                  
-                  <hr class="horizontal dark my-2">
-                  <h5 class="mb-0">+ <?php echo $tong_ck ?>đ</h5>
-                </div>
-              </div>
-            </div>
-            <div class="col-4">
-              <div class="card">
-                <div class="card-header mx-4 p-3 text-center">
-                  <div class="icon icon-shape icon-md bg-gradient-primary shadow text-center border-radius-md">
-                    <i class="fab fa-cc-visa opacity-10"></i>
-                  </div>
-                </div>
-                <div class="card-body pt-0 p-1 text-center">
-                <?php
-                    $sql = "select sum(HD_TONGTIEN) as tongtien from hoa_don where TT_ID = 3 and PTTT_ID = 3";
-                    $result = $conn->query($sql);
-                    $row = mysqli_fetch_assoc($result);
-                    $tong_vm = number_format($row["tongtien"], 0, '.');
-                  ?>
-                  <h6 class="text-center mb-0">Visa/Mastercard</h6>                  
-                  <hr class="horizontal dark my-2">
-                  <h5 class="mb-0">+ <?php echo $tong_vm ?>đ</h5>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row mt-4 ">
+          <div class="row ">
             <div class="col-lg-12">
               <div class="card h-100">
                 <div class="card-header pb-0 p-3">
                   <div class="row">
                     <div class="col-6 d-flex align-items-center">
-                      <h6 class="mb-0">Danh sách hoá đơn</h6>
+                      <h6 class="mb-0">Danh sách đối tác nhập</h6>
                     </div>
                     <div class="col-6 text-end">
                       <?php
-                        $sql = "select * from hoa_don where TT_ID = 3;";
+                        $sql = "select * from nguon_hang";
                       ?>
                     </div>
                   </div>
@@ -334,12 +273,9 @@
                         <table class="table align-items-center mb-0">
                           <thead>
                             <tr class="col-12">
-                              <th class="col-1 text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Mã hoá đơn</th>
-                              <th class="col-3 text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Ngày hoàn thành</th>
-                              <th class="col-2 text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Số lượng SP</th>
-                              <th class="col-3 text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">PT Thanh toán</th>
-                              <th class="col-2 text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Tổng tiền</th>
-                              <th class="col-1 text-secondary opacity-7"></th>
+                              <th class="col-1 text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Mã đối tác</th>
+                              <th class="col-4 text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Tên đối tác nhập hàng</th>                              
+                              <th class="col-7 text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Mô tả</th>                              
                             </tr>
                           </thead>
                           <tbody>
@@ -354,43 +290,20 @@
                                   ?>
                                   <tr class="height-100">
                                     <td class="align-middle text-center" >
-                                      <!-- ma hd -->
-                                      <?php echo $row["HD_ID"] ?>
-                                    </td>
-                                    <td class="align-middle text-center">
-                                      <!-- ngayhoanthanh -->
-                                      <?php echo $row["HD_NGAYDAT"] ?>
-                                    </td>
-                                    <td class="align-middle text-center">
-                                      <!-- soluong -->
-                                      <?php
-                                        $sql_sl = "select count(*) as soluong from chitiet_hd where HD_ID = ".$row["HD_ID"]."";
-                                        $rssl = $conn->query($sql_sl);
-                                        $rowsl = mysqli_fetch_assoc($rssl);
-                                        echo $rowsl["soluong"]
-                                      ?>
+                                      <!-- ma dt -->
+                                      <?php echo $row["NH_ID"] ?>
                                     </td>
 
-                                    <!-- phuont thuc thanh toan -->
-                                    <td class="align-middle text-xs text-center">
-                                        <?php
-                                          $idpttt = $row["PTTT_ID"];
-                                          $sqlpt = "select PTTT_TEN from pt_thanhtoan where PTTT_ID = {$idpttt}";
-                                          $rspt = $conn->query($sqlpt);
-                                          $rowpt = mysqli_fetch_assoc($rspt);
-                                          echo $rowpt["PTTT_TEN"];
-                                        ?>
+                                    <td class="align-middle text-center">
+                                      <!-- ten dt -->
+                                      <?php echo $row["NH_TENNGUON"] ?>
                                     </td>
 
-                                    <td class="align-middle text-success text-center">
-                                      <!-- tongtien -->
-                                      <?php echo number_format($row["HD_TONGTIEN"], 0, '.') ?>đ
-                                    </td>
                                     <td class="align-middle text-center">
-                                      <button class="btn btn-link text-primary font-weight-bold text-sm mt-3">
-                                        Xem chi tiết >
-                                      </button>
+                                      <!-- mota dt -->
+                                      <?php echo $row["NH_MOTA"] ?>
                                     </td>
+                                    
                                   </tr>
                                   <?php
                                 }
@@ -406,107 +319,39 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-5">
+        <div class="col-lg-3">
           <div class="card h-100">
             <div class="card-header pb-0 p-3">
               <div class="row">
                 <div class="col-7 d-flex align-items-center">
-                  <h6 class="mb-0">Chi tiết hoá đơn</h6>
+                  <h6 class="mb-0">Thêm đối tác mới</h6>
                 </div>
-                <div class="col-2 text-center me-n3">
-                  <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><i class="fas fa-print text-sm me-1"></i> In</button>
-                </div>
-                <div class="col-3 text-center">
-                  <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-1"><i class="fas fa-file-pdf text-sm me-1"></i> Xuất PDF</button>
-                </div>
+                <div class="col-2 text-center"></div>
+                <div class="col-3 text-center"></div>
               </div>
             </div>
             <div class="card-body p-3 pb-0">
               <div class="row">
-                <div class="col-12">
-                  <!-- title -->
-                  <div class="row text-center fs-4 font-weight-bold">
-                    <div class="col-12">
-                      HOÁ ĐƠN
-                    </div>
-                  </div>
-                  <!-- ngay -->
-                  <div class="row text-center fs-5 font-weight-bold"> 
-                    <div class="col-12">
-                      31/12/2023
-                    </div>
-                  </div>
-                  <!-- thongtin khachhang -->
-                  <div class="row mt-3">
-                    <div class="col-md-12">
-                      <h6>Thông tin khách hàng:</h6>
-                      <!-- 1 hang -->
-                      <div class="row px-2 mt-2">
-                        <div class="col-4">
-                          <h6>Mã khách hàng: </h6>
-                        </div>
-                        <div class="col-8">
-                          <p>421</p>
-                        </div>
-                      </div>
-                      <!-- 1 hang -->
-                      <div class="row px-2 mt-n3">
-                        <div class="col-4">
-                          <h6>Tên khách hàng: </h6>
-                        </div>
-                        <div class="col-8">
-                          <p>Nguyễn Văn A</p>
-                        </div>
-                      </div>
-                      <!-- 1 hang -->
-                      <div class="row px-2 mt-n3">
-                        <div class="col-4">
-                          <h6>SĐT: </h6>
-                        </div>
-                        <div class="col-8">
-                          <p>0123456789</p>
-                        </div>
-                      </div>
-                       <!-- 1 hang -->
-                       <div class="row px-2 mt-n3">
-                        <div class="col-4">
-                          <h6>Địa chỉ: </h6>
-                        </div>
-                        <div class="col-8">
-                          <p>A123, ABC, phường A, quận B, TP.C</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- thongtin nhanvien -->
-                  <div class="row mt-3">
-                    <div class="col-md-12">
-                      <h6>Thông tin nhân viên:</h6>
-                      <!-- 1 hang -->
-                      <div class="row px-2 mt-2">
-                        <div class="col-4">
-                          <h6>Mã nhân viên: </h6>
-                        </div>
-                        <div class="col-8">
-                          <p>231</p>
-                        </div>
-                      </div>
-                      <!-- 1 hang -->
-                      <div class="row px-2 mt-n3">
-                        <div class="col-4">
-                          <h6>Tên nhân viên: </h6>
-                        </div>
-                        <div class="col-8">
-                          <p>Nguyễn Thị B</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                <div class="col-12 mt-5">
+                  Tên đối tác nhập hàng:
+                  <input type="text" class="form-control form-control-lg mt-1" placeholder="Tên đối tác">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 mt-3">
+                  Tên đối tác nhập hàng:
+                  <textarea id="myTextarea" name="mota_dtnh" class="form-control form-control-md mt-1">Mô tả đối tác</textarea>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 text-center mt-3">
+                  <button class="btn btn-primary mt-2">Thêm đối tác</button>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        <div class="col-lg-1"></div>
       </div>
        
     </div>

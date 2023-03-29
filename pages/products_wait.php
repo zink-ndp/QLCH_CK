@@ -376,13 +376,13 @@
                                 </td>
                                 <!-- status-->
                                 <td class="align-middle text-center">
-                                    <?php
-                                        if ($row3["TT_ID"]==1) $style = "text-warning";
-                                        elseif ($row3["TT_ID"]==2) $style = "text-primary";
-                                        elseif ($row3["TT_ID"]==0) $style = "text-danger";
+                                  <?php
+                                        if ($row3["TT_ID"]==1) $style = "btn-warning";
+                                        elseif ($row3["TT_ID"]==2) $style = "btn-primary";
+                                        elseif ($row3["TT_ID"]==0) $style = "btn-danger";
                                         else $style = "text-success";
                                     ?>
-                                <p class="text-xs font-weight-bold mb-0 <?php echo $style; ?>"><?php echo $row3["TT_TEN"]; ?></p>
+                                  <button class="btn text-xs font-weight-bold mb-0 <?php echo $style; ?>"><?php echo $row3["TT_TEN"]; ?></button>
                                 </td>
                                 <td class="align-middle">
                                     <form action="detail-pdwait.php" method="post">

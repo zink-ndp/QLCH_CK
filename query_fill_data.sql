@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th3 19, 2023 lúc 03:41 PM
+-- Thời gian đã tạo: Th3 29, 2023 lúc 09:07 AM
 -- Phiên bản máy phục vụ: 10.4.27-MariaDB
 -- Phiên bản PHP: 8.0.25
 
@@ -34,16 +34,18 @@ INSERT INTO `chitiet_hd` (`SP_ID`, `HD_ID`, `SP_SOLUONG`) VALUES
 (5, 3, 1),
 (7, 3, 1);
 
-
 --
 -- Đang đổ dữ liệu cho bảng `chitiet_nhap`
 --
 
 INSERT INTO `chitiet_nhap` (`NH_ID`, `SP_ID`, `NV_ID`, `NH_NGAYNHAP`, `SP_SOLUONG`) VALUES
 (1, 1, 1, '2023-03-13', 20),
+(1, 1, 1, '2023-03-27', 4),
 (1, 5, 1, '2023-03-19', 11),
+(1, 5, 1, '2023-03-27', 2),
 (1, 6, 1, '2023-03-19', 14),
 (2, 2, 1, '2023-03-19', 50),
+(2, 2, 1, '2023-03-27', 20),
 (2, 3, 1, '2023-03-19', 15),
 (3, 4, 1, '2023-03-16', 4),
 (3, 7, 1, '2023-03-19', 50);
@@ -61,9 +63,9 @@ INSERT INTO `don_van_chuyen` (`DVC_ID`, `NVC_ID`, `DVC_DIACHI`, `DVC_TGBATDAU`, 
 --
 
 INSERT INTO `hoa_don` (`HD_ID`, `DVC_ID`, `KM_ID`, `NV_ID`, `PTTT_ID`, `KH_ID`, `TT_ID`, `HD_TONGTIEN`, `HD_NGAYDAT`, `HD_LIDOHUY`) VALUES
-(1, 1, NULL, NULL, 2, 1, 1, 300000, '2023-03-12', NULL),
-(2, 2, NULL, 1, 1, 2, 2, 400000, '2023-03-14', NULL),
-(3, 2, NULL, NULL, 1, 3, 1, 320000, '2023-03-02', NULL);
+(1, 1, NULL, 1, 1, 1, 3, 300000, '2023-03-12', 'Lí do huỷ đơn'),
+(2, 2, NULL, 1, 1, 2, 3, 400000, '2023-03-14', 'Lí do huỷ đơn'),
+(3, 2, NULL, NULL, 1, 3, 1, 320000, '2023-03-02', 'Lí do huỷ đơn');
 
 --
 -- Đang đổ dữ liệu cho bảng `khach_hang`
@@ -137,13 +139,13 @@ INSERT INTO `pt_thanhtoan` (`PTTT_ID`, `PTTT_TEN`) VALUES
 --
 
 INSERT INTO `san_pham` (`SP_ID`, `LSP_ID`, `SP_TEN`, `SP_MOTA`, `SP_GIA`, `SP_HINHANH`, `SP_SOLUONG`, `SP_DVT`) VALUES
-(1, 1, 'Cá hề', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque feugiat sapien auctor auctor egestas. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Inter', 200000, 'untitled-1-1.jpg', 46, 'Con'),
-(2, 2, 'Aquamaster Wheat Gerrm', 'Thức ăn cho cá Koi vào mùa đông\r\nThức ăn cho cá Koi vào mùa đông\r\nThức ăn cho cá Koi vào mùa đông', 100000, '0-Thức ăn mùa đông cho cá Koi Aquamaster Aqua Master Wheat Germ Koi Food.jpg',15,'Gói'),
-(3, 2, 'Tôm sấy khô cho cá hộp 85g', 'Tôm sấy khô cho cá hộp 85gTôm sấy khô cho cá hộp 85gTôm sấy khô cho cá hộp 85g', 120000, 'ff4dde06ff158a22744a1663aa69c74e.jpg',38,'Hộp'),
-(4, 3, 'Tượng đá phục sinh', 'Tượng đá phục sinh\r\nTượng đá phục sinh\r\nTượng đá phục sinh, Tượng đá phục sinh', 250000, '27044915_318094348699756_72419214_n.jpg',6,'Cái'),
-(5, 3, 'Bể cá mini', 'Bể cá mini kích thước 20x20x20cm, có thể đặt trên bàn làm việc', 150000, 'mau-be-ca-de-ban-lam-viec-1.jpg',4,'Cái'),
-(6, 1, 'Cá chép vàng', 'Cá chép vàng có kích thước từ 5-7cm, phù hợp để nuôi trong bể nhỏ Cá chép vàng có kích thước từ 5-7cm, phù hợp để nuôi trong bể nhỏ', 15000, 'ca-chep-canh-hellothucung-1.jpg',57,'Con'),
-(7, 3, 'Thảm cỏ hồ cá', 'Thảm cỏ giả kích thước 30x30cm, giúp tạo cảnh quan tự nhiên cho bể', 50000, 'tham-co-nhan-tao-be-ca-chat-luong.jpg',20,'m2');
+(1, 1, 'Cá hề', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque feugiat sapien auctor auctor egestas. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Inter', 200000, 'untitled-1-1.jpg', 66, 'Con'),
+(2, 2, 'Aquamaster Wheat Gerrm', 'Thức ăn cho cá Koi vào mùa đông\r\nThức ăn cho cá Koi vào mùa đông\r\nThức ăn cho cá Koi vào mùa đông', 100000, '0-Thức ăn mùa đông cho cá Koi Aquamaster Aqua Master Wheat Germ Koi Food.jpg', 35, 'Gói'),
+(3, 2, 'Tôm sấy khô cho cá hộp 85g', 'Tôm sấy khô cho cá hộp 85gTôm sấy khô cho cá hộp 85gTôm sấy khô cho cá hộp 85g', 120000, 'ff4dde06ff158a22744a1663aa69c74e.jpg', 38, 'Hộp'),
+(4, 3, 'Tượng đá phục sinh', 'Tượng đá phục sinh\r\nTượng đá phục sinh\r\nTượng đá phục sinh, Tượng đá phục sinh', 250000, '27044915_318094348699756_72419214_n.jpg', 6, 'Cái'),
+(5, 3, 'Bể cá mini', 'Bể cá mini kích thước 20x20x20cm, có thể đặt trên bàn làm việc', 150000, 'mau-be-ca-de-ban-lam-viec-1.jpg', 6, 'Cái'),
+(6, 1, 'Cá chép vàng', 'Cá chép vàng có kích thước từ 5-7cm, phù hợp để nuôi trong bể nhỏ Cá chép vàng có kích thước từ 5-7cm, phù hợp để nuôi trong bể nhỏ', 15000, 'ca-chep-canh-hellothucung-1.jpg', 63, 'Con'),
+(7, 3, 'Thảm cỏ hồ cá', 'Thảm cỏ giả kích thước 30x30cm, giúp tạo cảnh quan tự nhiên cho bể', 50000, 'tham-co-nhan-tao-be-ca-chat-luong.jpg', 20, 'm2');
 
 --
 -- Đang đổ dữ liệu cho bảng `tai_khoan`
@@ -161,16 +163,6 @@ INSERT INTO `tai_khoan` (`TK_ID`, `TK_TENDANGNHAP`, `TK_MATKHAU`, `TK_AVATAR`, `
 (9, 'kh2', 'khh2', 'team-2.jpg', 'custommer'),
 (10, 'kh3', 'kh3', 'team-1.jpg', 'custommer'),
 (11, 'kh4', 'kh4', 'macdinh.jpg', 'custommer');
-
---
--- Đang đổ dữ liệu cho bảng `trangthai_hd`
---
-
-INSERT INTO `trangthai_hd` (`TT_ID`, `TT_TEN`) VALUES
-(0, 'Đã huỷ'),
-(1, 'Đợi xác nhận'),
-(2, 'Đang giao hàng'),
-(3, 'Hoàn thành');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

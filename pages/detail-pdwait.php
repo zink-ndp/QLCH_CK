@@ -335,13 +335,13 @@
                                         </td>
                                         <!-- status-->
                                         <td class="align-middle text-center">
-                                            <?php
-                                                if ($trangthai==1) $style = "text-info";
-                                                elseif ($trangthai==2) $style = "text-primary";
-                                                elseif ($trangthai==0) $style = "text-danger";
-                                                else $style = "text-success";
-                                            ?>
-                                        <p class="text-xs font-weight-bold mb-0 <?php echo $style; ?>"><?php echo $tentrangthai ?></p>
+                                          <?php
+                                              if ($trangthai==1) $style = "btn-warning";
+                                              elseif ($trangthai==2) $style = "btn-primary";
+                                              elseif ($trangthai==0) $style = "btn-danger";
+                                              else $style = "btn-success";
+                                          ?>
+                                          <button class="btn text-xs font-weight-bold mb-0 <?php echo $style; ?>"><?php echo $tentrangthai ?></button>
                                         </td>
                                     </tr>
                             <!-- het 1 hang -->
@@ -382,7 +382,7 @@
                               $sql2 = "select * from chitiet_nhap where SP_ID = {$idsp}";
                               $rs2 = $conn->query($sql2);
                               $row2 = mysqli_fetch_assoc($rs2);
-                              $dvtsp = $row2["SP_DVT"];
+                              $dvtsp = $row1["SP_DVT"];
     
                               ?>
                                   <tr class="height-100">
