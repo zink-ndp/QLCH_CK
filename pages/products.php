@@ -437,7 +437,7 @@
                                         <div class=" align-middle col-4">
                                           <form method="post" action="del_product.php">
                                               <input type="hidden" name="pdid" value="<?php echo $row["SP_ID"]; ?>">
-                                              <button onclick="this.form.submit()" class="btn btn-link text-warning text-secondary font-weight-bold text-sm">
+                                              <button onclick="this.form.submit()" class="addmore-button btn btn-link text-warning text-secondary font-weight-bold text-sm">
                                                 Xoá
                                               </button>
                                             </form>
