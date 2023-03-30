@@ -266,159 +266,215 @@
 
     <div class="row">
         <div class="col-12  px-4">
-            <div class="card mb-4">
+              <div class="card mb-4">
                 <form action="#" method="get">
-                <div class="card-header pb-2 d-flex align-items-center">
+                  <div class="card-header pb-2 d-flex align-items-center">
                     <div class="col-3">
-                    <h6 class="">Danh sách đơn hàng</h6>
+                      <h5>Danh sách đơn hàng</h5>
                     </div>
-                    <!-- <div class="col-6"></div> -->
-                    <div class="col-9 d-flex align-items-center  justify-content-end">
-                    <!-- <div class="input-group w-30 me-3">
-                        <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-                        <input type="text" name="timkiem" class="form-control" placeholder="Nhập tên khách hàng cần tìm..">
+                    <div class="col-4"></div>
+                    <div class="col-2 me-2">
+                      <select class="form-control form-control-md" name="status" id="status">
+                        <option value="" selected disabled hidden>- Trạng thái -</option>
+                        <?php
+                          $sql = "SELECT * FROM trangthai_hd WHERE TT_ID BETWEEN 0 and 2";
+                          $result = $conn->query($sql);
+                          if ($result->num_rows > 0) {
+                            $result = $conn->query($sql);
+                            $result_all = $result -> fetch_all(MYSQLI_ASSOC);
+                            foreach ($result_all as $row) {
+                              echo "<option value=" .$row["TT_ID"]. ">".$row["TT_TEN"]. "</option>";
+                            }                          
+                          } else {
+                            echo "<option value=''>Không có dữ liệu</option>";
+                          }
+                        ?>
+                      </select>
                     </div>
-                    <button type="submit" class="btn btn-primary text-white font-weight-bold text-md ms-0 mt-3">
-                        Tìm
-                    </button> -->
+                    <div class="col-2">
+                      <select class="form-control form-control-md" name="method" id="method">
+                        <option value="" selected disabled hidden>- Phương thức thanh toán -</option>
+                        <?php
+                          $sql = "SELECT * FROM pt_thanhtoan";
+                          $result = $conn->query($sql);
+                          if ($result->num_rows > 0) {
+                            $result = $conn->query($sql);
+                            $result_all = $result -> fetch_all(MYSQLI_ASSOC);
+                            foreach ($result_all as $row) {
+                              echo "<option value=" .$row["PTTT_ID"]. ">".$row["PTTT_TEN"]. "</option>";
+                            }                          
+                          } else {
+                            echo "<option value=''>Không có dữ liệu</option>";
+                          }
+                        ?>
+                      </select>
+                    </div>
+                    <div class="px-2 col-1 font-weight-bold">
+                      <button type="submit" class="btn btn-primary text-white font-weight-bold text-md ms-0 mt-3">
+                        Lọc
+                      </button>
+                    </div>
+                  </div>
+                </form>
+                
+
+                <?php
+                  $sql = "select * from hoa_don where TT_ID BETWEEN 0 AND 2";
+                  if(isset($_GET["status"]) && isset($_GET["method"])){
+                    $sql = "select * from hoa_don where TT_ID = {$_GET["status"]} and PTTT_ID = {$_GET["method"]}";
+                  } elseif (isset($_GET["status"]) && !isset($_GET["method"])){
+                    $sql = "select * from hoa_don where TT_ID = {$_GET["status"]}";
+                  } elseif (!isset($_GET["status"]) && isset($_GET["method"])){
+                    $sql = "select * from hoa_don where TT_ID BETWEEN 0 AND 2 and PTTT_ID = {$_GET["method"]}";
+                  } else {
+                    $sql = "select * from hoa_don where TT_ID BETWEEN 0 AND 2";
+                  }
+                ?>            
+                <div class="card-body px-0 pt-0 pb-2">
+                  <div class="table-responsive p-0">
+                  <!-- table 5 cot -->
+                  <table class="table align-items-center mb-0">
+                      <thead>
+                      <tr>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Mã đơn</th>
+                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Khách hàng</th>
+                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nhân viên tiếp nhận</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Tổng tiền</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Phương thức</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ngày đặt hàng</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Trạng thái</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"></th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <!-- 1 hang -->
+                      <?php
+                          $result = $conn->query($sql);
+                          if ($result->num_rows > 0) {
+                          $result = $conn->query($sql);
+                          $result_all = $result -> fetch_all(MYSQLI_ASSOC);
+                          foreach ($result_all as $row) {
+                              
+                              $nvid = $row["NV_ID"];
+
+                              $sql_kh = "SELECT * FROM khach_hang WHERE KH_ID = {$row["KH_ID"]}";
+                              $result1 = $conn->query($sql_kh);
+                              if ($result1->num_rows > 0) {
+                              $result1 = $conn->query($sql_kh);
+                              $result_all1 = $result1 -> fetch_all(MYSQLI_ASSOC);
+                              foreach ($result_all1 as $row1) {
+
+                                  $sql_tk = "select * from tai_khoan where TK_ID = {$row1["TK_ID"]}";
+                                  $result2 = $conn->query($sql_tk);
+                                  $row2 = mysqli_fetch_assoc($result2);
+
+                                  $sql_tt = "select * from trangthai_hd where TT_ID = {$row["TT_ID"]}" ;
+                                  $result3 = $conn->query($sql_tt);
+                                  $row3 = mysqli_fetch_assoc($result3);
+
+
+                              ?>
+                              <tr class="height-100">
+                                  <!-- Ma hoa don -->
+                                  <td class="align-middle text-center">
+                                      <p class="text-sm font-weight-bold mb-0"><?php echo $row["HD_ID"]; ?></p>
+                                  </td>
+                                  <td>
+                                  <div class="d-flex px-1 py-1">
+                                      <!-- hinh anh khach hang -->
+                                      <div>
+                                      <?php
+                                          $avatar_url = "../assets/img/cus_img/" . $row2["TK_AVATAR"];
+                                          echo "<img src='{$avatar_url}' class='avatar avatar-md me-3 mt-3' alt='cus'>";
+                                      ?> 
+                                      </div>
+                                      <!-- ten kh -->
+                                      <div class="d-flex flex-column justify-content-center">
+                                      <h6 class="mb-0 text-sm"><?php echo $row1["KH_HOTEN"]; ?></h6>
+                                      <p class='text-xs text-secondary mb-0'>Ngày sinh: <?php echo $row1["KH_NGAYSINH"]; ?></p>
+                                      <p class="text-xs text-secondary mb-0">Địa chỉ: <?php echo $row1["KH_DIACHI"]; ?></p>
+                                      </div>
+                                  </div>
+                                  </td>
+
+                                  <!-- Nhan vien tiep nhan -->
+                                  <td>
+                                      <?php
+                                      if ($nvid != null){
+                                          $sqlnv = "select NV_HOTEN from nhan_vien where NV_ID = {$nvid}";
+                                          $rsnv = $conn->query($sqlnv);
+                                          $rownv = mysqli_fetch_assoc($rsnv);
+                                          $tennv = $rownv["NV_HOTEN"];
+                                      } else {
+                                          $tennv = "Chưa được duyệt!";
+                                      }
+                                      ?>
+                                  <p class="text-xs font-weight-bold mb-0"><?php echo $tennv; ?></p>
+                                  </td>
+                                  <!-- Tong tien-->
+                                  <td>
+                                  <p class="text-s text-success font-weight-bold mb-0"><?php echo number_format($row["HD_TONGTIEN"], 0, '.')  ?> VNĐ</p>
+                                  </td>
+                                  <!-- Phuong thuc-->
+                                  <td class="align-middle text-center">
+                                    <?php
+                                      $idpttt = $row["PTTT_ID"];
+                                      $sqlpt = "select PTTT_TEN from pt_thanhtoan where PTTT_ID = {$idpttt}";
+                                      $rspt = $conn->query($sqlpt);
+                                      $rowpt = mysqli_fetch_assoc($rspt);
+                                    ?>
+                                  <p class="text-xs text-secondary mb-0"><?php echo $rowpt["PTTT_TEN"];  ?></p>
+                                  </td>
+                                  <!-- ngay them -->
+                                  <td class="align-middle text-center">
+                                  <span class="text-secondary text-xs font-weight-bold"><?php echo date('d/m/Y',strtotime($row["HD_NGAYDAT"])); ?></span>
+                                  </td>
+                                  <!-- status-->
+                                  <td class="align-middle text-center">
+                                    <?php
+                                          if ($row3["TT_ID"]==1) $style = "btn-warning";
+                                          elseif ($row3["TT_ID"]==2) $style = "btn-primary";
+                                          elseif ($row3["TT_ID"]==0) $style = "btn-danger";
+                                          else $style = "text-success";
+                                      ?>
+                                    <button class="btn text-xs font-weight-bold mb-0 <?php echo $style; ?>"><?php echo $row3["TT_TEN"]; ?></button>
+                                  </td>
+                                  <td class="align-middle">
+                                      <form action="detail-pdwait.php" method="post">
+                                          <input type="hidden" name="mahd" value="<?php echo $row["HD_ID"]; ?>">
+                                          <input type="hidden" name="avtkh" value="<?php echo $row2["TK_AVATAR"]; ?>">
+                                          <input type="hidden" name="tenkh" value="<?php echo $row1["KH_HOTEN"]; ?>">
+                                          <input type="hidden" name="ngaysinh" value="<?php echo $row1["KH_NGAYSINH"]; ?>">
+                                          <input type="hidden" name="diachikh" value="<?php echo $row1["KH_DIACHI"]; ?>">
+                                          <input type="hidden" name="sdtkh" value="<?php echo $row1["KH_SDT"]; ?>">
+                                          <input type="hidden" name="emailkh" value="<?php echo $row1["KH_EMAIL"]; ?>">
+                                          <input type="hidden" name="tongtien" value="<?php echo $row["HD_TONGTIEN"]; ?>">
+                                          <input type="hidden" name="ngaydat" value="<?php echo $row["HD_NGAYDAT"]; ?>">
+                                          <input type="hidden" name="trangthai" value="<?php echo $row3["TT_ID"]; ?>">
+                                          <input type="hidden" name="phuongthuc" value="<?php echo $rowpt["PTTT_TEN"]; ?>">
+                                          <input type="hidden" name="tentrangthai" value="<?php echo $row3["TT_TEN"]; ?>">
+                                          
+
+                                          <button type="submit" class="mt-4 btn btn-link text-primary font-weight-bold text-xs">
+                                              Xem chi tiết ->
+                                          </button>
+                                      </form>
+                                  </td>
+                              </tr>
+                              <?php
+                              }
+                              }
+                          }
+                          }
+                      ?>
+                      <!-- het 1 hang -->
+                      </tbody>
+                  </table>
                 </div>
-            </div>
-            </form>
-
-            <div class="card-body px-0 pt-0 pb-2">
-                <div class="table-responsive p-0">
-                <!-- table 5 cot -->
-                <table class="table align-items-center mb-0">
-                    <thead>
-                    <tr>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Mã đơn</th>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Khách hàng</th>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nhân viên tiếp nhận</th>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Tổng tiền</th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ngày đặt hàng</th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Trạng thái</th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <!-- 1 hang -->
-                    <?php
-                        $sql = "select * from hoa_don where TT_ID BETWEEN 0 AND 2";
-                        $result = $conn->query($sql);
-                        if ($result->num_rows > 0) {
-                        $result = $conn->query($sql);
-                        $result_all = $result -> fetch_all(MYSQLI_ASSOC);
-                        foreach ($result_all as $row) {
-                            
-                            $nvid = $row["NV_ID"];
-
-                            $sql_kh = "SELECT * FROM khach_hang WHERE KH_ID = {$row["KH_ID"]}";
-                            $result1 = $conn->query($sql_kh);
-                            if ($result1->num_rows > 0) {
-                            $result1 = $conn->query($sql_kh);
-                            $result_all1 = $result1 -> fetch_all(MYSQLI_ASSOC);
-                            foreach ($result_all1 as $row1) {
-
-                                $sql_tk = "select * from tai_khoan where TK_ID = {$row1["TK_ID"]}";
-                                $result2 = $conn->query($sql_tk);
-                                $row2 = mysqli_fetch_assoc($result2);
-
-                                $sql_tt = "select * from trangthai_hd where TT_ID = {$row["TT_ID"]}" ;
-                                $result3 = $conn->query($sql_tt);
-                                $row3 = mysqli_fetch_assoc($result3);
-
-
-                            ?>
-                            <tr class="height-100">
-                                <!-- Ma hoa don -->
-                                <td class="align-middle text-center">
-                                    <p class="text-sm font-weight-bold mb-0"><?php echo $row["HD_ID"]; ?></p>
-                                </td>
-                                <td>
-                                <div class="d-flex px-1 py-1">
-                                    <!-- hinh anh khach hang -->
-                                    <div>
-                                    <?php
-                                        $avatar_url = "../assets/img/cus_img/" . $row2["TK_AVATAR"];
-                                        echo "<img src='{$avatar_url}' class='avatar avatar-md me-3 mt-3' alt='cus'>";
-                                    ?> 
-                                    </div>
-                                    <!-- ten kh -->
-                                    <div class="d-flex flex-column justify-content-center">
-                                    <h6 class="mb-0 text-sm"><?php echo $row1["KH_HOTEN"]; ?></h6>
-                                    <p class='text-xs text-secondary mb-0'>Ngày sinh: <?php echo $row1["KH_NGAYSINH"]; ?></p>
-                                    <p class="text-xs text-secondary mb-0">Địa chỉ: <?php echo $row1["KH_DIACHI"]; ?></p>
-                                    </div>
-                                </div>
-                                </td>
-
-                                <!-- Nhan vien tiep nhan -->
-                                <td>
-                                    <?php
-                                    if ($nvid != null){
-                                        $sqlnv = "select NV_HOTEN from nhan_vien where NV_ID = {$nvid}";
-                                        $rsnv = $conn->query($sqlnv);
-                                        $rownv = mysqli_fetch_assoc($rsnv);
-                                        $tennv = $rownv["NV_HOTEN"];
-                                    } else {
-                                        $tennv = "Chưa được duyệt!";
-                                    }
-                                    ?>
-                                <p class="text-xs font-weight-bold mb-0"><?php echo $tennv; ?></p>
-                                </td>
-                                <!-- Tong tien-->
-                                <td>
-                                <p class="text-s text-success font-weight-bold mb-0"><?php echo number_format($row["HD_TONGTIEN"], 0, '.')  ?> VNĐ</p>
-                                </td>
-                                <!-- ngay them -->
-                                <td class="align-middle text-center">
-                                <span class="text-secondary text-xs font-weight-bold"><?php echo $row["HD_NGAYDAT"]; ?></span>
-                                </td>
-                                <!-- status-->
-                                <td class="align-middle text-center">
-                                  <?php
-                                        if ($row3["TT_ID"]==1) $style = "btn-warning";
-                                        elseif ($row3["TT_ID"]==2) $style = "btn-primary";
-                                        elseif ($row3["TT_ID"]==0) $style = "btn-danger";
-                                        else $style = "text-success";
-                                    ?>
-                                  <button class="btn text-xs font-weight-bold mb-0 <?php echo $style; ?>"><?php echo $row3["TT_TEN"]; ?></button>
-                                </td>
-                                <td class="align-middle">
-                                    <form action="detail-pdwait.php" method="post">
-                                        <input type="hidden" name="mahd" value="<?php echo $row["HD_ID"]; ?>">
-                                        <input type="hidden" name="avtkh" value="<?php echo $row2["TK_AVATAR"]; ?>">
-                                        <input type="hidden" name="tenkh" value="<?php echo $row1["KH_HOTEN"]; ?>">
-                                        <input type="hidden" name="ngaysinh" value="<?php echo $row1["KH_NGAYSINH"]; ?>">
-                                        <input type="hidden" name="diachikh" value="<?php echo $row1["KH_DIACHI"]; ?>">
-                                        <input type="hidden" name="sdtkh" value="<?php echo $row1["KH_SDT"]; ?>">
-                                        <input type="hidden" name="emailkh" value="<?php echo $row1["KH_EMAIL"]; ?>">
-                                        <input type="hidden" name="tongtien" value="<?php echo $row["HD_TONGTIEN"]; ?>">
-                                        <input type="hidden" name="ngaydat" value="<?php echo $row["HD_NGAYDAT"]; ?>">
-                                        <input type="hidden" name="trangthai" value="<?php echo $row3["TT_ID"] ?>">
-                                        <input type="hidden" name="tentrangthai" value="<?php echo $row3["TT_TEN"] ?>">
-                                        
-
-                                        <button type="submit" class="mt-4 btn btn-link text-primary font-weight-bold text-xs">
-                                            Xem chi tiết ->
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
-                            <?php
-                            }
-                            }
-                        }
-                        }
-                    ?>
-                    <!-- het 1 hang -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
+              </div>
+          </div>
     </div>
-</div>
-</div>
+  </div>
 </main>
 
   

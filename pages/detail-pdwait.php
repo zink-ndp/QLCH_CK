@@ -258,12 +258,28 @@
             <div class="row">
               <div class="col-12  px-4">
                   <div class="card mb-4">
+                    <?php 
+                      $mahd = $_POST["mahd"];
+                      $avtkh = $_POST["avtkh"];
+                      $tenkh = $_POST["tenkh"];
+                      $diachikh = $_POST["diachikh"];
+                      $emailkh = $_POST["emailkh"];
+                      $sdtkh = $_POST["sdtkh"];
+                      $tongtien = $_POST["tongtien"];
+                      $ngaydat = $_POST["ngaydat"];
+                      $trangthai = $_POST["trangthai"];
+                      $tentrangthai = $_POST["tentrangthai"];
+                      $ngaysinh = $_POST["ngaysinh"];
+                      $phuongthuc = $_POST["phuongthuc"];
+                      
+                    ?>
                     <form action="#" method="get">
                     <div class="card-header pb-2 d-flex align-items-center">
                         <div class="col-3">
                           <h6 class="">Thông tin khách hàng</h6>
                         </div>
-                        <div class="col-9 d-flex align-items-center  justify-content-end"></div>
+                        <div class="col-9 d-flex align-items-center justify-content-end"></div>
+
                     </div>
                     </form>
                     <div class="card-body px-0 pt-0 pb-2">
@@ -276,29 +292,14 @@
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Khách hàng</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Liên hệ</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Tổng tiền</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ngày đặt hàng</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Phương thức thanh toán</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Trạng thái</th>
                             </tr>
                             </thead>
                             <tbody>
                             <!-- 1 hang -->
                             <tr class="height-100">
-                                <?php 
-                                    $mahd = $_POST["mahd"];
-                                    $avtkh = $_POST["avtkh"];
-                                    $tenkh = $_POST["tenkh"];
-                                    $diachikh = $_POST["diachikh"];
-                                    $emailkh = $_POST["emailkh"];
-                                    $sdtkh = $_POST["sdtkh"];
-                                    $tongtien = $_POST["tongtien"];
-                                    $ngaydat = $_POST["ngaydat"];
-                                    $trangthai = $_POST["trangthai"];
-                                    $tentrangthai = $_POST["tentrangthai"];
-                                    $ngaysinh = $_POST["ngaysinh"];
-                                    
-    
-                                    
-                                ?>
+                                
                                         <!-- Ma hoa don -->
                                         <td class="align-middle text-center">
                                             <p class="text-sm font-weight-bold mb-0"><?php echo $mahd ?></p>
@@ -329,9 +330,9 @@
                                         <td>
                                         <p class="text-s text-success font-weight-bold mb-0"><?php echo number_format($tongtien)  ?> VNĐ</p>
                                         </td>
-                                        <!-- ngay them -->
+                                        <!-- phuong thuc -->
                                         <td class="align-middle text-center">
-                                        <span class="text-secondary text-xs font-weight-bold"><?php echo $ngaydat; ?></span>
+                                          <p class="text-s text-secondary mb-0"><?php echo $phuongthuc;  ?></p>
                                         </td>
                                         <!-- status-->
                                         <td class="align-middle text-center">
@@ -359,7 +360,10 @@
                       <div class="col-3">
                           <h6 class="">Danh sách sản phẩm</h6>
                       </div>
-                      <div class="col-9 d-flex align-items-center  justify-content-end"></div>
+                      <div class="col-6 d-flex align-items-center  justify-content-end"></div>
+                      <div class="col-3 d-flex align-items-center justify-content-end">
+                        Ngày đặt hàng: <span class="ms-2 text-secondary text-s text-center font-weight-bold"><?php echo $ngaydat; ?></span>
+                      </div>
                   </div>
                   <div class="card-body px-0 pt-0 pb-2 px-4 py-4">
                       <table class="table align-items-center mb-0">

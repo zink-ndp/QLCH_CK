@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     26/03 3:04                                   */
+/* Created on:     29/03 3:05                                   */
 /*==============================================================*/
 
 
@@ -162,6 +162,7 @@ create table NGUON_HANG
 (
    NH_ID                int not null,
    NH_TENNGUON          char(40) not null,
+   NH_MOTA              char(200) not null,
    primary key (NH_ID)
 );
 

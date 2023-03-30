@@ -105,10 +105,10 @@
                 <div class="card-body">
                   <form role="form" method="post" action="log.php">
                     <div class="mb-3">
-                      <input type="text" name="usname" class="form-control form-control-lg" placeholder="Username" aria-label="Username">
+                      <input required type="text" name="usname" class="form-control form-control-lg" placeholder="Username" aria-label="Username">
                     </div>
                     <div class="mb-3">
-                      <input type="password" name="pass" class="form-control form-control-lg" placeholder="Password" aria-label="Password">
+                      <input required type="password" name="pass" class="form-control form-control-lg" placeholder="Password" aria-label="Password">
                     </div>
                     <!-- <div class="form-check form-switch">
                       <input class="form-check-input" type="checkbox" id="rememberMe">

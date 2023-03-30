@@ -336,7 +336,7 @@
                                           <!-- ten san pham -->
                                           <div class="d-flex flex-column justify-content-center">
                                             <h6 class="mb-0 text-sm"><?php echo $row["NV_HOTEN"]; ?></h6>
-                                            <p class='text-xs text-secondary mb-0'>Ngày sinh: <?php echo $row["NV_NGAYSINH"]; ?></p>
+                                            <p class='text-xs text-secondary mb-0'>Ngày sinh: <?php echo date('d/m/Y', strtotime($row["NV_NGAYSINH"])); ?></p>
                                           </div>
                                         </div>
                                       </td>
@@ -363,7 +363,7 @@
                                       </td>
                                       <!-- ngay them -->
                                       <td class="align-middle text-center">
-                                        <span class="text-secondary text-xs font-weight-bold"><?php echo $row["NV_NGAYTUYEN"]; ?></span>
+                                        <span class="text-secondary text-xs font-weight-bold"><?php echo date('d/m/Y', strtotime($row["NV_NGAYTUYEN"])); ?></span>
                                       </td>
                                       <td class="align-middle">
                                       <form method="post" action="edit_staff.php">

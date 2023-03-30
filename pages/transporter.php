@@ -25,7 +25,7 @@
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <title>
-    Đối tác nhập hàng
+    Đối tác vận chuyển
   </title>
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -115,7 +115,7 @@
                     <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Quản lý đối tác</h6>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link active   " href="../pages/pdsource.php">
+                    <a class="nav-link    " href="../pages/pdsource.php">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                     <i class="fas fa-building text-primary text-sm opacity-10"></i>
                     </div>
@@ -123,7 +123,7 @@
                     </a>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link " href="../pages/transporter.php">
+                    <a class="nav-link active" href="../pages/transporter.php">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                     <i class="fas fa-truck text-success text-sm opacity-10"></i>
                     </div>
@@ -192,9 +192,9 @@
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">Trang</a></li>
-            <li class="breadcrumb-item text-sm text-white active" aria-current="page">Nguồn hàng</li>
+            <li class="breadcrumb-item text-sm text-white active" aria-current="page">Vận chuyển</li>
           </ol>
-          <h6 class="font-weight-bolder text-white mb-0">Nguồn hàng</h6>
+          <h6 class="font-weight-bolder text-white mb-0">Vận chuyển</h6>
         </nav>
         <!-- Đoạn này -->
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
@@ -250,18 +250,19 @@
     ?>
     <div class="container-fluid py-4">
       <div class="row">
-        <div class="col-lg-9">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-5">
           <div class="row ">
             <div class="col-lg-12">
               <div class="card h-100">
                 <div class="card-header pb-0 p-3">
                   <div class="row">
                     <div class="col-6 d-flex align-items-center">
-                      <h6 class="mb-0">Danh sách đối tác nhập</h6>
+                      <h6 class="mb-0">Danh sách đối tác vận chuyển</h6>
                     </div>
                     <div class="col-6 text-end">
                       <?php
-                        $sql = "select * from nguon_hang";
+                        $sql = "select * from nha_van_chuyen";
                       ?>
                     </div>
                   </div>
@@ -273,8 +274,7 @@
                           <thead>
                             <tr class="col-12">
                               <th class="col-1 text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Mã đối tác</th>
-                              <th class="col-4 text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Tên đối tác nhập hàng</th>                              
-                              <th class="col-6 text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Mô tả</th>  
+                              <th class="col-4 text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Tên đối tác vận chuyển</th> 
                               <th class="col-1 text-secondary opacity-7"></th>
 
                             </tr>
@@ -292,17 +292,12 @@
                                   <tr class="height-100">
                                     <td class="align-middle text-center" >
                                       <!-- ma dt -->
-                                      <?php echo $row["NH_ID"] ?>
+                                      <?php echo $row["NVC_ID"] ?>
                                     </td>
 
                                     <td class="align-middle text-center">
                                       <!-- ten dt -->
-                                      <?php echo $row["NH_TENNGUON"] ?>
-                                    </td>
-
-                                    <td class="align-middle text-center">
-                                      <!-- mota dt -->
-                                      <?php echo $row["NH_MOTA"] ?>
+                                      <?php echo $row["NVC_TEN"] ?>
                                     </td>
                                     
                                     <td class="align-middle text-center">
@@ -340,17 +335,11 @@
               </div>
             </div>
             <div class="card-body p-3 pb-0">
-            <form action="add_source.php" method="post">
+            <form action="add_trans.php" method="post">
               <div class="row">
                 <div class="col-12 mt-4">
-                  Tên đối tác nhập hàng:
+                  Tên đối tác vận chuyển:
                   <input type="text" name="ten" class="form-control form-control-lg mt-1" placeholder="Tên đối tác">
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-12 mt-3">
-                  Tên đối tác nhập hàng:
-                  <textarea id="myTextarea" name="mota" class="form-control form-control-md mt-1">Mô tả đối tác</textarea>
                 </div>
               </div>
               <div class="row">
@@ -362,6 +351,8 @@
             </form>
           </div>
         </div>
+        <div class="col-lg-2"></div>
+
       </div>
        
     </div>

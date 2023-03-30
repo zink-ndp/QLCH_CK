@@ -402,7 +402,7 @@
                                     </td>
                                     <!-- ngay them -->
                                     <td class="align-middle text-center">
-                                    <p class="text-xs font-weight-bold mb-0"><?php echo $ngaynhap; ?></p>
+                                    <p class="text-xs font-weight-bold mb-0"><?php echo date('d/m/Y', strtotime($ngaynhap)); ?></p>
                                     </td>
                                     <td class="align-middle text-center">
                                       <div class="mt-3 d-flex col-sm-12">

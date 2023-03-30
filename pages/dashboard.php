@@ -297,9 +297,20 @@
               <div class="row">
                 <div class="col-8">
                   <div class="numbers">
-                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Tổng abcxyz</p>
+                    <?php
+                      $sql = "select count(*) as sohd from hoa_don";
+                      $rs = $conn->query($sql);
+                      $row = mysqli_fetch_assoc($rs);
+                      if ($row["sohd"] != null){
+                        $message = "1";
+                        $tongsohd = $row["sohd"];
+                      }else {
+                        $tongsohd = 0;
+                      }
+                    ?>
+                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Tổng đơn hàng</p>
                     <h5 class="font-weight-bolder">
-                      2,300
+                      <?php echo $tongsohd ?>
                     </h5>
                     <p class="mb-0">
                       <span class="text-success text-sm font-weight-bolder">+3%</span>
@@ -309,7 +320,7 @@
                 </div>
                 <div class="col-4 text-end">
                   <div class="icon icon-shape bg-gradient-danger shadow-danger text-center rounded-circle">
-                    <i class="ni ni-world text-lg opacity-10" aria-hidden="true"></i>
+                    <i class="fas fa-file-invoice-dollar text-lg opacity-10" aria-hidden="true"></i>
                   </div>
                 </div>
               </div>
@@ -378,7 +389,7 @@
                 </div>
                 <div class="col-4 text-end">
                   <div class="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle">
-                    <i class="fa-solid fa-user-tie text-lg opacity-10"></i>
+                    <i class="fas fa-users text-lg opacity-10"></i>
                   </div>
                 </div>
               </div>

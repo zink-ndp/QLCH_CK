@@ -346,7 +346,7 @@
                                       </td>
                                       <!-- ngay them -->
                                       <td class="align-middle text-center">
-                                        <span class="text-secondary text-xs font-weight-bold"><?php echo $row["KH_NGAYDK"]; ?></span>
+                                        <span class="text-secondary text-xs font-weight-bold"><?php echo date('d/m/Y', strtotime($row["KH_NGAYDK"])); ?></span>
                                       </td>
                                       <td class="align-middle">
                                       <form method="post" action="edit_staff.php">

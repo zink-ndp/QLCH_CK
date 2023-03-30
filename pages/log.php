@@ -14,7 +14,10 @@ if ($conn->connect_error) {
 
 session_start();
 
-$sql = "select tk_id, tk_tendangnhap, tk_matkhau, tk_vaitro, tk_avatar from tai_khoan where tk_tendangnhap = '".strtolower($_POST["usname"])."' and tk_matkhau = '".$_POST["pass"]."'";
+$username = mysqli_real_escape_string($conn, $_POST['usname']);
+$password = mysqli_real_escape_string($conn, $_POST['pass']);
+
+$sql = "select tk_id, tk_tendangnhap, tk_matkhau, tk_vaitro, tk_avatar from tai_khoan where tk_tendangnhap = '".strtolower($username)."' and tk_matkhau = '".$password."'";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
  

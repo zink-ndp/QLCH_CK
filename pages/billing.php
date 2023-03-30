@@ -359,7 +359,7 @@
                                     </td>
                                     <td class="align-middle text-center">
                                       <!-- ngayhoanthanh -->
-                                      <?php echo $row["HD_NGAYDAT"] ?>
+                                      <?php echo date('d/m/Y', strtotime($row["HD_NGAYDAT"])) ?>
                                     </td>
                                     <td class="align-middle text-center">
                                       <!-- soluong -->
@@ -371,7 +371,7 @@
                                       ?>
                                     </td>
 
-                                    <!-- phuont thuc thanh toan -->
+                                    <!-- phuong thuc thanh toan -->
                                     <td class="align-middle text-xs text-center">
                                         <?php
                                           $idpttt = $row["PTTT_ID"];
