@@ -37,6 +37,9 @@
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="../assets/img/logo-ck.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
   <title>
     Trang quản lý Forish
   </title>
@@ -53,6 +56,11 @@
 </head>
 <body class="g-sidenav-show  bg-gray-100">
   <!-- Nguyên đoạn này -->
+  <div class="position-absolute top-6 z-index-2" style="left: 40%; font-family: 'Montserrat', sans-serif; text-shadow: 0px 0px 7px #000000;">
+    <h3 class="text-white">
+      TRANG QUẢN LÝ CỬA HÀNG CÁ KIỂNG
+    </h3>
+  </div>
   <div class="position-absolute w-100 min-height-300 top-0" style="background-image: url('https://images.unsplash.com/photo-1514907283155-ea5f4094c70c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80'); background-position-y: 50%;">
     <span class="mask bg-primary opacity-5"></span>
   </div>
@@ -262,7 +270,9 @@
                 <div class="col-8">
                   <div class="numbers">
                     <?php
-                      $sql = "select SUM(HD_TONGTIEN) as tongdt from hoa_don where TT_ID = 3";
+                      $thang = date('m');
+                      $nam = date('Y');
+                      $sql = "select SUM(HD_TONGTIEN) as tongdt from hoa_don where TT_ID = 3 and extract(month from hd_ngaydat) = '03' and extract(year from hd_ngaydat) = '2023'";
                       $rs = $conn->query($sql);
                       $row = mysqli_fetch_assoc($rs);
                       if ($row["tongdt"] != null){
@@ -272,13 +282,13 @@
                         $tongdoanhthu = 0;
                       }
                     ?>
-                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Doanh thu</p>
+                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Doanh thu tháng <?php echo $thang ."/". $nam ?></p>
                     <h5 class="font-weight-bolder">
                       <?php echo number_format($tongdoanhthu); ?> VNĐ
                     </h5>
                     <p class="mb-0">
                       <span class="text-success text-sm font-weight-bolder">+55%</span>
-                      since yesterday
+                      since last month
                     </p>
                   </div>
                 </div>
@@ -415,8 +425,8 @@
                       <div class="col-7"></div>
                       <div class="col-3">
                         <select class="form-control form-control-md ms-3" name="year" id="year">
-                          <!-- <option value="" selected disabled hidden>- Năm -</option> -->
-                          <option value="2022" selected>2022</option>
+                          <option value="" selected disabled hidden>- Năm -</option>
+                          <option value="2022">2022</option>
                           <option value="2023">2023</option>
                         </select>
                       </div>
@@ -1007,24 +1017,18 @@
     var year = document.getElementById('slyear')
     var ctx = document.getElementById('myChart-y').getContext('2d');
     var chart = new Chart(ctx, {
-      type: 'bar',
+      type: 'line',
       data: {
         labels: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'],
         datasets: [{
           label: 'Doanh thu',
           data: [thang_1, thang_2, thang_3, thang_4, thang_5, thang_6, thang_7, thang_8, thang_9, thang_10 ,thang_11, thang_12],
           
-          // data: (function() {
-          //         var data_m = [];
-          //         for (var i = 0; i < 12; i++) {
-          //           data_m.push(Math.floor(Math.random() * 1000000));
-          //         }
-          //         return data_m;
-          //       })(),
           backgroundColor: 'rgba(0, 128, 255, 0.6)',
           borderColor: 'rgba(0, 128, 255, 0.6)',
-          borderWidth: 1,
+          borderWidth: 3,
           borderRadius: 5,
+          lineTension: 0.4, //độ cong
         }]
       },
       options: {

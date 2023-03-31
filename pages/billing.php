@@ -24,6 +24,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+	<script>
+		$(document).ready( function () {
+			$('#myTable').DataTable();
+		} );
+	</script>
+  <style>
+    #myTable tbody tr:nth-child(odd) {
+      background-color: #ffffff;
+    }
+    tr {
+      height: 30px;
+    }
+  </style>
   <title>
     Hoá đơn
   </title>
@@ -250,7 +266,7 @@
     ?>
     <div class="container-fluid py-4">
       <div class="row">
-        <div class="col-lg-7">
+        <div class="col-lg-8">
           <div class="row">
             <div class="col-4">
               <div class="card">
@@ -331,15 +347,15 @@
                 <div class="card-body p-3 pb-0">
                   <div class="table-responsive p-0">
                         <!-- table 5 cot -->
-                        <table class="table align-items-center mb-0">
+                        <table id="myTable" class="display" class="table align-items-center mb-0">
                           <thead>
                             <tr class="col-12">
                               <th class="col-1 text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Mã hoá đơn</th>
-                              <th class="col-3 text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Ngày hoàn thành</th>
-                              <th class="col-2 text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Số lượng SP</th>
+                              <th class="col-2 text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Ngày hoàn thành</th>
+                              <th class="col-1 text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Số lượng SP</th>
                               <th class="col-3 text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">PT Thanh toán</th>
-                              <th class="col-2 text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Tổng tiền</th>
-                              <th class="col-1 text-secondary opacity-7"></th>
+                              <th class="col-3 text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Tổng tiền</th>
+                              <th class="col-2 text-secondary opacity-7"></th>
                             </tr>
                           </thead>
                           <tbody>
@@ -352,7 +368,7 @@
                                 foreach ($result_all as $row) {
 
                                   ?>
-                                  <tr class="height-100">
+                                  <tr>
                                     <td class="align-middle text-center" >
                                       <!-- ma hd -->
                                       <?php echo $row["HD_ID"] ?>
@@ -406,7 +422,7 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-5">
+        <div class="col-lg-4">
           <div class="card">
             <div class="card-header pb-0 p-3">
               <div class="row">
