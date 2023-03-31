@@ -413,7 +413,9 @@
             <div class="card-header col-12 pb-0 pt-3 bg-transparent">
               <div class="row">
                 <div class="col-3">
-                  <h6 class="text-capitalize">Doanh thu</h6>
+                  <div class="doanhthunam">
+                    <h6 class="text-capitalize">Doanh thu</h6>
+                  </div>
                   <p class="text-sm mb-0">
                     <i class="fa fa-arrow-up text-success"></i>
                     <span class="font-weight-bold">4% more</span> in 2021
@@ -431,7 +433,7 @@
                         </select>
                       </div>
                       <div class="col-2">
-                        <button type="submit" class="btn btn-link text-primary font-weight-bold text-md ms-0">
+                        <button type="submit" class="btn btn-primary text-white font-weight-bold text-md ms-0">
                           Lọc
                         </button>
                       </div>
@@ -556,6 +558,7 @@
                       <div id="myDataMonth" data-json='<?php echo $json_data; ?>'></div>
                       <script>
                         var div = document.querySelector(".chart-here");
+                        var dtnam = document.querySelector(".doanhthunam")
                         div.innerHTML = "<canvas id=\"myChart-y\" height=\"80%\" class=\"chart-canvas\"></canvas>";
                       </script>
                     <?php
@@ -716,7 +719,7 @@
           <div class="card ">
             <div class="card-header pb-0 p-3">
               <div class="d-flex justify-content-between">
-                <h6 class="mb-2">Sales by Country</h6>
+                <h6 class="mb-2">Đơn theo loại hàng</h6>
               </div>
             </div>
             <div class="table-responsive">
@@ -725,12 +728,12 @@
                   <tr>
                     <td class="w-30">
                       <div class="d-flex px-2 py-1 align-items-center">
-                        <div>
-                          <img src="../assets/img/icons/flags/US.png" alt="Country flag">
+                        <div class="icon icon-shape bg-gradient-primary shadow-warning text-center rounded-circle">
+                          <i class="fas fa-fish text-lg opacity-10"></i>
                         </div>
                         <div class="ms-4">
-                          <p class="text-xs font-weight-bold mb-0">Country:</p>
-                          <h6 class="text-sm mb-0">United States</h6>
+                          <p class="text-xs font-weight-bold mb-0">Loại:</p>
+                          <h6 class="text-sm mb-0">Cá kiểng</h6>
                         </div>
                       </div>
                     </td>
@@ -756,12 +759,12 @@
                   <tr>
                     <td class="w-30">
                       <div class="d-flex px-2 py-1 align-items-center">
-                        <div>
-                          <img src="../assets/img/icons/flags/DE.png" alt="Country flag">
+                        <div class="icon icon-shape bg-gradient-success shadow-warning text-center rounded-circle">
+                        <i class="fas fa-archive text-lg opacity-10"></i>
                         </div>
                         <div class="ms-4">
-                          <p class="text-xs font-weight-bold mb-0">Country:</p>
-                          <h6 class="text-sm mb-0">Germany</h6>
+                          <p class="text-xs font-weight-bold mb-0">Loại:</p>
+                          <h6 class="text-sm mb-0">Thức ăn</h6>
                         </div>
                       </div>
                     </td>
@@ -787,12 +790,12 @@
                   <tr>
                     <td class="w-30">
                       <div class="d-flex px-2 py-1 align-items-center">
-                        <div>
-                          <img src="../assets/img/icons/flags/GB.png" alt="Country flag">
+                        <div class="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle">
+                        <i class="fas fa-holly-berry text-lg opacity-10"></i>
                         </div>
                         <div class="ms-4">
-                          <p class="text-xs font-weight-bold mb-0">Country:</p>
-                          <h6 class="text-sm mb-0">Great Britain</h6>
+                          <p class="text-xs font-weight-bold mb-0">Loại:</p>
+                          <h6 class="text-sm mb-0">Trang trí</h6>
                         </div>
                       </div>
                     </td>
@@ -818,12 +821,13 @@
                   <tr>
                     <td class="w-30">
                       <div class="d-flex px-2 py-1 align-items-center">
-                        <div>
-                          <img src="../assets/img/icons/flags/BR.png" alt="Country flag">
+                        <div class="icon icon-shape bg-gradient-danger shadow-warning text-center rounded-circle">
+                          <i class="fas fa-tree-decorated "></i>
+                          <i class="fas fa-ellipsis-h text-lg opacity-10"></i>
                         </div>
                         <div class="ms-4">
-                          <p class="text-xs font-weight-bold mb-0">Country:</p>
-                          <h6 class="text-sm mb-0">Brasil</h6>
+                          <p class="text-xs font-weight-bold mb-0">Loại:</p>
+                          <h6 class="text-sm mb-0">Khác</h6>
                         </div>
                       </div>
                     </td>

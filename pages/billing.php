@@ -36,8 +36,8 @@
     #myTable tbody tr:nth-child(odd) {
       background-color: #ffffff;
     }
-    tr {
-      height: 30px;
+    #myTable tbody tr {
+      height: 10px;
     }
   </style>
   <title>
