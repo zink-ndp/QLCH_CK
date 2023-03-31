@@ -274,7 +274,7 @@
                     ?>
                     <p class="text-sm mb-0 text-uppercase font-weight-bold">Doanh thu</p>
                     <h5 class="font-weight-bolder">
-                      <?php echo number_format($tongdoanhthu); ?>
+                      <?php echo number_format($tongdoanhthu); ?> VNĐ
                     </h5>
                     <p class="mb-0">
                       <span class="text-success text-sm font-weight-bolder">+55%</span>

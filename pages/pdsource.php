@@ -344,13 +344,13 @@
               <div class="row">
                 <div class="col-12 mt-4">
                   Tên đối tác nhập hàng:
-                  <input type="text" name="ten" class="form-control form-control-lg mt-1" placeholder="Tên đối tác">
+                  <input required type="text" name="ten" class="form-control form-control-lg mt-1" placeholder="Tên đối tác">
                 </div>
               </div>
               <div class="row">
                 <div class="col-12 mt-3">
                   Tên đối tác nhập hàng:
-                  <textarea id="myTextarea" name="mota" class="form-control form-control-md mt-1">Mô tả đối tác</textarea>
+                  <textarea required id="myTextarea" name="mota" class="form-control form-control-md mt-1">Mô tả đối tác</textarea>
                 </div>
               </div>
               <div class="row">
@@ -450,9 +450,9 @@
 
       // Hiển thị thông tin chi tiết của sản phẩm
       const productName = document.querySelector('.name');
-      productName.innerHTML = 'Tên đối tác <input value="' + name + '" type="text" name="name" class="form-control form-control-lg mt-3">';
+      productName.innerHTML = 'Tên đối tác <input required value="' + name + '" type="text" name="name" class="form-control form-control-lg mt-3">';
       const productImg = document.querySelector('.des');
-      productImg.innerHTML = 'Mô tả <textarea id="myTextarea" name="des" class="form-control form-control-md mt-1">'+des+'</textarea>';
+      productImg.innerHTML = 'Mô tả <textarea required id="myTextarea" name="des" class="form-control form-control-md mt-1">'+des+'</textarea>';
       
     }
 

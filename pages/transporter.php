@@ -339,7 +339,7 @@
               <div class="row">
                 <div class="col-12 mt-3">
                   Tên đối tác vận chuyển:
-                  <input type="text" name="ten" class="form-control form-control-lg mt-1" placeholder="Tên đối tác">
+                  <input required type="text" name="ten" class="form-control form-control-lg mt-1" placeholder="Tên đối tác">
                 </div>
               </div>
               <div class="row">

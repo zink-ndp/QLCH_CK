@@ -259,7 +259,7 @@
                       <div class="mb-3 px-3 col-3">
                           Danh mục
                           <br>
-                          <select class="form-control form-control-lg" name="types" id="types">
+                          <select required class="form-control form-control-lg" name="types" id="types">
                           <option value="" selected disabled hidden>-Chọn-</option>
                           <?php
                             $sql = "SELECT * FROM loai_sp";
@@ -278,21 +278,21 @@
                       </div>
                       <div class="mb-3 px-3 col-9">
                           Tên sản phẩm
-                        <input type="text" name="pd_name" class="form-control form-control-lg" placeholder="Nhập tên sản phẩm">
+                        <input required type="text" name="pd_name" class="form-control form-control-lg" placeholder="Nhập tên sản phẩm">
                       </div>
                       
                     </div>
                     <div class="col-12 mt-n4 card-header pb-2 d-flex align-items-center">
                       <div class="mb-3 px-3 col-12">
                           Mô tả sản phẩm
-                        <textarea row="20" name="pd_des" style="height: 150px;" class="form-control form-control-lg" placeholder="Nhập mô tả sản phẩm"></textarea>
+                        <textarea required row="20" name="pd_des" style="height: 150px;" class="form-control form-control-lg" placeholder="Nhập mô tả sản phẩm"></textarea>
                       </div>
                     </div>
                     <div class="col-12 mt-n4 card-header pb-2 d-flex align-items-center">                    
                       <div class="mb-3 px-3 col-3">
                           Nguồn cung cấp
                           <br>
-                          <select class="form-control form-control-lg" name="source" id="source">
+                          <select required class="form-control form-control-lg" name="source" id="source">
                             <option value="" selected disabled hidden>-Chọn-</option>
                             <?php
                               $sql = "SELECT * FROM nguon_hang";
@@ -332,16 +332,16 @@
                       </div> -->
                       <div class="mb-3 px-3 col-3">
                           Giá (VNĐ)
-                        <input min="1000" max="10000000000" step="1000" type="number" name="pd_price" class="form-control form-control-lg" placeholder="Nhập giá bán sản phẩm">
+                        <input required min="1000" max="10000000000" step="1000" type="number" name="pd_price" class="form-control form-control-lg" placeholder="Nhập giá bán sản phẩm">
                       </div>
                       <div class="mb-3 px-3 col-3">
                         Đơn vị tính
                         <br>
-                        <input type="text" name="dvt" class="form-control form-control-lg" placeholder="ĐVT: Con, Cái, Hộp, Kg...">
+                        <input required type="text" name="dvt" class="form-control form-control-lg" placeholder="ĐVT: Con, Cái, Hộp, Kg...">
                       </div>
                       <div class="mb-3 px-3 col-3">
                           Số lượng
-                        <input min="1" max="10000" step="1" type="number" name="pd_quantity" class="form-control form-control-lg" placeholder="Nhập số lượng sản phẩm">
+                        <input required min="1" max="10000" step="1" type="number" name="pd_quantity" class="form-control form-control-lg" placeholder="Nhập số lượng sản phẩm">
                       </div>
                     </div>
                     <div class="col-12 mt-n4 card-header pb-2 d-flex align-items-center">                                        

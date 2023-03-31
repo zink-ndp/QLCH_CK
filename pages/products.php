@@ -332,6 +332,7 @@
                           <thead>
                             <tr>
                               <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Sản phẩm</th>
+                              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Mã</th>
                               <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Giá</th>
                               <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Số lượng</th>
                               <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Đơn vị tính</th>
@@ -387,6 +388,10 @@
                                           <p class='text-xs text-secondary mb-0'><?php echo $tennh; ?></p>
                                         </div>
                                       </div>
+                                    </td>
+                                    <!-- ma sp -->
+                                    <td>
+                                      <p class="text-xs font-weight-bold mb-0"><?php echo $row["SP_ID"]; ?></p>
                                     </td>
                                     <!-- gia sp -->
                                     <td>

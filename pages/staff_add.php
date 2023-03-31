@@ -257,11 +257,11 @@
                     <div class="col-12 card-header pb-2 d-flex align-items-center">
                       <div class="mb-3 px-3 col-4">
                           Họ và tên
-                        <input type="text" name="staff_name" class="form-control form-control-lg" placeholder="Nhập họ và tên">
+                        <input required type="text" name="staff_name" class="form-control form-control-lg" placeholder="Nhập họ và tên">
                       </div>
                       <div class="mb-3 px-3 col-4">
                         Ngày sinh
-                        <input type="date" name="staff_birth" id="staff_birth" class="form-control form-control-lg">
+                        <input required type="date" name="staff_birth" id="staff_birth" class="form-control form-control-lg">
                       </div>
                       <div class="mb-3 px-3 col-4">
                         Giới tính
@@ -275,11 +275,11 @@
                     <div class="col-12 card-header pb-2 d-flex align-items-center">
                       <div class="mb-3 px-3 col-6">
                           Số điện thoại
-                        <input type="text" name="staff_phone" class="form-control form-control-lg" placeholder="Nhập SĐT">
+                        <input required type="text" name="staff_phone" class="form-control form-control-lg" placeholder="Nhập SĐT">
                       </div>
                       <div class="mb-3 px-3 col-6">
                           Email
-                        <input type="email" name="staff_mail" class="form-control form-control-lg" placeholder="Nhập email">
+                        <input required type="email" name="staff_mail" class="form-control form-control-lg" placeholder="Nhập email">
                       </div>
                     </div>
                     <div class="col-12 card-header pb-2 d-flex align-items-center">
@@ -293,15 +293,15 @@
                       </div>
                       <div class="mb-3 px-3 col-3">
                           Tên đăng nhập
-                        <input type="text" name="staff_usname" class="form-control form-control-lg" placeholder="Nhập tên đang nhập">
+                        <input required type="text" name="staff_usname" class="form-control form-control-lg" placeholder="Nhập tên đang nhập">
                       </div>
                       <div class="mb-3 px-3 col-3">
                           Mật khẩu
-                        <input type="password" id="pw" name="staff_pass" class="form-control form-control-lg" placeholder="Nhập mật khẩu">
+                        <input required type="password" id="pw" name="staff_pass" class="form-control form-control-lg" placeholder="Nhập mật khẩu">
                       </div>
                       <div class="mb-3 px-3 col-3">
                           Nhập lại mật khẩu
-                        <input type="password" id="rpw" name="staff_repass" class="form-control form-control-lg" placeholder="Nhập lại mật khẩu">
+                        <input required type="password" id="rpw" name="staff_repass" class="form-control form-control-lg" placeholder="Nhập lại mật khẩu">
                       </div>
                     </div>
                     <div class="col-12 card-header pb-2 d-flex align-items-center">
