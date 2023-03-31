@@ -400,16 +400,257 @@
       <div class="row mt-4">
         <div class="col-lg-7 mb-lg-0 mb-4">
           <div class="card z-index-2 h-100">
-            <div class="card-header pb-0 pt-3 bg-transparent">
-              <h6 class="text-capitalize">Sales overview</h6>
-              <p class="text-sm mb-0">
-                <i class="fa fa-arrow-up text-success"></i>
-                <span class="font-weight-bold">4% more</span> in 2021
-              </p>
+            <div class="card-header col-12 pb-0 pt-3 bg-transparent">
+              <div class="row">
+                <div class="col-3">
+                  <h6 class="text-capitalize">Doanh thu</h6>
+                  <p class="text-sm mb-0">
+                    <i class="fa fa-arrow-up text-success"></i>
+                    <span class="font-weight-bold">4% more</span> in 2021
+                  </p>
+                </div>
+                <div class="col-9">
+                  <form action="#" method="get">
+                    <div class="row">
+                      <div class="col-7"></div>
+                      <div class="col-3">
+                        <select class="form-control form-control-md ms-3" name="year" id="year">
+                          <!-- <option value="" selected disabled hidden>- Năm -</option> -->
+                          <option value="2022" selected>2022</option>
+                          <option value="2023">2023</option>
+                        </select>
+                      </div>
+                      <div class="col-2">
+                        <button type="submit" class="btn btn-link text-primary font-weight-bold text-md ms-0">
+                          Lọc
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
             </div>
             <div class="card-body p-3">
-              <div class="chart">
-                <canvas id="chart-line" class="chart-canvas" height="300"></canvas>
+              <div class="chart"> 
+                <style>
+                  canvas {
+                    -moz-user-select: none;
+                    -webkit-user-select: none;
+                    -ms-user-select: none;
+                  }
+
+                  canvas .bar{
+                    width: 50px;
+                  }
+
+                </style>
+                <div class="chart_here">
+                  <canvas id="myChart-y" height="80%" class="chart-canvas"></canvas>
+                  <!-- <canvas id="chart-line" class="chart-canvas" height="300"></canvas> -->
+                </div>
+                <?php
+                  // Đoạn này tính doanh thu 12 tháng
+                  if(isset($_GET["year"])){
+                    $y = $_GET["year"];
+                    $sql = "SELECT MONTH(HD_NGAYDAT) AS THANG, SUM(HD_TONGTIEN) AS DOANH_THU 
+                            FROM HOA_DON 
+                            WHERE TT_ID = 3 AND YEAR(HD_NGAYDAT)={$y}
+                            GROUP BY THANG";
+                    $result = mysqli_query($conn, $sql);
+                    // Lấy dữ liệu từ kết quả truy vấn
+                    $data = array();
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        $data[] = $row;
+                    } 
+                    // Khởi tạo mảng các biến tháng
+                      $thang_1 = 0;
+                      $thang_2 = 0;
+                      $thang_3 = 0;
+                      $thang_4 = 0;
+                      $thang_5 = 0;
+                      $thang_6 = 0;
+                      $thang_7 = 0;
+                      $thang_8 = 0;
+                      $thang_9 = 0;
+                      $thang_10 = 0;
+                      $thang_11 = 0;
+                      $thang_12 = 0;
+
+                      // Duyệt qua các phần tử của mảng kết quả
+                      foreach ($data as $row) {
+                          // Lấy giá trị của cột THANG
+                          $thang = $row['THANG'];
+
+                          // Lấy giá trị của cột DOANH_THU
+                          $doanh_thu = $row['DOANH_THU'];
+
+                          // Gán giá trị của cột DOANH_THU vào biến tháng tương ứng
+                          switch ($thang) {
+                              case 1:
+                                  $thang_1 = $doanh_thu;
+                                  break;
+                              case 2:
+                                  $thang_2 = $doanh_thu;
+                                  break;
+                              case 3:
+                                  $thang_3 = $doanh_thu;
+                                  break;
+                              case 4:
+                                  $thang_4 = $doanh_thu;
+                                  break;
+                              case 5:
+                                  $thang_5 = $doanh_thu;
+                                  break;
+                              case 6:
+                                  $thang_6 = $doanh_thu;
+                                  break;
+                              case 7:
+                                  $thang_7 = $doanh_thu;
+                                  break;
+                              case 8:
+                                  $thang_8 = $doanh_thu;
+                                  break;
+                              case 9:
+                                  $thang_9 = $doanh_thu;
+                                  break;
+                              case 10:
+                                  $thang_10 = $doanh_thu;
+                                  break;
+                              case 11:
+                                  $thang_11 = $doanh_thu;
+                                  break;
+                              case 12:
+                                  $thang_12 = $doanh_thu;
+                                  break;
+                          }
+                      }
+
+                      // Tạo mảng chứa các giá trị của các biến
+                      $data_month = array(
+                        'thang_1' => $thang_1,
+                        'thang_2' => $thang_2,
+                        'thang_3' => $thang_3,
+                        'thang_4' => $thang_4,
+                        'thang_5' => $thang_5,
+                        'thang_6' => $thang_6,
+                        'thang_7' => $thang_7,
+                        'thang_8' => $thang_8,
+                        'thang_9' => $thang_9,
+                        'thang_10' => $thang_10,
+                        'thang_11' => $thang_11,
+                        'thang_12' => $thang_12
+                      );
+                      // Chuyển đổi mảng thành đối tượng JSON
+                      $json_data = json_encode($data_month);
+                    ?>
+                      <div id="myDataMonth" data-json='<?php echo $json_data; ?>'></div>
+                      <script>
+                        var div = document.querySelector(".chart-here");
+                        div.innerHTML = "<canvas id=\"myChart-y\" height=\"80%\" class=\"chart-canvas\"></canvas>";
+                      </script>
+                    <?php
+                  } else {
+                    $sql = "SELECT MONTH(HD_NGAYDAT) AS THANG, SUM(HD_TONGTIEN) AS DOANH_THU 
+                            FROM HOA_DON 
+                            WHERE TT_ID = 3 AND YEAR(HD_NGAYDAT)=2022
+                            GROUP BY THANG";
+                    $result = mysqli_query($conn, $sql);
+                    // Lấy dữ liệu từ kết quả truy vấn
+                    $data = array();
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        $data[] = $row;
+                    } 
+                    // Khởi tạo mảng các biến tháng
+                      $thang_1 = 0;
+                      $thang_2 = 0;
+                      $thang_3 = 0;
+                      $thang_4 = 0;
+                      $thang_5 = 0;
+                      $thang_6 = 0;
+                      $thang_7 = 0;
+                      $thang_8 = 0;
+                      $thang_9 = 0;
+                      $thang_10 = 0;
+                      $thang_11 = 0;
+                      $thang_12 = 0;
+
+                      // Duyệt qua các phần tử của mảng kết quả
+                      foreach ($data as $row) {
+                          // Lấy giá trị của cột THANG
+                          $thang = $row['THANG'];
+
+                          // Lấy giá trị của cột DOANH_THU
+                          $doanh_thu = $row['DOANH_THU'];
+
+                          // Gán giá trị của cột DOANH_THU vào biến tháng tương ứng
+                          switch ($thang) {
+                              case 1:
+                                  $thang_1 = $doanh_thu;
+                                  break;
+                              case 2:
+                                  $thang_2 = $doanh_thu;
+                                  break;
+                              case 3:
+                                  $thang_3 = $doanh_thu;
+                                  break;
+                              case 4:
+                                  $thang_4 = $doanh_thu;
+                                  break;
+                              case 5:
+                                  $thang_5 = $doanh_thu;
+                                  break;
+                              case 6:
+                                  $thang_6 = $doanh_thu;
+                                  break;
+                              case 7:
+                                  $thang_7 = $doanh_thu;
+                                  break;
+                              case 8:
+                                  $thang_8 = $doanh_thu;
+                                  break;
+                              case 9:
+                                  $thang_9 = $doanh_thu;
+                                  break;
+                              case 10:
+                                  $thang_10 = $doanh_thu;
+                                  break;
+                              case 11:
+                                  $thang_11 = $doanh_thu;
+                                  break;
+                              case 12:
+                                  $thang_12 = $doanh_thu;
+                                  break;
+                          }
+                      }
+
+                      // Tạo mảng chứa các giá trị của các biến
+                      $data_month = array(
+                        'thang_1' => $thang_1,
+                        'thang_2' => $thang_2,
+                        'thang_3' => $thang_3,
+                        'thang_4' => $thang_4,
+                        'thang_5' => $thang_5,
+                        'thang_6' => $thang_6,
+                        'thang_7' => $thang_7,
+                        'thang_8' => $thang_8,
+                        'thang_9' => $thang_9,
+                        'thang_10' => $thang_10,
+                        'thang_11' => $thang_11,
+                        'thang_12' => $thang_12
+                      );
+                      // Chuyển đổi mảng thành đối tượng JSON
+                      $json_data = json_encode($data_month);
+                    ?>
+                      <div id="myDataMonth" data-json='<?php echo $json_data; ?>'></div>
+                      <script>
+                        var div = document.querySelector(".chart-here");
+                        div.innerHTML = "<canvas id=\"myChart-y\" height=\"80%\" class=\"chart-canvas\"></canvas>";
+                      </script>
+                    <?php
+                  }
+
+                ?>
+                
               </div>
             </div>
           </div>
@@ -709,6 +950,95 @@
   <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
   <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
   <script src="../assets/js/plugins/chartjs.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- chart by month -->
+  <script>
+    var ctx = document.getElementById('myChart-m').getContext('2d');
+    var chart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        let labels = [];
+        for (let month = 1; month <= 12; month++) {
+          let daysInMonth = new Date(2023, month, 0).getDate();
+          for (let day = 1; day <= daysInMonth; day++) {
+            labels.push(`${day}/${month}`);
+          }
+        }
+        datasets: [{
+          label: 'Doanh thu',
+          // data: [2500000, 1950000, 2500000, 1800000, 2000000, 2900000, 3100000, 1800000, 2600000, 2155000 ,2200000, 1500000],
+          let data = [];
+          for (let i = 0; i < daysInMonth; i++) {
+            data.push(Math.floor(Math.random() * 1000000));
+          }
+          backgroundColor: 'rgba(0, 128, 255, 0.6)',
+          borderColor: 'rgba(0, 128, 255, 0.6)',
+          borderWidth: 1,
+          borderRadius: 5,
+        }]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero:true
+            }
+          }]
+        }
+      }
+    });
+  </script>
+  <!-- chart by year -->
+  <script>
+    // Lấy đối tượng JSON từ thuộc tính dữ liệu của phần tử div
+    var data = JSON.parse(document.getElementById("myDataMonth").getAttribute("data-json"));
+    var thang_1 = data.thang_1;
+    var thang_2 = data.thang_2;
+    var thang_3 = data.thang_3;
+    var thang_4 = data.thang_4;
+    var thang_5 = data.thang_5;
+    var thang_6 = data.thang_6;
+    var thang_7 = data.thang_7;
+    var thang_8 = data.thang_8;
+    var thang_9 = data.thang_9;
+    var thang_10 = data.thang_10;
+    var thang_11 = data.thang_11;
+    var thang_12 = data.thang_12;
+    var year = document.getElementById('slyear')
+    var ctx = document.getElementById('myChart-y').getContext('2d');
+    var chart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'],
+        datasets: [{
+          label: 'Doanh thu',
+          data: [thang_1, thang_2, thang_3, thang_4, thang_5, thang_6, thang_7, thang_8, thang_9, thang_10 ,thang_11, thang_12],
+          
+          // data: (function() {
+          //         var data_m = [];
+          //         for (var i = 0; i < 12; i++) {
+          //           data_m.push(Math.floor(Math.random() * 1000000));
+          //         }
+          //         return data_m;
+          //       })(),
+          backgroundColor: 'rgba(0, 128, 255, 0.6)',
+          borderColor: 'rgba(0, 128, 255, 0.6)',
+          borderWidth: 1,
+          borderRadius: 5,
+        }]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero:true
+            }
+          }]
+        }
+      }
+    });
+    
+  </script>
   <script>
     var ctx1 = document.getElementById("chart-line").getContext("2d");
 
