@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     29/03 3:05                                   */
+/* Created on:     01/04 7:03                                   */
 /*==============================================================*/
 
 
@@ -34,6 +34,8 @@ drop table if exists SAN_PHAM;
 
 drop table if exists TAI_KHOAN;
 
+drop table if exists TIN_TUC;
+
 drop table if exists TRANGTHAI_HD;
 
 /*==============================================================*/
@@ -61,12 +63,12 @@ create table CHITIET_HD
 /*==============================================================*/
 create table CHITIET_NHAP
 (
-   NH_ID                int not null,
    SP_ID                int not null,
+   NH_ID                int not null,
    NV_ID                int not null,
    NH_NGAYNHAP          date not null,
    SP_SOLUONG           int not null,
-   primary key (NH_ID, SP_ID, NH_NGAYNHAP)
+   primary key (SP_ID, NH_ID, NH_NGAYNHAP, SP_SOLUONG)
 );
 
 /*==============================================================*/
@@ -75,9 +77,9 @@ create table CHITIET_NHAP
 create table DANH_GIA
 (
    DG_ID                int not null,
-   SP_ID                int not null,
-   TK_ID                int not null,
    NV_ID                int not null,
+   TK_ID                int not null,
+   SP_ID                int not null,
    DG_TIEUDE            char(50) not null,
    DG_NOIDUNG           text not null,
    DG_RATE              numeric(1,0) not null,
@@ -105,11 +107,11 @@ create table HOA_DON
 (
    HD_ID                int not null,
    DVC_ID               int not null,
-   KM_ID                int,
+   TT_ID                int not null,
    NV_ID                int,
+   KM_ID                int,
    PTTT_ID              int not null,
    KH_ID                int not null,
-   TT_ID                int not null,
    HD_TONGTIEN          float not null,
    HD_NGAYDAT           date not null,
    HD_LIDOHUY           text,
@@ -162,7 +164,7 @@ create table NGUON_HANG
 (
    NH_ID                int not null,
    NH_TENNGUON          char(40) not null,
-   NH_MOTA              char(200) not null,
+   NH_MOTA              char(150) not null,
    primary key (NH_ID)
 );
 
@@ -229,6 +231,19 @@ create table TAI_KHOAN
    TK_AVATAR            text not null,
    TK_VAITRO            char(30) not null,
    primary key (TK_ID)
+);
+
+/*==============================================================*/
+/* Table: TIN_TUC                                               */
+/*==============================================================*/
+create table TIN_TUC
+(
+   TTC_ID               int not null,
+   NV_ID                int not null,
+   TTC_TITLE            char(100) not null,
+   TTC_LINK             char(150) not null,
+   TTC_ANH              char(100),
+   primary key (TTC_ID)
 );
 
 /*==============================================================*/
@@ -300,4 +315,7 @@ alter table NHAN_VIEN add constraint FK_TK_NV foreign key (TK_ID)
 
 alter table SAN_PHAM add constraint FK_THUOC_LOAI foreign key (LSP_ID)
       references LOAI_SP (LSP_ID) on delete restrict on update restrict;
+
+alter table TIN_TUC add constraint FK_DO_NV_POST foreign key (NV_ID)
+      references NHAN_VIEN (NV_ID) on delete restrict on update restrict;
 
