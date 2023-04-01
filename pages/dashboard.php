@@ -195,6 +195,14 @@
             <span class="nav-link-text ms-1">Đánh giá</span>
           </a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link " href="../pages/news.php">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="far fa-newspaper text-primary text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Tin tức</span>
+          </a>
+        </li>
         <li class="nav-item mt-3">
           <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Quản lý tài khoản</h6>
         </li>
@@ -408,7 +416,7 @@
         </div>
       </div>
       <div class="row mt-4">
-        <div class="col-lg-7 mb-lg-0 mb-4">
+        <div class="col-lg-8 mb-lg-0 mb-4">
           <div class="card z-index-2 h-100">
             <div class="card-header col-12 pb-0 pt-3 bg-transparent">
               <div class="row">
@@ -668,37 +676,64 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-5">
+        <div class="col-lg-4">
           <div class="card card-carousel overflow-hidden h-100 p-0">
             <div id="carouselExampleCaptions" class="carousel slide h-100" data-bs-ride="carousel">
               <div class="carousel-inner border-radius-lg h-100">
+                <?php
+                  $sql = "select sp.sp_id as id, sp.sp_ten as ten, sp.SP_MOTA as mt, sp.SP_HINHANH as anh, count(distinct ct.hd_id) as so_hd
+                          from san_pham sp
+                          join chitiet_hd ct on sp.sp_id = ct.sp_id
+                          group by sp.sp_id, sp.sp_ten
+                          order by so_hd desc
+                          limit 3; ";
+
+                  $result = $conn->query($sql);
+                  $row1 = $result->fetch_assoc();
+                  $row2 = $result->fetch_assoc();
+                  $row3 = $result->fetch_assoc();
+
+                  $top1_ten = $row1["ten"];
+                  $top1_mota = $row1["mt"];
+                  $top1_anh = $row1["anh"];
+                  $top1_hd = $row1["so_hd"];
+
+                  $top2_ten = $row2["ten"];
+                  $top2_mota = $row2["mt"];
+                  $top2_anh = $row2["anh"];
+                  $top2_hd = $row2["so_hd"];
+
+                  $top3_ten = $row3["ten"];
+                  $top3_mota = $row3["mt"];
+                  $top3_anh = $row3["anh"];
+                  $top3_hd = $row3["so_hd"];
+
+                ?>
+                <!-- Top1 -->
                 <div class="carousel-item h-100 active" style="background-image: url('../assets/img/carousel-1.jpg'); background-size: cover;">
                   <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
-                    <div class="icon icon-shape icon-sm bg-white text-center border-radius-md mb-3">
-                      <i class="ni ni-camera-compact text-dark opacity-10"></i>
-                    </div>
-                    <h5 class="text-white mb-1">Get started with Argon</h5>
-                    <p>There’s nothing I really wanted to do in life that I wasn’t able to get good at.</p>
+                    <h3 class="text-warning mb-6">Top 1</h3>                    
+                    <img src="../assets/img/product_img/<?php echo $top1_anh ?>" class="rounded-circle avatar avatar-xxl me-3 mt-n5" alt="products">
+                    <h3 class="text-white mb-1 "><?php echo $top1_ten ?></h3>
+                    <h5 class="text-white">Số đơn hàng: <?php echo $top1_hd ?></h5>
                   </div>
                 </div>
-                <div class="carousel-item h-100" style="background-image: url('../assets/img/carousel-2.jpg');
-      background-size: cover;">
+                <!-- Top2 -->
+                <div class="carousel-item h-100" style="background-image: url('../assets/img/carousel-2.jpg'); background-size: cover;">
                   <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
-                    <div class="icon icon-shape icon-sm bg-white text-center border-radius-md mb-3">
-                      <i class="ni ni-bulb-61 text-dark opacity-10"></i>
-                    </div>
-                    <h5 class="text-white mb-1">Faster way to create web pages</h5>
-                    <p>That’s my skill. I’m not really specifically talented at anything except for the ability to learn.</p>
+                  <h3 class="text-warning mb-6">Top 2</h3>                    
+                    <img src="../assets/img/product_img/<?php echo $top2_anh ?>" class="rounded-circle avatar avatar-xxl me-3 mt-n5" alt="products">
+                    <h3 class="text-white mb-1 "><?php echo $top2_ten ?></h3>
+                    <h5 class="text-white">Số đơn hàng: <?php echo $top2_hd ?></h5>
                   </div>
                 </div>
-                <div class="carousel-item h-100" style="background-image: url('../assets/img/carousel-3.jpg');
-      background-size: cover;">
+                <!-- Top3 -->
+                <div class="carousel-item h-100" style="background-image: url('../assets/img/carousel-3.jpg'); background-size: cover;">
                   <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
-                    <div class="icon icon-shape icon-sm bg-white text-center border-radius-md mb-3">
-                      <i class="ni ni-trophy text-dark opacity-10"></i>
-                    </div>
-                    <h5 class="text-white mb-1">Share with us your design tips!</h5>
-                    <p>Don’t be afraid to be wrong because you can’t learn anything from a compliment.</p>
+                  <h3 class="text-warning mb-6">Top 3</h3>                    
+                    <img src="../assets/img/product_img/<?php echo $top3_anh ?>" class="rounded-circle avatar avatar-xxl me-3 mt-n5" alt="products">
+                    <h3 class="text-white mb-1 "><?php echo $top3_ten ?></h3>
+                    <h5 class="text-white">Số đơn hàng: <?php echo $top3_hd ?></h5>
                   </div>
                 </div>
               </div>

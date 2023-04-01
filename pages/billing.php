@@ -398,14 +398,17 @@
                                         ?>
                                     </td>
 
-                                    <td class="align-middle text-success text-center">
+                                    <td class="align-middle font-weight-bold text-success text-center">
                                       <!-- tongtien -->
                                       <?php echo number_format($row["HD_TONGTIEN"], 0, '.') ?>đ
                                     </td>
                                     <td class="align-middle text-center">
-                                      <button class="btn btn-link text-primary font-weight-bold text-sm mt-3">
-                                        Xem chi tiết >
-                                      </button>
+                                      <form action="#" method="get">
+                                        <input type="hidden" name="hd_id" value="<?php $row["HD_ID"] ?>">
+                                        <button class="view-btn btn btn-outline_primary text-primary font-weight-bold text-sm mt-3">
+                                          Xem chi tiết >
+                                        </button>
+                                      </form>
                                     </td>
                                   </tr>
                                   <?php
@@ -426,99 +429,33 @@
           <div class="card">
             <div class="card-header pb-0 p-3">
               <div class="row">
-                <div class="col-7 d-flex align-items-center">
+                <div class="col-6 d-flex align-items-center">
                   <h6 class="mb-0">Chi tiết hoá đơn</h6>
                 </div>
-                <div class="col-2 text-center me-n3">
-                  <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><i class="fas fa-print text-sm me-1"></i> In</button>
+                <div class="col-3 text-end me-n3">
+                  <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-5"><i class="fas fa-print text-sm me-1"></i> In</button>
                 </div>
-                <div class="col-3 text-center">
+                <div class="col-3 text-end">
                   <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-1"><i class="fas fa-file-pdf text-sm me-1"></i> Xuất PDF</button>
                 </div>
               </div>
             </div>
             <div class="card-body p-3 pb-0">
               <div class="row">
-                <div class="col-12">
-                  <!-- title -->
-                  <div class="row text-center fs-4 font-weight-bold">
-                    <div class="col-12">
-                      HOÁ ĐƠN
-                    </div>
-                  </div>
-                  <!-- ngay -->
-                  <div class="row text-center fs-5 font-weight-bold"> 
-                    <div class="col-12">
-                      31/12/2023
-                    </div>
-                  </div>
-                  <!-- thongtin khachhang -->
-                  <div class="row mt-3">
-                    <div class="col-md-12">
-                      <h6>Thông tin khách hàng:</h6>
-                      <!-- 1 hang -->
-                      <div class="row px-2 mt-2">
-                        <div class="col-4">
-                          <h6>Mã khách hàng: </h6>
-                        </div>
-                        <div class="col-8">
-                          <p>421</p>
-                        </div>
-                      </div>
-                      <!-- 1 hang -->
-                      <div class="row px-2 mt-n3">
-                        <div class="col-4">
-                          <h6>Tên khách hàng: </h6>
-                        </div>
-                        <div class="col-8">
-                          <p>Nguyễn Văn A</p>
-                        </div>
-                      </div>
-                      <!-- 1 hang -->
-                      <div class="row px-2 mt-n3">
-                        <div class="col-4">
-                          <h6>SĐT: </h6>
-                        </div>
-                        <div class="col-8">
-                          <p>0123456789</p>
-                        </div>
-                      </div>
-                       <!-- 1 hang -->
-                       <div class="row px-2 mt-n3">
-                        <div class="col-4">
-                          <h6>Địa chỉ: </h6>
-                        </div>
-                        <div class="col-8">
-                          <p>A123, ABC, phường A, quận B, TP.C</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- thongtin nhanvien -->
-                  <div class="row mt-3">
-                    <div class="col-md-12">
-                      <h6>Thông tin nhân viên:</h6>
-                      <!-- 1 hang -->
-                      <div class="row px-2 mt-2">
-                        <div class="col-4">
-                          <h6>Mã nhân viên: </h6>
-                        </div>
-                        <div class="col-8">
-                          <p>231</p>
-                        </div>
-                      </div>
-                      <!-- 1 hang -->
-                      <div class="row px-2 mt-n3">
-                        <div class="col-4">
-                          <h6>Tên nhân viên: </h6>
-                        </div>
-                        <div class="col-8">
-                          <p>Nguyễn Thị B</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <?php
+                  if(isset($_GET["hd_id"])){
+                    $hdid = $_GET["hd_id"];
+                    $sql = "select kh.KH_ID as makh, kh.KH_HOTEN as tenkh, kh.KH_SDT as sdtkh, kh.KH_DIACHI as dckh, nv.NV_ID as manv, nv.NV_HOTEN as tennv
+                            from hoa_don hd
+                            inner join khach_hang kh on kh.KH_ID = hd.KH_ID
+                            inner join nhan_vien nv on nv.NV_ID = hd.NV_ID
+                            where hd.HD_ID=1;";
+                    $rs = $conn->query($sql);
+                    $row = mysqli_fetch_assoc($rs);
+                    
+
+                  }
+                ?>
               </div>
             </div>
           </div>
