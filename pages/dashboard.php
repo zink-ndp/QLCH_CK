@@ -722,6 +722,81 @@
                 <h6 class="mb-2">Đơn theo loại hàng</h6>
               </div>
             </div>
+            <?php
+              $sql_ck="select count(*) as tongsp
+                      from chitiet_hd ct
+                      inner join san_pham sp on sp.SP_ID = ct.SP_ID
+                      inner join loai_sp l on l.LSP_ID = sp.LSP_ID
+                      where l.LSP_ID=1;";
+              $rs = $conn->query($sql_ck);
+              $row = mysqli_fetch_assoc($rs);
+              $tongsp_ck = $row["tongsp"];
+
+              $sql_ta="select count(*) as tongsp
+                      from chitiet_hd ct
+                      inner join san_pham sp on sp.SP_ID = ct.SP_ID
+                      inner join loai_sp l on l.LSP_ID = sp.LSP_ID
+                      where l.LSP_ID=2;";
+              $rs = $conn->query($sql_ta);
+              $row = mysqli_fetch_assoc($rs);
+              $tongsp_ta = $row["tongsp"];
+
+              $sql_tt="select count(*) as tongsp
+                      from chitiet_hd ct
+                      inner join san_pham sp on sp.SP_ID = ct.SP_ID
+                      inner join loai_sp l on l.LSP_ID = sp.LSP_ID
+                      where l.LSP_ID=3;";
+              $rs = $conn->query($sql_tt);
+              $row = mysqli_fetch_assoc($rs);
+              $tongsp_tt = $row["tongsp"];
+
+              $sql_k="select count(*) as tongsp
+                      from chitiet_hd ct
+                      inner join san_pham sp on sp.SP_ID = ct.SP_ID
+                      inner join loai_sp l on l.LSP_ID = sp.LSP_ID
+                      where l.LSP_ID=4;";
+              $rs = $conn->query($sql_k);
+              $row = mysqli_fetch_assoc($rs);
+              $tongsp_k = $row["tongsp"];
+
+             $sql = "SELECT SUM(SAN_PHAM.SP_GIA * CHITIET_HD.SP_SOLUONG) AS TONG_TIEN
+                                    FROM SAN_PHAM
+                                    JOIN LOAI_SP ON SAN_PHAM.LSP_ID = LOAI_SP.LSP_ID
+                                    JOIN CHITIET_HD ON SAN_PHAM.SP_ID = CHITIET_HD.SP_ID
+                                    GROUP BY LOAI_SP.LSP_TEN";
+
+              $result = $conn->query($sql);
+              
+              $row1 = $result->fetch_assoc();
+              if ($row1) {
+                  $tt_ck = $row1['TONG_TIEN'];
+              } else {
+                  $tt_ck = 0;
+              }
+
+              $row2 = $result->fetch_assoc();
+              if ($row2) {
+                  $tt_ta = $row2['TONG_TIEN'];
+              } else {
+                  $tt_ta = 0;
+              }
+
+              $row3 = $result->fetch_assoc();
+              if ($row3) {
+                  $tt_tt = $row3['TONG_TIEN'];
+              } else {
+                  $tt_tt = 0;
+              }
+
+              $row4 = $result->fetch_assoc();
+              if ($row4) {
+                  $tt_k = $row4['TONG_TIEN'];
+              } else {
+                  $tt_k = 0;
+              }
+
+
+            ?>
             <div class="table-responsive">
               <table class="table align-items-center ">
                 <tbody>
@@ -739,20 +814,14 @@
                     </td>
                     <td>
                       <div class="text-center">
-                        <p class="text-xs font-weight-bold mb-0">Sales:</p>
-                        <h6 class="text-sm mb-0">2500</h6>
+                        <p class="text-xs font-weight-bold mb-0">Đã bán:</p>
+                        <h6 class="text-sm mb-0"><?php echo $tongsp_ck; ?></h6>
                       </div>
                     </td>
                     <td>
                       <div class="text-center">
-                        <p class="text-xs font-weight-bold mb-0">Value:</p>
-                        <h6 class="text-sm mb-0">$230,900</h6>
-                      </div>
-                    </td>
-                    <td class="align-middle text-sm">
-                      <div class="col text-center">
-                        <p class="text-xs font-weight-bold mb-0">Bounce:</p>
-                        <h6 class="text-sm mb-0">29.9%</h6>
+                        <p class="text-xs font-weight-bold mb-0">Tổng tiền:</p>
+                        <h6 class="text-sm mb-0"><?php echo number_format($tt_ck, 0, '.') ; ?>đ</h6>
                       </div>
                     </td>
                   </tr>
@@ -770,20 +839,14 @@
                     </td>
                     <td>
                       <div class="text-center">
-                        <p class="text-xs font-weight-bold mb-0">Sales:</p>
-                        <h6 class="text-sm mb-0">3.900</h6>
+                        <p class="text-xs font-weight-bold mb-0">Đã bán:</p>
+                        <h6 class="text-sm mb-0"><?php echo $tongsp_ta; ?></h6>
                       </div>
                     </td>
                     <td>
                       <div class="text-center">
-                        <p class="text-xs font-weight-bold mb-0">Value:</p>
-                        <h6 class="text-sm mb-0">$440,000</h6>
-                      </div>
-                    </td>
-                    <td class="align-middle text-sm">
-                      <div class="col text-center">
-                        <p class="text-xs font-weight-bold mb-0">Bounce:</p>
-                        <h6 class="text-sm mb-0">40.22%</h6>
+                        <p class="text-xs font-weight-bold mb-0">Tổng tiền:</p>
+                        <h6 class="text-sm mb-0"><?php echo number_format($tt_ta, 0, '.'); ?>đ</h6>
                       </div>
                     </td>
                   </tr>
@@ -801,20 +864,14 @@
                     </td>
                     <td>
                       <div class="text-center">
-                        <p class="text-xs font-weight-bold mb-0">Sales:</p>
-                        <h6 class="text-sm mb-0">1.400</h6>
+                        <p class="text-xs font-weight-bold mb-0">Đã bán:</p>
+                        <h6 class="text-sm mb-0"><?php echo $tongsp_tt; ?></h6>
                       </div>
                     </td>
                     <td>
                       <div class="text-center">
-                        <p class="text-xs font-weight-bold mb-0">Value:</p>
-                        <h6 class="text-sm mb-0">$190,700</h6>
-                      </div>
-                    </td>
-                    <td class="align-middle text-sm">
-                      <div class="col text-center">
-                        <p class="text-xs font-weight-bold mb-0">Bounce:</p>
-                        <h6 class="text-sm mb-0">23.44%</h6>
+                        <p class="text-xs font-weight-bold mb-0">Tổng tiền:</p>
+                        <h6 class="text-sm mb-0"><?php echo number_format($tt_tt, 0, '.'); ?>đ</h6>
                       </div>
                     </td>
                   </tr>
@@ -833,20 +890,14 @@
                     </td>
                     <td>
                       <div class="text-center">
-                        <p class="text-xs font-weight-bold mb-0">Sales:</p>
-                        <h6 class="text-sm mb-0">562</h6>
+                        <p class="text-xs font-weight-bold mb-0">Đã bán:</p>
+                        <h6 class="text-sm mb-0"><?php echo $tongsp_k; ?></h6>
                       </div>
                     </td>
                     <td>
                       <div class="text-center">
-                        <p class="text-xs font-weight-bold mb-0">Value:</p>
-                        <h6 class="text-sm mb-0">$143,960</h6>
-                      </div>
-                    </td>
-                    <td class="align-middle text-sm">
-                      <div class="col text-center">
-                        <p class="text-xs font-weight-bold mb-0">Bounce:</p>
-                        <h6 class="text-sm mb-0">32.14%</h6>
+                        <p class="text-xs font-weight-bold mb-0">Tổng tiền:</p>
+                        <h6 class="text-sm mb-0"><?php echo number_format($tt_k, 0, '.'); ?>đ</h6>
                       </div>
                     </td>
                   </tr>
