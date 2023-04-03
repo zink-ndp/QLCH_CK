@@ -371,7 +371,7 @@
                                 foreach ($result_all as $row) {
 
                                   ?>
-                                  <tr>
+                                  <tr class="h-50">
                                     <td class="align-middle text-center" >
                                       <!-- ma hd -->
                                       <?php echo $row["HD_ID"] ?>
@@ -408,7 +408,7 @@
                                     <td class="align-middle text-center">
                                       <form action="" method="get">
                                         <input type="hidden" name="hd_id" value="<?php echo $row["HD_ID"] ?>">
-                                        <button onclick="this.form.submit()" class="view-btn btn btn-outline_primary text-primary font-weight-bold text-sm mt-3">
+                                        <button onclick="this.form.submit()" class="view-btn btn btn-outline-primary text-primary font-weight-bold text-xs mt-3 p-1">
                                           Xem chi tiết >
                                         </button>
                                       </form>
@@ -455,7 +455,7 @@
               </div>
             </div>
             <div class="card-body p-3 pb-0">
-              <div class="row">
+              <div class="row" id="printable-content">
                 <div class="col-12">
                   <!-- title -->
                   <div class="row text-center fs-4 font-weight-bold">
@@ -521,7 +521,7 @@
                           <h6>Mã nhân viên: </h6>
                         </div>
                         <div class="col-8">
-                          <p>231</p>
+                          <p><?php echo $row["manv"] ?></p>
                         </div>
                       </div>
                       <!-- 1 hang -->
@@ -530,7 +530,7 @@
                           <h6>Tên nhân viên: </h6>
                         </div>
                         <div class="col-8">
-                          <p>Nguyễn Thị B</p>
+                          <p><?php echo $row["tennv"] ?></p>
                         </div>
                       </div>
                     </div>
@@ -569,6 +569,27 @@
       </div>
     </div>
   </main>
+  <style>
+    /* Styles for printing */
+    @media print {
+      /* Hide elements that should not be printed */
+      * {
+        visibility: hidden;
+        display: none;
+      }
+      #printable-content, #printable-content * {
+        visibility: visible;
+        display: block;
+      }
+      
+      /* Set the print area */
+      #printable-content {
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+    }
+  </style>
    <!--   Core JS Files   -->
   <script src="../assets/js/core/popper.min.js"></script>
   <script src="../assets/js/core/bootstrap.min.js"></script>

@@ -57,7 +57,7 @@
 <body class="g-sidenav-show  bg-gray-100">
   <!-- Nguyên đoạn này -->
   
-  <div class="position-absolute w-100 min-height-300 top-0" style="background-image: url('https://images.unsplash.com/photo-1514907283155-ea5f4094c70c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80'); background-position-y: 50%;">
+  <div class="position-absolute w-100 min-height-400 top-0" style="background-image: url('https://images.unsplash.com/photo-1514907283155-ea5f4094c70c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80'); background-position-y: 50%;">
     <span class="mask bg-primary opacity-5"></span>
   </div>
   
@@ -282,31 +282,56 @@
                     <?php
                       $thang = date('m');
                       $nam = date('Y');
-                      $sql = "select SUM(HD_TONGTIEN) as tongdt from hoa_don where TT_ID = 3 and extract(month from hd_ngaydat) = extract(month from sysdate()) and extract(year from hd_ngaydat) = '2023'";
+                      $sql = "select 
+                                  sum(case 
+                                          when month(hd_ngaydat) = month(now()) and year(hd_ngaydat) = year(now()) and (tt_id = 3) then hd_tongtien 
+                                          else 0 
+                                      end) as doanh_thu_thang_hien_tai, 
+                                  sum(case 
+                                          when month(hd_ngaydat) = month(date_sub(now(), interval 1 month)) and year(hd_ngaydat) = year(now()) and (tt_id = 3) then hd_tongtien 
+                                          else 0 
+                                      end) as doanh_thu_thang_truoc
+                              from hoa_don;
+                              ";
                       $rs = $conn->query($sql);
                       $row = mysqli_fetch_assoc($rs);
-                      if ($row["tongdt"] != null){
+                      if ($row["doanh_thu_thang_hien_tai"] != null){
                         $message = "1";
-                        $tongdoanhthu = $row["tongdt"];
+                        $tongdoanhthu = $row["doanh_thu_thang_hien_tai"];
+                        $dt_thangtruoc = $row["doanh_thu_thang_truoc"];
                       }else {
                         $tongdoanhthu = 0;
+                        $dt_thangtruoc = 0;
                       }
                     ?>
                     <p class="text-sm mb-0 text-uppercase font-weight-bold">Doanh thu tháng <?php echo $thang ."/". $nam ?></p>
                     <h4 class="font-weight-bolder">
                       <?php echo number_format($tongdoanhthu); ?> VNĐ
                     </h5>
-                    <!-- <p class="mb-0">
-                      <span class="text-success text-sm font-weight-bolder">+55%</span>
-                      since last month
-                    </p> -->
+                    <?php
+                      if($dt_thangtruoc<$tongdoanhthu){
+                        $perc = round($tongdoanhthu / $dt_thangtruoc, 1);
+                        ?>                        
+                        <p class="mb-0">
+                          <span class="text-success text-sm font-weight-bolder">+<?php echo $perc ?>% </span>so với tháng trước
+                        </p>
+                        <?php
+                      } else {
+                        $perc = round($dt_thangtruoc / $tongdoanhthu, 1);
+                        ?>                        
+                        <p class="mb-0">
+                          <span class="text-danger text-sm font-weight-bolder">-<?php echo $perc ?>% </span>so với tháng trước
+                        </p>
+                        <?php
+                      }
+                    ?>
                   </div>
                 </div>
                 <div class="col-4 text-end">
                   <!-- <div class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
                     <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
                   </div> -->
-                  <img style="height:70px;" src="https://img.icons8.com/3d-fluency/94/null/money-bag.png"/>
+                  <img style="height:90px;" src="https://img.icons8.com/3d-fluency/94/null/money-bag.png"/>
                 </div>
               </div>
             </div>
@@ -319,31 +344,33 @@
                 <div class="col-8">
                   <div class="numbers">
                     <?php
-                      $sql = "select count(*) as sohd from hoa_don";
+                      $sql = "select count(*) as sohd, count(case when month(HD_NGAYDAT) = month(sysdate()) then 1 end) as trongthang from hoa_don";
                       $rs = $conn->query($sql);
                       $row = mysqli_fetch_assoc($rs);
                       if ($row["sohd"] != null){
                         $message = "1";
                         $tongsohd = $row["sohd"];
+                        $dat_trong_thang = $row["trongthang"];
                       }else {
                         $tongsohd = 0;
+                        $dat_trong_thang = 0;
                       }
                     ?>
                     <p class="text-sm mb-0 text-uppercase font-weight-bold">Tổng đơn hàng</p>
                     <h4 class="font-weight-bolder">
                       <?php echo $tongsohd ?>
                     </h4>
-                    <!-- <p class="mb-0">
-                      <span class="text-success text-sm font-weight-bolder">+3%</span>
-                      since last week
-                    </p> -->
+                    <p class="mb-0">
+                      <span class="text-success text-sm font-weight-bolder">+<?php echo $dat_trong_thang ?></span>
+                      trong tháng
+                    </p>
                   </div>
                 </div>
                 <div class="col-4 text-end">
                   <!-- <div class="icon icon-shape bg-gradient-danger shadow-danger text-center rounded-circle">
                     <i class="fas fa-file-invoice-dollar text-lg opacity-10" aria-hidden="true"></i>
                   </div> -->
-                  <img style="height:70px;" src="https://img.icons8.com/3d-fluency/94/null/bill.png"/>
+                  <img style="height:90px;" src="https://img.icons8.com/3d-fluency/94/null/bill.png"/>
                 </div>
               </div>
             </div>
@@ -356,30 +383,32 @@
                 <div class="col-8">
                   <div class="numbers">
                     <?php
-                      $sql_kh = "select count(KH_ID) as countkh from khach_hang";
+                      $sql_kh = "select count(KH_ID) as countkh, count(case when month(KH_NGAYDK) = month(sysdate()) then 1 end) as trongthang from khach_hang";
                       $rs_kh = $conn->query($sql_kh);
                       if ($rs_kh->num_rows > 0){
                         $row_kh = mysqli_fetch_assoc($rs_kh);
                         $countkh = $row_kh["countkh"];
+                        $dk_trong_thang = $row_kh["trongthang"];
                       } else {
                         $countkh = 0;
+                        $dk_trong_thang = 0;
                       }
                     ?>
                     <p class="text-sm mb-0 text-uppercase font-weight-bold">Tổng số khách hàng</p>
                     <h4 class="font-weight-bolder">
                       <?php echo $countkh ?>
                     </h4>
-                    <!-- <p class="mb-0">
-                      <span class="text-danger text-sm font-weight-bolder">-2%</span>
-                      since last quarter
-                    </p> -->
+                    <p class="mb-0">
+                      <span class="text-success text-sm font-weight-bolder">+<?php echo $dk_trong_thang ?></span>
+                      trong tháng
+                    </p>
                   </div>
                 </div>
                 <div class="col-4 text-end">
                   <!-- <div class="icon icon-shape bg-gradient-success shadow-success text-center rounded-circle">
                     <i class="ni ni-paper-diploma text-lg opacity-10" aria-hidden="true"></i>
                   </div> -->
-                  <img style="height:70px;" src="https://img.icons8.com/3d-fluency/94/null/businessman.png"/>
+                  <img style="height:90px;" src="https://img.icons8.com/3d-fluency/94/null/businessman.png"/>
                 </div>
               </div>
             </div>
@@ -392,29 +421,31 @@
                 <div class="col-8">
                   <div class="numbers">
                     <?php
-                      $sql_nv = "select count(NV_ID) as countnv from nhan_vien";
+                      $sql_nv = "select count(NV_ID) as countnv, count(case when month(NV_NGAYTUYEN) = month(sysdate()) then 1 end) as trongthang from nhan_vien";
                       $rs_nv = $conn->query($sql_nv);
                       if ($rs_nv->num_rows > 0){
                         $row_nv = mysqli_fetch_assoc($rs_nv);
                         $countnv = $row_nv["countnv"];
+                        $tuyen_trong_thang = $row_nv["trongthang"];
                       } else {
                         $countnv = 0;
+                        $tuyen_trong_thang = 0;
                       }
                     ?>
                     <p class="text-sm mb-0 text-uppercase font-weight-bold">Tổng số nhân viên</p>
                     <h4 class="font-weight-bolder">
                       <?php echo $countnv ?>
                     </h4>
-                    <!-- <p class="mb-0">
-                      <span class="text-success text-sm font-weight-bolder">+5%</span> than last month
-                    </p> -->
+                    <p class="mb-0">
+                      <span class="text-success text-sm font-weight-bolder">+<?php echo $tuyen_trong_thang ?></span> trong tháng
+                    </p>
                   </div>
                 </div>
                 <div class="col-4 text-end">
                   <!-- <div class="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle">
                     <i class="fas fa-users text-lg opacity-10"></i>
                   </div> -->
-                  <img style="height:70px;" src="https://img.icons8.com/3d-fluency/94/null/manager.png"/>
+                  <img style="height:90px;" src="https://img.icons8.com/3d-fluency/94/null/manager.png"/>
                 </div>
               </div>
             </div>
@@ -636,7 +667,7 @@
                   }
                 ?>
               <div class="row">
-                <div class="col-2">
+                <div class="col-lg-2">
                   <div class="doanhthunam mt-1">
                     <h5 class="text-capitalize">Doanh thu</h5>
                   </div>
@@ -645,25 +676,27 @@
                     <span class="font-weight-bold">4% more</span> in 2021
                   </p> -->
                 </div>
-                <div class="col-4 ms-n5">
+                <div class="col-lg-4">
                   <form action="#" method="get">
                     <div class="row">
-                      <div class="col-11">
-                        <select class="form-control form-control-md ms-3" name="year" id="year">
+                      <div class="col-10">
+                        <select class="form-control form-control-md" name="year" id="year">
                           <option value="" selected disabled hidden>2022</option>
                           <option value="2022">2022</option>
                           <option value="2023">2023</option>
                         </select>
                       </div>
                       <div class="col-1">
-                        <button type="submit" class="btn btn-primary text-white font-weight-bold text-md ms-0">
+                        <button type="submit" class="btn btn-primary text-white font-weight-bold text-md">
                           Lọc
                         </button>
                       </div>
                     </div>
                   </form>
                 </div>
-                <div class="col-6"></div>
+                <div class="col-lg-6 d-flex text-end align-items-center justify-content-end mt-n4 ">
+                  <span>Tổng doanh thu: </span><h5 class="text-success ms-2 mt-1"><?php echo number_format($tongdt, 0, '.') ?> VNĐ</h5>
+                </div>
               </div>
             </div>
             <div class="card-body p-3">
@@ -684,9 +717,9 @@
                   <canvas id="myChart-y" height="80%" class="chart-canvas"></canvas>
                   <!-- <canvas id="chart-line" class="chart-canvas" height="300"></canvas> -->
                 </div>
-                <div class="d-flex text-center align-items-center justify-content-center mt-3">
+                <!-- <div class="d-flex text-center align-items-center justify-content-center mt-3">
                   <span>Tổng doanh thu: </span><h4 class="text-success ms-2 mt-1"><?php echo number_format($tongdt, 0, '.') ?> VNĐ</h4>
-                </div>
+                </div> -->
                 
               </div>
             </div>

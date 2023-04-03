@@ -108,17 +108,36 @@
                       <input required type="text" name="usname" class="form-control form-control-lg" placeholder="Username" aria-label="Username">
                     </div>
                     <div class="mb-3">
-                      <input required type="password" name="pass" class="form-control form-control-lg" placeholder="Password" aria-label="Password">
+                      <input required type="password" name="pass" class="form-control form-control-lg" placeholder="Password" aria-label="Password" id="passInput">
+                    </div>
+                    <div class="mb-3 d-flex justify-content-center">                      
+                      <button class="btn btn-link" type="button" id="showPasswordBtn">
+                        Hiện mật khẩu <i class="fa fa-eye" aria-hidden="true"></i>
+                      </button>
                     </div>
                     <!-- <div class="form-check form-switch">
                       <input class="form-check-input" type="checkbox" id="rememberMe">
                       <label class="form-check-label" for="rememberMe">Remember me</label>
                     </div> -->
                     <div class="text-center">
-                      <button type="submit" class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">Sign in</button>
+                      <button type="submit" class="btn btn-lg btn-primary btn-lg w-100 mt-n3 mb-0">Sign in</button>
                     </div>
                   </form>
                 </div>
+                <script>
+                  const passInput = document.getElementById('passInput');
+                  const showPasswordBtn = document.getElementById('showPasswordBtn');
+                  showPasswordBtn.addEventListener('click', () => {
+                      if (passInput.type === 'password') {
+                          passInput.type = 'text';
+                          showPasswordBtn.innerHTML = 'Ẩn mật khẩu <i class="fa fa-eye-slash" aria-hidden="true"></i>';
+                      } else {
+                          passInput.type = 'password';
+                          showPasswordBtn.innerHTML = 'Hiện mật khẩu <i class="fa fa-eye" aria-hidden="true"></i>';
+                      }
+                  });
+                </script>
+
                 <!-- <div class="card-footer text-center pt-0 px-lg-2 px-1">
                   <p class="mb-4 text-sm mx-auto">
                     Don't have an account?

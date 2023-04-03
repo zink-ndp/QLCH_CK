@@ -292,6 +292,7 @@
                           <thead>
                             <tr>
                               <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nhân viên</th>
+                              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID</th>
                               <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Chức vụ</th>
                               <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">SĐT</th>
                               <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Email</th>
@@ -333,13 +334,18 @@
                                             ?> 
                                             
                                           </div>
-                                          <!-- ten san pham -->
+                                          <!-- ngaysinh -->
                                           <div class="d-flex flex-column justify-content-center">
                                             <h6 class="mb-0 text-sm"><?php echo $row["NV_HOTEN"]; ?></h6>
                                             <p class='text-xs text-secondary mb-0'>Ngày sinh: <?php echo date('d/m/Y', strtotime($row["NV_NGAYSINH"])); ?></p>
                                           </div>
                                         </div>
                                       </td>
+                                      <!-- id -->
+                                      <td class="align-middle text-center">
+                                        <p class="text-sm font-weight-bold mb-0"><?php echo $tknvid; ?></p>
+                                      </td>
+                                      <!-- vaitro -->
                                       <td>
                                         <?php
                                             if($row1["TK_VAITRO"] == "staff") {
