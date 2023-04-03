@@ -271,9 +271,10 @@
             <div class="col-4">
               <div class="card">
                 <div class="card-header mx-4 p-3 text-center">
-                  <div class="icon icon-shape icon-md bg-gradient-primary shadow text-center border-radius-md">
+                  <!-- <div class="icon icon-shape icon-md bg-gradient-primary shadow text-center border-radius-md">
                     <i class="fas fa-money-bill-wave opacity-10"></i>
-                  </div>
+                  </div> -->
+                  <img src="https://img.icons8.com/3d-fluency/94/null/cash-in-hand.png"/>
                 </div>
                 <div class="card-body pt-0 p-1 text-center">
                   <?php
@@ -291,9 +292,10 @@
             <div class="col-4">
               <div class="card">
                 <div class="card-header mx-4 p-3 text-center">
-                  <div class="icon icon-shape icon-md bg-gradient-primary shadow text-center border-radius-md">
+                  <!-- <div class="icon icon-shape icon-md bg-gradient-primary shadow text-center border-radius-md">
                     <i class="fas fa-landmark opacity-10"></i>
-                  </div>
+                  </div> -->
+                  <img src="https://img.icons8.com/3d-fluency/94/null/money-transfer.png"/>
                 </div>
                 <div class="card-body pt-0 p-1 text-center">
                 <?php
@@ -311,9 +313,10 @@
             <div class="col-4">
               <div class="card">
                 <div class="card-header mx-4 p-3 text-center">
-                  <div class="icon icon-shape icon-md bg-gradient-primary shadow text-center border-radius-md">
+                  <!-- <div class="icon icon-shape icon-md bg-gradient-primary shadow text-center border-radius-md">
                     <i class="fab fa-cc-visa opacity-10"></i>
-                  </div>
+                  </div> -->
+                  <img src="https://img.icons8.com/3d-fluency/94/null/bank-cards.png"/>
                 </div>
                 <div class="card-body pt-0 p-1 text-center">
                 <?php
@@ -403,9 +406,9 @@
                                       <?php echo number_format($row["HD_TONGTIEN"], 0, '.') ?>đ
                                     </td>
                                     <td class="align-middle text-center">
-                                      <form action="#" method="get">
-                                        <input type="hidden" name="hd_id" value="<?php $row["HD_ID"] ?>">
-                                        <button class="view-btn btn btn-outline_primary text-primary font-weight-bold text-sm mt-3">
+                                      <form action="" method="get">
+                                        <input type="hidden" name="hd_id" value="<?php echo $row["HD_ID"] ?>">
+                                        <button onclick="this.form.submit()" class="view-btn btn btn-outline_primary text-primary font-weight-bold text-sm mt-3">
                                           Xem chi tiết >
                                         </button>
                                       </form>
@@ -426,6 +429,17 @@
           </div>
         </div>
         <div class="col-lg-4">
+        <?php
+          if(isset($_GET["hd_id"])){
+            $hdid = $_GET["hd_id"];
+            $sql = "select hd.HD_ID as mahd, hd.HD_NGAYDAT as ngay, kh.KH_ID as makh, kh.KH_HOTEN as tenkh, kh.KH_SDT as sdtkh, kh.KH_DIACHI as dckh, nv.NV_ID as manv, nv.NV_HOTEN as tennv
+                    from hoa_don hd
+                    inner join khach_hang kh on kh.KH_ID = hd.KH_ID
+                    inner join nhan_vien nv on nv.NV_ID = hd.NV_ID
+                    where hd.HD_ID={$hdid};";
+            $rs = $conn->query($sql);
+            $row = mysqli_fetch_assoc($rs);
+            ?>
           <div class="card">
             <div class="card-header pb-0 p-3">
               <div class="row">
@@ -442,100 +456,120 @@
             </div>
             <div class="card-body p-3 pb-0">
               <div class="row">
-                <?php
-                  if(isset($_GET["hd_id"])){
-                    $hdid = $_GET["hd_id"];
-                    $sql = "select kh.KH_ID as makh, kh.KH_HOTEN as tenkh, kh.KH_SDT as sdtkh, kh.KH_DIACHI as dckh, nv.NV_ID as manv, nv.NV_HOTEN as tennv
-                            from hoa_don hd
-                            inner join khach_hang kh on kh.KH_ID = hd.KH_ID
-                            inner join nhan_vien nv on nv.NV_ID = hd.NV_ID
-                            where hd.HD_ID=1;";
-                    $rs = $conn->query($sql);
-                    $row = mysqli_fetch_assoc($rs);
-                    
-
-                  }
-                ?>
+                <div class="col-12">
+                  <!-- title -->
+                  <div class="row text-center fs-4 font-weight-bold">
+                    <div class="col-12">
+                      HOÁ ĐƠN <?php echo $row["mahd"] ?>
+                    </div>
+                  </div>
+                  <!-- ngay -->
+                  <div class="row text-center fs-5 font-weight-bold"> 
+                    <div class="col-12">
+                      Ngày đặt: <?php echo $row["ngay"] ?>
+                    </div>
+                  </div>
+                  <!-- thongtin khachhang -->
+                  <div class="row mt-3">
+                    <div class="col-md-12">
+                      <h6>Thông tin khách hàng:</h6>
+                      <!-- 1 hang -->
+                      <div class="row px-2 mt-2">
+                        <div class="col-4">
+                          <h6>Mã khách hàng: </h6>
+                        </div>
+                        <div class="col-8">
+                          <p><?php echo $row["makh"] ?></p>
+                        </div>
+                      </div>
+                      <!-- 1 hang -->
+                      <div class="row px-2 mt-n3">
+                        <div class="col-4">
+                          <h6>Tên khách hàng: </h6>
+                        </div>
+                        <div class="col-8">
+                          <p><?php echo $row["tenkh"] ?></p>
+                        </div>
+                      </div>
+                      <!-- 1 hang -->
+                      <div class="row px-2 mt-n3">
+                        <div class="col-4">
+                          <h6>SĐT: </h6>
+                        </div>
+                        <div class="col-8">
+                          <p><?php echo $row["sdtkh"] ?></p>
+                        </div>
+                      </div>
+                      <!-- 1 hang -->
+                      <div class="row px-2 mt-n3">
+                        <div class="col-4">
+                          <h6>Địa chỉ: </h6>
+                        </div>
+                        <div class="col-8">
+                          <p><?php echo $row["dckh"] ?></p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- thongtin nhanvien -->
+                  <div class="row mt-3">
+                    <div class="col-md-12">
+                      <h6>Thông tin nhân viên:</h6>
+                      <!-- 1 hang -->
+                      <div class="row px-2 mt-2">
+                        <div class="col-4">
+                          <h6>Mã nhân viên: </h6>
+                        </div>
+                        <div class="col-8">
+                          <p>231</p>
+                        </div>
+                      </div>
+                      <!-- 1 hang -->
+                      <div class="row px-2 mt-n3">
+                        <div class="col-4">
+                          <h6>Tên nhân viên: </h6>
+                        </div>
+                        <div class="col-8">
+                          <p>Nguyễn Thị B</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-md-12">
+                      <h6>Danh sách sản phẩm:</h6>
+                      <!-- 1 hang -->
+                      
+                    </div>
+                  </div>
+                </div>
+                
               </div>
             </div>
           </div>
+          <?php 
+            } else {
+          ?>
+              <div class="card">
+              <div class="card-header pb-0 p-3"></div>
+              <div class="card-body p-3 pb-0">
+                <div class="row">
+                  <div class="col-12 pt-4 pb-5 text-center">
+                    <h5>                      
+                      Thông tin chi tiết sẽ xuất hiện ở đây
+                    </h5>
+                  </div>
+                </div>
+              </div>
+          <?php
+            }
+          
+          ?>
         </div>
       </div>
     </div>
   </main>
-  <div class="fixed-plugin">
-    <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
-      <i class="fa fa-cog py-2"> </i>
-    </a>
-    <div class="card shadow-lg">
-      <div class="card-header pb-0 pt-3 ">
-        <div class="float-start">
-          <h5 class="mt-3 mb-0">Argon Configurator</h5>
-          <p>See our dashboard options.</p>
-        </div>
-        <div class="float-end mt-4">
-          <button class="btn btn-link text-dark p-0 fixed-plugin-close-button">
-            <i class="fa fa-close"></i>
-          </button>
-        </div>
-        <!-- End Toggle Button -->
-      </div>
-      <hr class="horizontal dark my-1">
-      <div class="card-body pt-sm-3 pt-0 overflow-auto">
-        <!-- Sidebar Backgrounds -->
-        <div>
-          <h6 class="mb-0">Sidebar Colors</h6>
-        </div>
-        <a href="javascript:void(0)" class="switch-trigger background-color">
-          <div class="badge-colors my-2 text-start">
-            <span class="badge filter bg-gradient-primary active" data-color="primary" onclick="sidebarColor(this)"></span>
-            <span class="badge filter bg-gradient-dark" data-color="dark" onclick="sidebarColor(this)"></span>
-            <span class="badge filter bg-gradient-info" data-color="info" onclick="sidebarColor(this)"></span>
-            <span class="badge filter bg-gradient-success" data-color="success" onclick="sidebarColor(this)"></span>
-            <span class="badge filter bg-gradient-warning" data-color="warning" onclick="sidebarColor(this)"></span>
-            <span class="badge filter bg-gradient-danger" data-color="danger" onclick="sidebarColor(this)"></span>
-          </div>
-        </a>
-        <!-- Sidenav Type -->
-        <div class="mt-3">
-          <h6 class="mb-0">Sidenav Type</h6>
-          <p class="text-sm">Choose between 2 different sidenav types.</p>
-        </div>
-        <div class="d-flex">
-          <button class="btn bg-gradient-primary w-100 px-3 mb-2 active me-2" data-class="bg-white" onclick="sidebarType(this)">White</button>
-          <button class="btn bg-gradient-primary w-100 px-3 mb-2" data-class="bg-default" onclick="sidebarType(this)">Dark</button>
-        </div>
-        <p class="text-sm d-xl-none d-block mt-2">You can change the sidenav type just on desktop view.</p>
-        <!-- Navbar Fixed -->
-        <div class="d-flex my-3">
-          <h6 class="mb-0">Navbar Fixed</h6>
-          <div class="form-check form-switch ps-0 ms-auto my-auto">
-            <input class="form-check-input mt-1 ms-auto" type="checkbox" id="navbarFixed" onclick="navbarFixed(this)">
-          </div>
-        </div>
-        <hr class="horizontal dark my-sm-4">
-        <div class="mt-2 mb-5 d-flex">
-          <h6 class="mb-0">Light / Dark</h6>
-          <div class="form-check form-switch ps-0 ms-auto my-auto">
-            <input class="form-check-input mt-1 ms-auto" type="checkbox" id="dark-version" onclick="darkMode(this)">
-          </div>
-        </div>
-        <a class="btn bg-gradient-dark w-100" href="https://www.creative-tim.com/product/argon-dashboard">Free Download</a>
-        <a class="btn btn-outline-dark w-100" href="https://www.creative-tim.com/learning-lab/bootstrap/license/argon-dashboard">View documentation</a>
-        <div class="w-100 text-center">
-          <a class="github-button" href="https://github.com/creativetimofficial/argon-dashboard" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star creativetimofficial/argon-dashboard on GitHub">Star</a>
-          <h6 class="mt-3">Thank you for sharing!</h6>
-          <a href="https://twitter.com/intent/tweet?text=Check%20Argon%20Dashboard%20made%20by%20%40CreativeTim%20%23webdesign%20%23dashboard%20%23bootstrap5&amp;url=https%3A%2F%2Fwww.creative-tim.com%2Fproduct%2Fargon-dashboard" class="btn btn-dark mb-0 me-2" target="_blank">
-            <i class="fab fa-twitter me-1" aria-hidden="true"></i> Tweet
-          </a>
-          <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.creative-tim.com/product/argon-dashboard" class="btn btn-dark mb-0 me-2" target="_blank">
-            <i class="fab fa-facebook-square me-1" aria-hidden="true"></i> Share
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!--   Core JS Files   -->
+   <!--   Core JS Files   -->
   <script src="../assets/js/core/popper.min.js"></script>
   <script src="../assets/js/core/bootstrap.min.js"></script>
   <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>

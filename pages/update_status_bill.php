@@ -35,6 +35,7 @@
 
 	$sql .= " where HD_ID = {$mahd}";
 
+
 	$rs = $conn->query($sql);
 	if($rs) {
 		$message = "Cập nhật đơn hàng thành công!";

@@ -56,11 +56,7 @@
 </head>
 <body class="g-sidenav-show  bg-gray-100">
   <!-- Nguyên đoạn này -->
-  <div class="position-absolute top-6 z-index-2" style="left: 40%; font-family: 'Montserrat', sans-serif; text-shadow: 0px 0px 7px #000000;">
-    <h3 class="text-white">
-      TRANG QUẢN LÝ CỬA HÀNG CÁ KIỂNG
-    </h3>
-  </div>
+  
   <div class="position-absolute w-100 min-height-300 top-0" style="background-image: url('https://images.unsplash.com/photo-1514907283155-ea5f4094c70c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80'); background-position-y: 50%;">
     <span class="mask bg-primary opacity-5"></span>
   </div>
@@ -222,14 +218,20 @@
     <!-- Navbar -->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur" data-scroll="false">
       <div class="container-fluid py-1 px-3">
-        <nav aria-label="breadcrumb">
+        <!-- <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="dashboard.php">Trang</a></li>
             <li class="breadcrumb-item text-sm text-white active" aria-current="page">Tổng quan</li>
           </ol>
           <h6 class="font-weight-bolder text-white mb-0">Tổng quan</h6>
-        </nav>
-
+        </nav> -->
+        <!-- <div class="position-absolute mt-5 z-index-2" style="left: 30%; font-family: 'Montserrat', sans-serif; text-shadow: 0px 0px 7px #000000;"> -->
+        <div class="mt-5 text-center" style="font-family: 'Montserrat', sans-serif; text-shadow: 5px 5px 10px #000000;">
+          <h3  class="text-white">
+            TRANG QUẢN LÝ CỬA HÀNG CÁ KIỂNG
+          </h3>
+        </div>  
+        <!-- </div> -->
         <!-- Đoạn này -->
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -280,7 +282,7 @@
                     <?php
                       $thang = date('m');
                       $nam = date('Y');
-                      $sql = "select SUM(HD_TONGTIEN) as tongdt from hoa_don where TT_ID = 3 and extract(month from hd_ngaydat) = '03' and extract(year from hd_ngaydat) = '2023'";
+                      $sql = "select SUM(HD_TONGTIEN) as tongdt from hoa_don where TT_ID = 3 and extract(month from hd_ngaydat) = extract(month from sysdate()) and extract(year from hd_ngaydat) = '2023'";
                       $rs = $conn->query($sql);
                       $row = mysqli_fetch_assoc($rs);
                       if ($row["tongdt"] != null){
@@ -291,19 +293,20 @@
                       }
                     ?>
                     <p class="text-sm mb-0 text-uppercase font-weight-bold">Doanh thu tháng <?php echo $thang ."/". $nam ?></p>
-                    <h5 class="font-weight-bolder">
+                    <h4 class="font-weight-bolder">
                       <?php echo number_format($tongdoanhthu); ?> VNĐ
                     </h5>
-                    <p class="mb-0">
+                    <!-- <p class="mb-0">
                       <span class="text-success text-sm font-weight-bolder">+55%</span>
                       since last month
-                    </p>
+                    </p> -->
                   </div>
                 </div>
                 <div class="col-4 text-end">
-                  <div class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
+                  <!-- <div class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
                     <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
-                  </div>
+                  </div> -->
+                  <img style="height:70px;" src="https://img.icons8.com/3d-fluency/94/null/money-bag.png"/>
                 </div>
               </div>
             </div>
@@ -327,19 +330,20 @@
                       }
                     ?>
                     <p class="text-sm mb-0 text-uppercase font-weight-bold">Tổng đơn hàng</p>
-                    <h5 class="font-weight-bolder">
+                    <h4 class="font-weight-bolder">
                       <?php echo $tongsohd ?>
-                    </h5>
-                    <p class="mb-0">
+                    </h4>
+                    <!-- <p class="mb-0">
                       <span class="text-success text-sm font-weight-bolder">+3%</span>
                       since last week
-                    </p>
+                    </p> -->
                   </div>
                 </div>
                 <div class="col-4 text-end">
-                  <div class="icon icon-shape bg-gradient-danger shadow-danger text-center rounded-circle">
+                  <!-- <div class="icon icon-shape bg-gradient-danger shadow-danger text-center rounded-circle">
                     <i class="fas fa-file-invoice-dollar text-lg opacity-10" aria-hidden="true"></i>
-                  </div>
+                  </div> -->
+                  <img style="height:70px;" src="https://img.icons8.com/3d-fluency/94/null/bill.png"/>
                 </div>
               </div>
             </div>
@@ -362,19 +366,20 @@
                       }
                     ?>
                     <p class="text-sm mb-0 text-uppercase font-weight-bold">Tổng số khách hàng</p>
-                    <h5 class="font-weight-bolder">
+                    <h4 class="font-weight-bolder">
                       <?php echo $countkh ?>
-                    </h5>
-                    <p class="mb-0">
+                    </h4>
+                    <!-- <p class="mb-0">
                       <span class="text-danger text-sm font-weight-bolder">-2%</span>
                       since last quarter
-                    </p>
+                    </p> -->
                   </div>
                 </div>
                 <div class="col-4 text-end">
-                  <div class="icon icon-shape bg-gradient-success shadow-success text-center rounded-circle">
+                  <!-- <div class="icon icon-shape bg-gradient-success shadow-success text-center rounded-circle">
                     <i class="ni ni-paper-diploma text-lg opacity-10" aria-hidden="true"></i>
-                  </div>
+                  </div> -->
+                  <img style="height:70px;" src="https://img.icons8.com/3d-fluency/94/null/businessman.png"/>
                 </div>
               </div>
             </div>
@@ -397,18 +402,19 @@
                       }
                     ?>
                     <p class="text-sm mb-0 text-uppercase font-weight-bold">Tổng số nhân viên</p>
-                    <h5 class="font-weight-bolder">
+                    <h4 class="font-weight-bolder">
                       <?php echo $countnv ?>
-                    </h5>
-                    <p class="mb-0">
+                    </h4>
+                    <!-- <p class="mb-0">
                       <span class="text-success text-sm font-weight-bolder">+5%</span> than last month
-                    </p>
+                    </p> -->
                   </div>
                 </div>
                 <div class="col-4 text-end">
-                  <div class="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle">
+                  <!-- <div class="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle">
                     <i class="fas fa-users text-lg opacity-10"></i>
-                  </div>
+                  </div> -->
+                  <img style="height:70px;" src="https://img.icons8.com/3d-fluency/94/null/manager.png"/>
                 </div>
               </div>
             </div>
@@ -419,55 +425,6 @@
         <div class="col-lg-8 mb-lg-0 mb-4">
           <div class="card z-index-2 h-100">
             <div class="card-header col-12 pb-0 pt-3 bg-transparent">
-              <div class="row">
-                <div class="col-3">
-                  <div class="doanhthunam">
-                    <h6 class="text-capitalize">Doanh thu</h6>
-                  </div>
-                  <p class="text-sm mb-0">
-                    <i class="fa fa-arrow-up text-success"></i>
-                    <span class="font-weight-bold">4% more</span> in 2021
-                  </p>
-                </div>
-                <div class="col-9">
-                  <form action="#" method="get">
-                    <div class="row">
-                      <div class="col-7"></div>
-                      <div class="col-3">
-                        <select class="form-control form-control-md ms-3" name="year" id="year">
-                          <option value="" selected disabled hidden>- Năm -</option>
-                          <option value="2022">2022</option>
-                          <option value="2023">2023</option>
-                        </select>
-                      </div>
-                      <div class="col-2">
-                        <button type="submit" class="btn btn-primary text-white font-weight-bold text-md ms-0">
-                          Lọc
-                        </button>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-            <div class="card-body p-3">
-              <div class="chart"> 
-                <style>
-                  canvas {
-                    -moz-user-select: none;
-                    -webkit-user-select: none;
-                    -ms-user-select: none;
-                  }
-
-                  canvas .bar{
-                    width: 50px;
-                  }
-
-                </style>
-                <div class="chart_here">
-                  <canvas id="myChart-y" height="80%" class="chart-canvas"></canvas>
-                  <!-- <canvas id="chart-line" class="chart-canvas" height="300"></canvas> -->
-                </div>
                 <?php
                   // Đoạn này tính doanh thu 12 tháng
                   if(isset($_GET["year"])){
@@ -496,6 +453,7 @@
                       $thang_11 = 0;
                       $thang_12 = 0;
 
+                      $tongdt=0;
                       // Duyệt qua các phần tử của mảng kết quả
                       foreach ($data as $row) {
                           // Lấy giá trị của cột THANG
@@ -503,6 +461,9 @@
 
                           // Lấy giá trị của cột DOANH_THU
                           $doanh_thu = $row['DOANH_THU'];
+
+                          //Tính tổng doanh thu năm
+                          $tongdt += $doanh_thu;
 
                           // Gán giá trị của cột DOANH_THU vào biến tháng tương ứng
                           switch ($thang) {
@@ -596,12 +557,16 @@
                       $thang_12 = 0;
 
                       // Duyệt qua các phần tử của mảng kết quả
+                      $tongdt = 0;
                       foreach ($data as $row) {
-                          // Lấy giá trị của cột THANG
-                          $thang = $row['THANG'];
-
-                          // Lấy giá trị của cột DOANH_THU
-                          $doanh_thu = $row['DOANH_THU'];
+                        // Lấy giá trị của cột THANG
+                        $thang = $row['THANG'];
+                        
+                        // Lấy giá trị của cột DOANH_THU
+                        $doanh_thu = $row['DOANH_THU'];
+                        
+                        //Tính tổng doanh thu năm
+                        $tongdt += $doanh_thu;
 
                           // Gán giá trị của cột DOANH_THU vào biến tháng tương ứng
                           switch ($thang) {
@@ -669,8 +634,59 @@
                       </script>
                     <?php
                   }
-
                 ?>
+              <div class="row">
+                <div class="col-2">
+                  <div class="doanhthunam mt-1">
+                    <h5 class="text-capitalize">Doanh thu</h5>
+                  </div>
+                  <!-- <p class="text-sm mb-0">
+                    <i class="fa fa-arrow-up text-success"></i>
+                    <span class="font-weight-bold">4% more</span> in 2021
+                  </p> -->
+                </div>
+                <div class="col-4 ms-n5">
+                  <form action="#" method="get">
+                    <div class="row">
+                      <div class="col-11">
+                        <select class="form-control form-control-md ms-3" name="year" id="year">
+                          <option value="" selected disabled hidden>2022</option>
+                          <option value="2022">2022</option>
+                          <option value="2023">2023</option>
+                        </select>
+                      </div>
+                      <div class="col-1">
+                        <button type="submit" class="btn btn-primary text-white font-weight-bold text-md ms-0">
+                          Lọc
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                <div class="col-6"></div>
+              </div>
+            </div>
+            <div class="card-body p-3">
+              <div class="chart mt-n2"> 
+                <style>
+                  canvas {
+                    -moz-user-select: none;
+                    -webkit-user-select: none;
+                    -ms-user-select: none;
+                  }
+
+                  canvas .bar{
+                    width: 50px;
+                  }
+
+                </style>
+                <div class="chart_here">
+                  <canvas id="myChart-y" height="80%" class="chart-canvas"></canvas>
+                  <!-- <canvas id="chart-line" class="chart-canvas" height="300"></canvas> -->
+                </div>
+                <div class="d-flex text-center align-items-center justify-content-center mt-3">
+                  <span>Tổng doanh thu: </span><h4 class="text-success ms-2 mt-1"><?php echo number_format($tongdt, 0, '.') ?> VNĐ</h4>
+                </div>
                 
               </div>
             </div>
@@ -680,60 +696,42 @@
           <div class="card card-carousel overflow-hidden h-100 p-0">
             <div id="carouselExampleCaptions" class="carousel slide h-100" data-bs-ride="carousel">
               <div class="carousel-inner border-radius-lg h-100">
-                <?php
-                  $sql = "select sp.sp_id as id, sp.sp_ten as ten, sp.SP_MOTA as mt, sp.SP_HINHANH as anh, count(distinct ct.hd_id) as so_hd
-                          from san_pham sp
-                          join chitiet_hd ct on sp.sp_id = ct.sp_id
-                          group by sp.sp_id, sp.sp_ten
-                          order by so_hd desc
-                          limit 3; ";
+                <style>
+                  .carousel-item::before {
+                    content: "";
+                    display: block;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: rgba(0, 0, 0, 0.2); /* hoặc giá trị màu tối ưa thích */
+                  }
 
-                  $result = $conn->query($sql);
-                  $row1 = $result->fetch_assoc();
-                  $row2 = $result->fetch_assoc();
-                  $row3 = $result->fetch_assoc();
+                  .carousel-caption {
+                    z-index: 1;
+                  }
 
-                  $top1_ten = $row1["ten"];
-                  $top1_mota = $row1["mt"];
-                  $top1_anh = $row1["anh"];
-                  $top1_hd = $row1["so_hd"];
-
-                  $top2_ten = $row2["ten"];
-                  $top2_mota = $row2["mt"];
-                  $top2_anh = $row2["anh"];
-                  $top2_hd = $row2["so_hd"];
-
-                  $top3_ten = $row3["ten"];
-                  $top3_mota = $row3["mt"];
-                  $top3_anh = $row3["anh"];
-                  $top3_hd = $row3["so_hd"];
-
-                ?>
+                </style>
                 <!-- Top1 -->
-                <div class="carousel-item h-100 active" style="background-image: url('../assets/img/carousel-1.jpg'); background-size: cover;">
-                  <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
-                    <h3 class="text-warning mb-6">Top 1</h3>                    
-                    <img src="../assets/img/product_img/<?php echo $top1_anh ?>" class="rounded-circle avatar avatar-xxl me-3 mt-n5" alt="products">
-                    <h3 class="text-white mb-1 "><?php echo $top1_ten ?></h3>
-                    <h5 class="text-white">Số đơn hàng: <?php echo $top1_hd ?></h5>
+                <div class="carousel-item h-100 active" style="background-image: url('../assets/img/c1.jpg'); background-size: cover;">
+                  <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-4">
+                      <h4 class="text-white">"Aquatic elegance for your home!" </h4> 
+                    <h5 class="text-white"> A simple, elegant way to describe ornamental fish.</h5>
                   </div>
                 </div>
                 <!-- Top2 -->
-                <div class="carousel-item h-100" style="background-image: url('../assets/img/carousel-2.jpg'); background-size: cover;">
-                  <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
-                  <h3 class="text-warning mb-6">Top 2</h3>                    
-                    <img src="../assets/img/product_img/<?php echo $top2_anh ?>" class="rounded-circle avatar avatar-xxl me-3 mt-n5" alt="products">
-                    <h3 class="text-white mb-1 "><?php echo $top2_ten ?></h3>
-                    <h5 class="text-white">Số đơn hàng: <?php echo $top2_hd ?></h5>
+                <div class="carousel-item h-100" style="background-image: url('../assets/img/c2.jpg'); background-size: cover;">
+                  <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-4">
+                    <h4 class="text-white">"Colorful companions for your space!"</h4>      
+                    <h5 class="text-white">A catchy way to highlight the vibrant hues of ornamental fish.</h5>
                   </div>
                 </div>
                 <!-- Top3 -->
-                <div class="carousel-item h-100" style="background-image: url('../assets/img/carousel-3.jpg'); background-size: cover;">
-                  <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
-                  <h3 class="text-warning mb-6">Top 3</h3>                    
-                    <img src="../assets/img/product_img/<?php echo $top3_anh ?>" class="rounded-circle avatar avatar-xxl me-3 mt-n5" alt="products">
-                    <h3 class="text-white mb-1 "><?php echo $top3_ten ?></h3>
-                    <h5 class="text-white">Số đơn hàng: <?php echo $top3_hd ?></h5>
+                <div class="carousel-item h-100" style="background-image: url('../assets/img/c3.jpg'); background-size: cover;">
+                  <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-4">
+                    <h4 class="text-white">"Underwater serenity in your own home!"</h4>  
+                    <h5 class="text-white">A concise way to describe the peaceful ambiance of ornamental fish.</h5>
                   </div>
                 </div>
               </div>
@@ -855,7 +853,7 @@
                     </td>
                     <td>
                       <div class="text-center">
-                        <p class="text-xs font-weight-bold mb-0">Tổng tiền:</p>
+                        <p class="text-xs font-weight-bold mb-0">Tổng thu:</p>
                         <h6 class="text-sm mb-0"><?php echo number_format($tt_ck, 0, '.') ; ?>đ</h6>
                       </div>
                     </td>
@@ -880,7 +878,7 @@
                     </td>
                     <td>
                       <div class="text-center">
-                        <p class="text-xs font-weight-bold mb-0">Tổng tiền:</p>
+                        <p class="text-xs font-weight-bold mb-0">Tổng thu:</p>
                         <h6 class="text-sm mb-0"><?php echo number_format($tt_ta, 0, '.'); ?>đ</h6>
                       </div>
                     </td>
@@ -905,7 +903,7 @@
                     </td>
                     <td>
                       <div class="text-center">
-                        <p class="text-xs font-weight-bold mb-0">Tổng tiền:</p>
+                        <p class="text-xs font-weight-bold mb-0">Tổng thu:</p>
                         <h6 class="text-sm mb-0"><?php echo number_format($tt_tt, 0, '.'); ?>đ</h6>
                       </div>
                     </td>
@@ -931,7 +929,7 @@
                     </td>
                     <td>
                       <div class="text-center">
-                        <p class="text-xs font-weight-bold mb-0">Tổng tiền:</p>
+                        <p class="text-xs font-weight-bold mb-0">Tổng thu:</p>
                         <h6 class="text-sm mb-0"><?php echo number_format($tt_k, 0, '.'); ?>đ</h6>
                       </div>
                     </td>
@@ -943,64 +941,103 @@
         </div>
         <div class="col-lg-5">
           <div class="card">
+            <?php
+              $sql = "select sp.sp_id as id, sp.sp_ten as ten, sp.SP_HINHANH as anh, sum(ct.sp_soluong) as so_ban, count(distinct ct.hd_id) as so_hd
+                      from san_pham sp
+                      join chitiet_hd ct on sp.sp_id = ct.sp_id
+                      group by sp.sp_id, sp.sp_ten
+                      order by so_hd desc
+                      limit 4;  ";
+
+              $result = $conn->query($sql);
+              $row1 = $result->fetch_assoc();
+              $row2 = $result->fetch_assoc();
+              $row3 = $result->fetch_assoc();
+              $row4 = $result->fetch_assoc();
+
+              $top1_ten = $row1["ten"];
+              $top1_soban = $row1["so_ban"];
+              $top1_anh = $row1["anh"];
+              $top1_hd = $row1["so_hd"];
+
+              $top2_ten = $row2["ten"];
+              $top2_soban = $row2["so_ban"];
+              $top2_anh = $row2["anh"];
+              $top2_hd = $row2["so_hd"];
+
+              $top3_ten = $row3["ten"];
+              $top3_soban = $row3["so_ban"];
+              $top3_anh = $row3["anh"];
+              $top3_hd = $row3["so_hd"];
+
+              $top4_ten = $row4["ten"];
+              $top4_soban = $row4["so_ban"];
+              $top4_anh = $row4["anh"];
+              $top4_hd = $row4["so_hd"];
+
+            ?>
             <div class="card-header pb-0 p-3">
-              <h6 class="mb-0">Categories</h6>
+              <h6 class="mb-0">Sản phẩm bán chạy</h6>
             </div>
             <div class="card-body p-3">
               <ul class="list-group">
                 <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
                   <div class="d-flex align-items-center">
-                    <div class="icon icon-shape icon-sm me-3 bg-gradient-dark shadow text-center">
-                      <i class="ni ni-mobile-button text-white opacity-10"></i>
+                    <div class="icon icon-shape icon-sm mb-3 me-3 bg-gradient-dark shadow text-center">
+                      <img class="avatar avatar-md" src="../assets/img/product_img/<?php echo $top1_anh ?>" alt="">
                     </div>
-                    <div class="d-flex flex-column">
-                      <h6 class="mb-1 text-dark text-sm">Devices</h6>
-                      <span class="text-xs">250 in stock, <span class="font-weight-bold">346+ sold</span></span>
+                    <div class="ms-2 d-flex flex-column">
+                      <h6 class="mb-1 text-dark text-md"><?php echo $top1_ten ?></h6>
+                      <span class="text-sm font-weight-bold">Số đơn hàng: <?php echo $top1_hd ?> - Sản phẩm đã bán: <?php echo $top1_soban ?> </span>
                     </div>
                   </div>
                   <div class="d-flex">
+                    <img src="../assets/img/gold_cup.png" style="height:40px; margin-right: 5px;" alt="">
                     <button class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto"><i class="ni ni-bold-right" aria-hidden="true"></i></button>
                   </div>
                 </li>
                 <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
                   <div class="d-flex align-items-center">
-                    <div class="icon icon-shape icon-sm me-3 bg-gradient-dark shadow text-center">
-                      <i class="ni ni-tag text-white opacity-10"></i>
+                    <div class="icon icon-shape icon-sm mb-3 me-3 bg-gradient-dark shadow text-center">
+                      <img class="avatar avatar-md" src="../assets/img/product_img/<?php echo $top2_anh ?>" alt="">
                     </div>
-                    <div class="d-flex flex-column">
-                      <h6 class="mb-1 text-dark text-sm">Tickets</h6>
-                      <span class="text-xs">123 closed, <span class="font-weight-bold">15 open</span></span>
+                    <div class="ms-2 d-flex flex-column">
+                      <h6 class="mb-1 text-dark text-md"><?php echo $top2_ten ?></h6>
+                      <span class="text-sm font-weight-bold">Số đơn hàng: <?php echo $top2_hd ?> - Sản phẩm đã bán: <?php echo $top2_soban ?> </span>
                     </div>
                   </div>
                   <div class="d-flex">
+                    <img src="../assets/img/silver_cup.png" style="height:40px; margin-right: 5px;" alt="">
                     <button class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto"><i class="ni ni-bold-right" aria-hidden="true"></i></button>
                   </div>
                 </li>
                 <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
                   <div class="d-flex align-items-center">
-                    <div class="icon icon-shape icon-sm me-3 bg-gradient-dark shadow text-center">
-                      <i class="ni ni-box-2 text-white opacity-10"></i>
+                    <div class="icon icon-shape icon-sm mb-3 me-3 bg-gradient-dark shadow text-center">
+                      <img class="avatar avatar-md" src="../assets/img/product_img/<?php echo $top3_anh ?>" alt="">
                     </div>
-                    <div class="d-flex flex-column">
-                      <h6 class="mb-1 text-dark text-sm">Error logs</h6>
-                      <span class="text-xs">1 is active, <span class="font-weight-bold">40 closed</span></span>
+                    <div class="ms-2 d-flex flex-column">
+                      <h6 class="mb-1 text-dark text-md"><?php echo $top3_ten ?></h6>
+                      <span class="text-sm font-weight-bold">Số đơn hàng: <?php echo $top3_hd ?> - Sản phẩm đã bán: <?php echo $top3_soban ?> </span>
                     </div>
                   </div>
                   <div class="d-flex">
+                    <img src="../assets/img/copper_cup.png" style="height:40px; margin-right: 5px;" alt="">
                     <button class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto"><i class="ni ni-bold-right" aria-hidden="true"></i></button>
                   </div>
                 </li>
                 <li class="list-group-item border-0 d-flex justify-content-between ps-0 border-radius-lg">
                   <div class="d-flex align-items-center">
-                    <div class="icon icon-shape icon-sm me-3 bg-gradient-dark shadow text-center">
-                      <i class="ni ni-satisfied text-white opacity-10"></i>
+                    <div class="icon icon-shape icon-sm mb-3 me-3 bg-gradient-dark shadow text-center">
+                      <img class="avatar avatar-md" src="../assets/img/product_img/<?php echo $top4_anh ?>" alt="">
                     </div>
-                    <div class="d-flex flex-column">
-                      <h6 class="mb-1 text-dark text-sm">Happy users</h6>
-                      <span class="text-xs font-weight-bold">+ 430</span>
+                    <div class="ms-2 d-flex flex-column">
+                      <h6 class="mb-1 text-dark text-md"><?php echo $top4_ten ?></h6>
+                      <span class="text-sm font-weight-bold">Số đơn hàng: <?php echo $top4_hd ?> - Sản phẩm đã bán: <?php echo $top4_soban ?> </span>
                     </div>
                   </div>
                   <div class="d-flex">
+                    <img src="../assets/img/medal4.png" style="height:40px; margin-right: 5px;" alt="">
                     <button class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto"><i class="ni ni-bold-right" aria-hidden="true"></i></button>
                   </div>
                 </li>
@@ -1073,7 +1110,7 @@
           }
           backgroundColor: 'rgba(0, 128, 255, 0.6)',
           borderColor: 'rgba(0, 128, 255, 0.6)',
-          borderWidth: 1,
+          borderWidth: 3,
           borderRadius: 5,
         }]
       },
