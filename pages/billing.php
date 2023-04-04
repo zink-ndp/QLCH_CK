@@ -455,8 +455,8 @@
               </div>
             </div>
             <div class="card-body p-3 pb-3">
-              <div class="row" id="printable-content">
-                <div class="col-12">
+              <div class="row">
+                <div class="col-12"  id="printable-content">
                   <!-- title -->
                   <div class="row text-center fs-4 font-weight-bold">
                     <div class="col-12">
@@ -635,27 +635,6 @@
       </div>
     </div>
   </main>
-  <style>
-    /* Styles for printing */
-    @media print {
-      /* Hide elements that should not be printed */
-      * {
-        visibility: hidden;
-        display: none;
-      }
-      #printable-content, #printable-content * {
-        visibility: visible;
-        display: block;
-      }
-      
-      /* Set the print area */
-      #printable-content {
-        position: absolute;
-        left: 0;
-        top: 0;
-      }
-    }
-  </style>
    <!--   Core JS Files   -->
   <script src="../assets/js/core/popper.min.js"></script>
   <script src="../assets/js/core/bootstrap.min.js"></script>
