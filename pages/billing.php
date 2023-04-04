@@ -454,19 +454,19 @@
                 </div>
               </div>
             </div>
-            <div class="card-body p-3 pb-0">
+            <div class="card-body p-3 pb-3">
               <div class="row" id="printable-content">
                 <div class="col-12">
                   <!-- title -->
                   <div class="row text-center fs-4 font-weight-bold">
                     <div class="col-12">
-                      HOÁ ĐƠN <?php echo $row["mahd"] ?>
+                      HOÁ ĐƠN <?php echo $row["mahd"]; ; $mahd = $row["mahd"]; ?>
                     </div>
                   </div>
                   <!-- ngay -->
-                  <div class="row text-center fs-5 font-weight-bold"> 
+                  <div class="row text-center fs- font-weight-bold"> 
                     <div class="col-12">
-                      Ngày đặt: <?php echo $row["ngay"] ?>
+                      Ngày đặt: <?php echo date('d/m/Y', strtotime($row["ngay"])) ?>
                     </div>
                   </div>
                   <!-- thongtin khachhang -->
@@ -538,8 +538,74 @@
                   <div class="row mt-3">
                     <div class="col-md-12">
                       <h6>Danh sách sản phẩm:</h6>
-                      <!-- 1 hang -->
-                      
+                      <table>
+                        <thead>
+                          <tr class="col-12">
+                            <th class="col-7 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ten SP</th>
+                            <th class="col-2 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">SL</th>
+                            <th class="col-3 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">ĐG</th>
+                            <th class="col-3 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">T.Tiền</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <?php
+                            $sql = "select sp.SP_TEN as tensp, sp.SP_GIA as giasp , ct.SP_SOLUONG as slsp, (ct.SP_SOLUONG*sp.SP_GIA) as tongtien 
+                                    from chitiet_hd ct 
+                                    join hoa_don hd on hd.HD_ID = ct.HD_ID 
+                                    join san_pham sp on sp.SP_ID = ct.SP_ID 
+                                    where hd.HD_ID = {$row["mahd"]}; ";
+
+                            $rs = $conn->query($sql);
+                            $rs_all = $rs -> fetch_all(MYSQLI_ASSOC);
+                            foreach($rs_all as $row){
+                              ?>
+                              <tr>
+                                <td colspan="4">
+                                  <hr style="height:1px;border-width:0;color:gray;background-color:gray">
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <?php echo $row["tensp"] ?>
+                                </td>
+                                <td>
+                                  <?php echo $row["slsp"] ?>
+                                </td>
+                                <td>
+                                  <?php echo number_format($row["giasp"], 0, '.') ?>
+                                </td>
+                                <td>
+                                  <?php echo number_format($row["tongtien"], 0, '.') ?>
+                                </td>
+                              </tr>
+                              <?php
+                            }
+
+                          ?>
+                          <tr>
+                            <td colspan="4">
+                              <hr style="height:1px;border-width:0;color:gray;background-color:gray">
+                            </td>
+                          </tr>
+                          <tr>
+                            <td colspan="4" class="text-end">
+                              <?php
+                                $sql = "select sum(ct.SP_SOLUONG*sp.SP_GIA) as tongtien 
+                                        from chitiet_hd ct 
+                                        join hoa_don hd on hd.HD_ID = ct.HD_ID 
+                                        join san_pham sp on sp.SP_ID = ct.SP_ID 
+                                        where hd.HD_ID = {$mahd}; ";
+                                $rs = $conn->query($sql);
+                                $row = mysqli_fetch_assoc($rs);
+                              ?>
+                              <h7>Thành tiền:</h7>
+                              <h6 class="fs-4 mt-n2">
+                                <?php echo number_format($row["tongtien"], 0, '.')." đ" ?>
+                              </h6> 
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
                     </div>
                   </div>
                 </div>
