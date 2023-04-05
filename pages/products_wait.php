@@ -356,6 +356,7 @@
                           foreach ($result_all as $row) {
                               
                               $nvid = $row["NV_ID"];
+                              $lidohuy = $row["HD_LIDOHUY"];
 
                               $sql_kh = "SELECT * FROM khach_hang WHERE KH_ID = {$row["KH_ID"]}";
                               $result1 = $conn->query($sql_kh);
@@ -453,6 +454,7 @@
                                           <input type="hidden" name="trangthai" value="<?php echo $row3["TT_ID"]; ?>">
                                           <input type="hidden" name="phuongthuc" value="<?php echo $rowpt["PTTT_TEN"]; ?>">
                                           <input type="hidden" name="tentrangthai" value="<?php echo $row3["TT_TEN"]; ?>">
+                                          <input type="hidden" name="lidohuy" value="<?php echo $lidohuy; ?>">
                                           
 
                                           <button type="submit" class="mt-4 btn btn-link text-primary font-weight-bold text-xs">

@@ -271,6 +271,7 @@
                       $tentrangthai = $_POST["tentrangthai"];
                       $ngaysinh = $_POST["ngaysinh"];
                       $phuongthuc = $_POST["phuongthuc"];
+                      $lidohuy = $_POST["lidohuy"];
                       
                     ?>
                     <form action="#" method="get">
@@ -469,8 +470,14 @@
                               
                           </select>
                       </div>
+                      <?php
+                        $display = "none";
+                        if ($trangthai == 0){
+                          $display = "block";
+                        }
+                      ?>  
                       <div class="col-12 d-flex align-items-center me-4 mt-4">
-                        <textarea id="myTextarea" style="display: none;" name="lido" class="form-control form-control-md">Lí do huỷ đơn</textarea>
+                        <textarea id="myTextarea" style="display: <?php echo $display; ?>;" name="lido" class="form-control form-control-md"><?php echo $lidohuy ?></textarea>
                       </div>
                       <div class="col-12 d-flex align-items-center justify-content-center">
                         <input type="hidden" name="mahd" value="<?php echo $mahd; ?>">

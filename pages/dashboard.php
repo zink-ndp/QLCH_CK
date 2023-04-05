@@ -331,7 +331,7 @@
                   <!-- <div class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
                     <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
                   </div> -->
-                  <img style="height:90px;" src="https://img.icons8.com/3d-fluency/94/null/money-bag.png"/>
+                  <img style="height:55px;" src="https://img.icons8.com/3d-fluency/94/null/money-bag.png"/>
                 </div>
               </div>
             </div>
@@ -370,7 +370,7 @@
                   <!-- <div class="icon icon-shape bg-gradient-danger shadow-danger text-center rounded-circle">
                     <i class="fas fa-file-invoice-dollar text-lg opacity-10" aria-hidden="true"></i>
                   </div> -->
-                  <img style="height:90px;" src="https://img.icons8.com/3d-fluency/94/null/bill.png"/>
+                  <img style="height:55px;" src="https://img.icons8.com/3d-fluency/94/null/bill.png"/>
                 </div>
               </div>
             </div>
@@ -408,7 +408,7 @@
                   <!-- <div class="icon icon-shape bg-gradient-success shadow-success text-center rounded-circle">
                     <i class="ni ni-paper-diploma text-lg opacity-10" aria-hidden="true"></i>
                   </div> -->
-                  <img style="height:90px;" src="https://img.icons8.com/3d-fluency/94/null/businessman.png"/>
+                  <img style="height:55px;" src="https://img.icons8.com/3d-fluency/94/null/businessman.png"/>
                 </div>
               </div>
             </div>
@@ -445,7 +445,7 @@
                   <!-- <div class="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle">
                     <i class="fas fa-users text-lg opacity-10"></i>
                   </div> -->
-                  <img style="height:90px;" src="https://img.icons8.com/3d-fluency/94/null/manager.png"/>
+                  <img style="height:55px;" src="https://img.icons8.com/3d-fluency/94/null/manager.png"/>
                 </div>
               </div>
             </div>
