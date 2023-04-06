@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     01/04 7:03                                   */
+/* Created on:     06/04 8:40                                   */
 /*==============================================================*/
 
 
@@ -68,7 +68,7 @@ create table CHITIET_NHAP
    NV_ID                int not null,
    NH_NGAYNHAP          date not null,
    SP_SOLUONG           int not null,
-   primary key (SP_ID, NH_ID, NH_NGAYNHAP, SP_SOLUONG)
+   primary key (SP_ID, NH_ID)
 );
 
 /*==============================================================*/
@@ -164,7 +164,7 @@ create table NGUON_HANG
 (
    NH_ID                int not null,
    NH_TENNGUON          char(40) not null,
-   NH_MOTA              char(150) not null,
+   NH_MOTA              char(200),
    primary key (NH_ID)
 );
 
@@ -241,8 +241,10 @@ create table TIN_TUC
    TTC_ID               int not null,
    NV_ID                int not null,
    TTC_TITLE            char(100) not null,
-   TTC_LINK             char(150) not null,
+   TTC_LINK             char(200) not null,
    TTC_ANH              char(100),
+   TTC_MOTA             char(200),
+   TTC_HIENTHI          bool not null,
    primary key (TTC_ID)
 );
 
