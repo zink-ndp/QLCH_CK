@@ -186,6 +186,14 @@
             <span class="nav-link-text ms-1">Đánh giá</span>
           </a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link " href="../pages/news.php">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="far fa-newspaper text-primary text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Tin tức</span>
+          </a>
+        </li>
         <li class="nav-item mt-3">
           <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Quản lý tài khoản</h6>
         </li>
@@ -458,15 +466,15 @@
               <div class="row">
                 <div class="col-12"  id="printable-content">
                   <!-- title -->
-                  <div class="row text-center fs-4 font-weight-bold">
+                  <div class="row text-center fs-5 font-weight-bold">
                     <div class="col-12">
-                      HOÁ ĐƠN <?php echo $row["mahd"]; ; $mahd = $row["mahd"]; ?>
+                      HOÁ ĐƠN FORISH
                     </div>
                   </div>
                   <!-- ngay -->
                   <div class="row text-center fs- font-weight-bold"> 
                     <div class="col-12">
-                      Ngày đặt: <?php echo date('d/m/Y', strtotime($row["ngay"])) ?>
+                      Mã đơn: <?php echo $row["mahd"]; ; $mahd = $row["mahd"]; ?> - Ngày đặt: <?php echo date('d/m/Y', strtotime($row["ngay"])) ?>
                     </div>
                   </div>
                   <!-- thongtin khachhang -->
